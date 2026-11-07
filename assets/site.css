@@ -386,3 +386,8 @@ input[type=file]{font:14px 'Plus Jakarta Sans',sans-serif}
 .wcard img{filter:grayscale(.9) contrast(1.05) brightness(.9);transition:filter .3s}
 .wcard:hover img,.wcard:focus-within img{filter:none}
 .slides:has(.sl-dpo.on) .credit{display:none}
+
+/* hidden must win over component display rules (form modes, buttons, results) */
+[hidden]{display:none!important}
+/* iOS Safari gives date inputs an intrinsic width wider than the form */
+input[type=date]{-webkit-appearance:none;appearance:none;min-width:0;max-width:100%;width:100%;display:block}
