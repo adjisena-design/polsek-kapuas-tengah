@@ -24,7 +24,7 @@ const IC = {
 };
 const PAGES = [
   ['UTAMA'], ['dasbor', 'Dasbor', IC.home],
-  ['LAYANAN'], ['booking', 'Booking kunjungan', IC.cal, 'bookings_new'], ['pengaduan', 'Pengaduan', IC.inbox, 'reports_new'],
+  ['LAYANAN'], ['booking', 'Booking', IC.cal, 'bookings_new'], ['pengaduan', 'Pengaduan', IC.inbox, 'reports_new'],
   ['KONTEN SITUS'], ['berita', 'Berita dan imbauan', IC.news], ['pencarian', 'Pencarian orang', IC.search], ['personel', 'Personel', IC.users],
   ['SISTEM', true], ['log', 'Log', IC.log, null, true], ['akses', 'Kode akses', IC.key, null, true],
 ];
@@ -167,8 +167,8 @@ function field([k, label, type, opts, req, hint], v) {
   const L = `<label for="e-${k}">${label}${req ? ' <span class="req">*</span>' : ''}</label>`, H = hint ? `<p class="hint">${hint}</p>` : '';
   if (type === 'select') return `<div class="fld">${L}<select id="e-${k}" name="${k}">${Object.entries(opts).map(([a, b]) => `<option value="${a}"${a === v ? ' selected' : ''}>${b}</option>`).join('')}</select>${H}</div>`;
   if (type === 'textarea' || type === 'textarea-s') return `<div class="fld">${L}<textarea id="e-${k}" name="${k}"${type === 'textarea-s' ? ' style="min-height:90px"' : ''}>${esc(v)}</textarea>${H}</div>`;
-  if (type === 'toggle') return `<div class="fld"><span style="font-weight:800">${label}</span><label class="toggle"><input type="checkbox" name="${k}"${v ? ' checked' : ''}><span>${v ? 'Ya' : 'Tidak'}</span></label>${H}</div>`;
-  if (type === 'image') return `<div class="fld"><span style="font-weight:800">${label}</span><div class="photo"><div class="box" style="${v ? `background-image:url('${esc(v)}')` : ''}">${v ? '' : 'Belum ada foto'}</div><div class="ctl"><label class="btn" style="align-self:flex-start">${I(IC.img, 18)}Pilih foto<input type="file" name="${k}__file" accept="image/*" hidden></label><input name="${k}" value="${esc(v)}" placeholder="atau tempel tautan foto" style="min-height:46px;border:1px solid var(--line);border-radius:12px;padding:0 14px"><p class="hint">JPG, PNG, atau WebP, maksimal 10 MB.</p></div></div></div>`;
+  if (type === 'toggle') return `<div class="fld"><span style="font-weight:700;font-size:14px">${label}</span><label class="toggle"><input type="checkbox" role="switch" name="${k}" aria-label="${label}"${v ? ' checked' : ''}></label>${H}</div>`;
+  if (type === 'image') return `<div class="fld"><span style="font-weight:700;font-size:14px">${label}</span><div class="photo"><div class="box" style="${v ? `background-image:url('${esc(v)}')` : ''}">${v ? '' : 'Belum ada foto'}</div><div class="ctl"><label class="btn" style="align-self:flex-start">${I(IC.img, 18)}Pilih foto<input type="file" name="${k}__file" accept="image/*" hidden></label><input name="${k}" value="${esc(v)}" placeholder="atau tempel tautan foto" style="min-height:46px;border:1px solid var(--line);border-radius:12px;padding:0 14px"><p class="hint">JPG, PNG, atau WebP, maksimal 10 MB.</p></div></div></div>`;
   return `<div class="fld">${L}<input id="e-${k}" name="${k}" type="${type}" value="${esc(v)}">${H}</div>`;
 }
 function edit(entity, r, done) {
@@ -179,7 +179,6 @@ function edit(entity, r, done) {
     `<form id="ef" class="dr-form" novalidate style="display:flex;flex-direction:column;gap:18px">${F.f.map(x => x[0] === 'two' ? `<div class="two">${x[1].map(y => field(y, val(y[0]))).join('')}</div>` : field(x, val(x[0]))).join('')}<p class="err-line" id="ef-err"></p></form>`,
     `<button class="btn primary" type="submit" form="ef">Simpan</button><button class="btn" type="button" data-close>Batal</button><span class="spacer"></span>${isNew ? '' : '<button class="btn danger" type="button" id="ef-del">Hapus</button>'}`);
   const f = $('#ef');
-  $$('.toggle input', f).forEach(t => t.onchange = () => t.nextElementSibling.textContent = t.checked ? 'Ya' : 'Tidak');
   $$('input[type=file]', f).forEach(inp => inp.onchange = () => {
     const file = inp.files[0]; if (!file) return;
     const box = inp.closest('.photo').querySelector('.box'); box.textContent = ''; box.style.backgroundImage = `url('${URL.createObjectURL(file)}')`;
