@@ -10,7 +10,7 @@ Shared styles and scripts: `assets/site.css`, `assets/site.js`. Header and foote
 - News photos are hotlinked from analisnews.co.id; upload proper ones from the console (Berita & imbauan → Ubah → Foto).
 - Kapolsek bio and welcome text, names of unit heads, Bhabinkamtibmas per desa, DPO / orang hilang lists.
 - Polsek phone, address and service hours come from public sources (Facebook page, generic Polri hours).
-- EN / Dayak Ngaju toggle only switches state; translations not written yet.
+- Language toggle ID / EN / NGAJU swaps the fixed page text in the browser (`assets/i18n.js`, generated from `i18n_src.py`). Database content (news, DPO, personnel names) stays in Indonesian. The choice resets on each page. **Dayak Ngaju is best effort and must be checked by a native speaker**: fill the last column of `i18n-review.csv`, then update `i18n_src.py` and regenerate.
 - Service guides (SKCK, SKTLK, pengaduan, SPKT) are compiled from public Polri sources; confirm with the Polsek before launch.
 
 ## Backend (Supabase project `zybfcsdhpoqalmkvmhtu`)

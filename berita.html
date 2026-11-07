@@ -86,7 +86,7 @@
 <form class="form" novalidate>
 <div data-mode="book" class="form">
 <p style="color:var(--muted)">Pesan jadwal datang ke Mako Polsek agar tidak menunggu lama. Anda akan menerima nomor tiket.</p>
-<label for="f-layanan">Layanan</label><select id="f-layanan" name="layanan" required><option value="">Pilih…</option><option>SKCK</option><option>Surat keterangan kehilangan</option><option>Pengaduan dan pendampingan</option><option>SPKT lainnya</option></select>
+<label for="f-layanan">Layanan</label><select id="f-layanan" name="layanan" required><option value="">Pilih…</option><option value="SKCK">SKCK</option><option value="Surat keterangan kehilangan">Surat keterangan kehilangan</option><option value="Pengaduan dan pendampingan">Pengaduan dan pendampingan</option><option value="SPKT lainnya">SPKT lainnya</option></select>
 <div class="two"><div class="form"><label for="f-nama">Nama lengkap</label><input id="f-nama" name="nama" autocomplete="name" required></div>
 <div class="form"><label for="f-hp">Nomor HP (WhatsApp)</label><input id="f-hp" name="hp" type="tel" inputmode="tel" autocomplete="tel" required placeholder="0812 3456 7890"></div></div>
 <div class="two"><div class="form"><label for="f-tgl">Tanggal kunjungan</label><input id="f-tgl" name="tanggal" type="date" required></div>
@@ -95,7 +95,7 @@
 </div>
 <div data-mode="ask" class="form">
 <p style="color:var(--muted)">Sampaikan laporan, aspirasi, atau pertanyaan. Identitas boleh dikosongkan, tetapi cantumkan nomor HP jika ingin dihubungi kembali. Untuk keadaan darurat, hubungi 110.</p>
-<label for="f-kat">Kategori</label><select id="f-kat" name="kategori" required><option value="">Pilih…</option><option>Pertanyaan layanan</option><option>Tindak pidana (pencurian, penipuan, penganiayaan)</option><option>Kekerasan terhadap perempuan atau anak</option><option>Gangguan kamtibmas atau konflik warga</option><option>Narkoba</option><option>Kebakaran hutan dan lahan</option><option>Orang hilang</option><option>Pelayanan atau perilaku petugas</option><option>Lainnya</option></select>
+<label for="f-kat">Kategori</label><select id="f-kat" name="kategori" required><option value="">Pilih…</option><option value="Pertanyaan layanan">Pertanyaan layanan</option><option value="Tindak pidana (pencurian, penipuan, penganiayaan)">Tindak pidana (pencurian, penipuan, penganiayaan)</option><option value="Kekerasan terhadap perempuan atau anak">Kekerasan terhadap perempuan atau anak</option><option value="Gangguan kamtibmas atau konflik warga">Gangguan kamtibmas atau konflik warga</option><option value="Narkoba">Narkoba</option><option value="Kebakaran hutan dan lahan">Kebakaran hutan dan lahan</option><option value="Orang hilang">Orang hilang</option><option value="Pelayanan atau perilaku petugas">Pelayanan atau perilaku petugas</option><option value="Lainnya">Lainnya</option></select>
 <label for="f-isi">Ceritakan apa yang terjadi atau yang ingin ditanyakan</label><textarea id="f-isi" name="isi" required placeholder="Apa, kapan, di mana, siapa yang terlibat"></textarea>
 <label for="f-desa">Desa (opsional)</label><input id="f-desa" name="desa">
 <div class="two"><div class="form"><label for="f-nama2">Nama (opsional)</label><input id="f-nama2" name="nama" autocomplete="name"></div>
@@ -113,6 +113,7 @@
 </div>
 </dialog>
 <script src="assets/sb.js?v=5" defer></script>
-<script src="assets/site.js?v=6" defer></script>
+<script src="assets/i18n.js?v=1" defer></script>
+<script src="assets/site.js?v=7" defer></script>
 </body>
 </html>

@@ -40,11 +40,45 @@ document.addEventListener('click', e => {
 });
 addEventListener('load', () => { const t = location.hash && document.getElementById(location.hash.slice(1)); if (t) go(t, false); });
 
-// language toggle: shortcut: only switches state and <html lang>; EN and Dayak Ngaju copy still to be written
-$$('.lang button').forEach(b => b.onclick = () => {
-  $$('.lang button').forEach(x => x.setAttribute('aria-pressed', x.dataset.lang === b.dataset.lang));
-  document.documentElement.lang = b.dataset.lang;
-});
+// language: Indonesian is the page source; EN / Ngaju come from assets/i18n.js. Not remembered between pages (by request).
+let LANG = 'id';
+const LI = () => LANG === 'en' ? 0 : 1;
+const tr = s => LANG === 'id' ? s : (I18N[s]?.[LI()] ?? s);
+const tf = (k, v = {}) => (LANG === 'id' ? k : (I18F[k]?.[LI()] ?? k)).replace(/\{(\w+)\}/g, (_, x) => v[x] ?? '');
+const ORIG = new Map(), ATTRS = ['placeholder', 'aria-label', 'alt', 'title'];
+function trText(n) {
+  if (!ORIG.has(n)) { const raw = n.data.trim(); if (!raw || !I18N[raw]) return; ORIG.set(n, n.data); }
+  const o = ORIG.get(n), raw = o.trim();
+  n.data = LANG === 'id' ? o : o.replace(raw, tr(raw));
+}
+function trEl(el) {
+  el.__i18n ??= {};
+  for (const a of ATTRS) {
+    const v = el.__i18n[a] ?? el.getAttribute(a);
+    if (!v || !I18N[v.trim()]) continue;
+    el.__i18n[a] = v; el.setAttribute(a, tr(v.trim()));
+  }
+}
+function trTree(root) {
+  if (root.nodeType === 3) return trText(root);
+  if (root.nodeType !== 1 || root.closest?.('script,style,svg')) return;
+  trEl(root);
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT, { acceptNode: n => n.nodeName === 'SCRIPT' || n.nodeName === 'STYLE' || n.nodeName === 'svg' ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+  for (let n = w.nextNode(); n; n = w.nextNode()) n.nodeType === 3 ? trText(n) : trEl(n);
+}
+const TITLE = document.title;
+function setLang(l) {
+  LANG = l;
+  document.documentElement.lang = l;
+  $$('.lang button').forEach(x => x.setAttribute('aria-pressed', x.dataset.lang === l));
+  trTree(document.body);
+  for (const [n] of ORIG) if (!n.isConnected) ORIG.delete(n);
+  document.title = tr(TITLE);
+  document.dispatchEvent(new Event('langchange'));
+}
+// text that scripts add later (form messages, sheets, lists) is translated as it appears
+new MutationObserver(ms => { if (LANG !== 'id') for (const m of ms) m.addedNodes.forEach(trTree); }).observe(document.body, { childList: true, subtree: true });
+$$('.lang button').forEach(b => b.onclick = () => setLang(b.dataset.lang));
 
 // hero carousel: fixed 6 s interval, pauses on hover/focus, off for reduced motion
 const box = $('#slides');
@@ -98,11 +132,11 @@ if (fd) {
   const f = $('form', fd), out = $('.result', fd), err = $('.err', fd), sub = $('[type=submit]', f);
   const jam = f.elements.jam, tgl = f.elements.tanggal;
   const slots = async () => {
-    [...jam.options].forEach(o => { o.disabled = false; o.textContent = o.textContent.replace(' (penuh)', ''); });
+    [...jam.options].forEach(o => { o.disabled = false; o.textContent = o.textContent.replace(/ \((penuh|full)\)$/, ''); });
     if (!tgl.value) return;
     try {
       const taken = await rpc('booked_slots', { p_tanggal: tgl.value });
-      [...jam.options].forEach(o => { if (taken.includes(o.value)) { o.disabled = true; o.textContent += ' (penuh)'; } });
+      [...jam.options].forEach(o => { if (taken.includes(o.value)) { o.disabled = true; o.textContent += tf(' (penuh)'); } });
       if (jam.selectedOptions[0]?.disabled) jam.value = [...jam.options].find(o => !o.disabled)?.value ?? '';
     } catch { /* server checks again on submit */ }
   };
@@ -174,7 +208,7 @@ if (ck) ck.onsubmit = async e => {
   try {
     const r = await rpc('ticket_status', { p_ticket: t, p_hp: h });
     m.textContent = !r ? 'Tiket tidak ditemukan. Periksa nomor tiket dan nomor HP yang didaftarkan.'
-      : `${r.jenis}: status ${r.status.toUpperCase()}${r.jadwal ? ', jadwal ' + r.jadwal : ''}. Dicatat ${new Date(r.dibuat).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}.`;
+      : tf('{jenis}: status {status}{jadwal}. Dicatat {tgl}.', { jenis: tf(r.jenis), status: tr(r.status).toUpperCase(), jadwal: r.jadwal ? tf(', jadwal {j}', { j: r.jadwal }) : '', tgl: new Date(r.dibuat).toLocaleDateString(LANG === 'en' ? 'en-GB' : 'id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) });
   } catch (x) { m.textContent = x.message; }
 };
 
@@ -182,7 +216,7 @@ if (ck) ck.onsubmit = async e => {
 const blankImg = '<span class="img blank"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h13v14H6a2 2 0 0 1-2-2zM17 9h3v8a2 2 0 0 1-2 2M7 9h7M7 12h7M7 15h4"/></svg></span>';
 const img = u => u ? `<span class="img"><img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.outerHTML=blankImg"></span>` : blankImg;
 const postLink = p => p.source_url ? ` href="${esc(p.source_url)}"${p.source_url.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}` : '';
-const postSrc = p => !p.source_url ? '' : p.source_url.startsWith('http') ? `Baca di ${esc(new URL(p.source_url).hostname.replace(/^www\./, ''))} ↗` : 'Baca selengkapnya →';
+const postSrc = p => !p.source_url ? '' : p.source_url.startsWith('http') ? esc(tf('Baca di {src} ↗', { src: new URL(p.source_url).hostname.replace(/^www\./, '') })) : tr('Baca selengkapnya →');
 const postCard = p => {
   const tag = p.source_url ? 'a' : 'article', im = p.kind === 'imbauan';
   return `<${tag} class="post${im ? ' imb' : ''}" data-cat="${p.kind}"${postLink(p)}>${img(p.image_url)}<span class="b"><span class="meta"><b>${im ? 'Imbauan' : 'Berita'}</b>${esc(p.date_label)}${p.place ? ' · ' + esc(p.place) : ''}</span><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p>${postSrc(p) ? `<span class="src">${postSrc(p)}</span>` : ''}</span></${tag}>`;
@@ -227,19 +261,20 @@ if (wd) Promise.all([
   const grid = $('.wgrid', wd), more = $('.wmore', wd), note = $('.wnote', wd), q = $('.wsearch', wd), tabs = $$('.wtabs button', wd);
   const SRC = { polsek: 'Polsek Kapuas Tengah', kejati: 'Kejati Kalimantan Tengah', pusiknas: 'Pusiknas Polri' };
   let src = 'polsek', shown = 24;
-  const fmt = d => new Date(d).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-  const card = r => `<article class="wcard ${r.kind}">${r.photo_url ? `<img src="${esc(r.photo_url)}" alt="Foto ${esc(r.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<div><span class="wtag">${r.kind === 'dpo' ? 'DPO' : 'Orang hilang'}</span><b>${esc(r.name)}</b>${r.crime ? `<span>${esc(r.crime)}</span>` : ''}${r.detail ? `<small>${esc(r.detail)}</small>` : ''}${r.source_url ? `<a href="${esc(r.source_url)}" target="_blank" rel="noopener">Lihat di ${SRC[r.source]} ↗</a>` : `<small>Sumber: ${SRC[r.source]}</small>`}</div></article>`;
+  const fmt = d => new Date(d).toLocaleDateString(LANG === 'en' ? 'en-GB' : 'id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+  const card = r => `<article class="wcard ${r.kind}">${r.photo_url ? `<img src="${esc(r.photo_url)}" alt="Foto ${esc(r.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<div><span class="wtag">${tf(r.kind === 'dpo' ? 'DPO' : 'Orang hilang')}</span><b>${esc(r.name)}</b>${r.crime ? `<span>${esc(r.crime)}</span>` : ''}${r.detail ? `<small>${esc(r.detail)}</small>` : ''}${r.source_url ? `<a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(tf('Lihat di {src} ↗', { src: tr(SRC[r.source]) }))}</a>` : `<small>${esc(tf('Sumber: {src}', { src: tr(SRC[r.source]) }))}</small>`}</div></article>`;
   const draw = () => {
     const t = q.value.trim().toLowerCase();
     const list = rows.filter(r => r.source === src && (!t || `${r.name} ${r.crime ?? ''} ${r.detail ?? ''}`.toLowerCase().includes(t)));
-    grid.innerHTML = list.slice(0, shown).map(card).join('') || `<div class="empty"><p>${t ? 'Tidak ada yang cocok dengan pencarian.' : 'Belum ada data yang dipublikasikan.'}</p></div>`;
+    grid.innerHTML = list.slice(0, shown).map(card).join('') || `<div class="empty"><p>${tr(t ? 'Tidak ada yang cocok dengan pencarian.' : 'Belum ada data yang dipublikasikan.')}</p></div>`;
     more.hidden = list.length <= shown;
     const run = runs.find(x => x.source === src);
-    note.textContent = `${list.length} data` + (src === 'polsek' ? ', diterbitkan petugas Polsek.' : run ? `, disalin dari situs resmi ${SRC[src]} pada ${fmt(run.at)}.` : '.');
+    note.textContent = src === 'polsek' ? tf('{n} data, diterbitkan petugas Polsek.', { n: list.length }) : run ? tf('{n} data, disalin dari situs resmi {src} pada {date}.', { n: list.length, src: tr(SRC[src]), date: fmt(run.at) }) : tf('{n} data.', { n: list.length });
   };
   tabs.forEach(b => b.onclick = () => { src = b.dataset.src; shown = 24; tabs.forEach(x => x.setAttribute('aria-selected', x === b)); draw(); });
   q.oninput = () => { shown = 24; draw(); };
   more.onclick = () => { shown += 48; draw(); };
+  document.addEventListener('langchange', draw);
   draw();
 }).catch(() => { $('.wnote', wd).textContent = 'Daftar belum bisa dimuat. Coba muat ulang halaman.'; });
 
