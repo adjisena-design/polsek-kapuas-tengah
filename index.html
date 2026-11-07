@@ -9,241 +9,30 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Red+Hat+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <link rel="preload" as="image" href="assets/hero-1.jpg">
-<style>
-:root{--ink:#2B2118;--brown:#5A4030;--khaki:#E8DFCC;--sand:#F3EDE1;--paper:#FAF8F3;--line:#D8CDB6;--muted:#5C4E40;--gold:#C9A227;--red:#C62828;--green:#1B7F45}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 'Plus Jakarta Sans',system-ui,sans-serif}
-img{max-width:100%;display:block}
-a{color:var(--brown)}a:hover{color:var(--ink)}
-h1,h2,h3,p{margin:0}
-.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
-.display{font-family:'Red Hat Display',sans-serif;font-weight:800;letter-spacing:-.01em}
-.eyebrow{font-size:13px;font-weight:700;letter-spacing:.12em;color:#8A6A1E;text-transform:uppercase}
-.h2{font-size:clamp(26px,3vw,34px);line-height:1.2;font-weight:700;letter-spacing:-.01em}
-.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border-radius:3px;font-weight:700;font-size:15px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;transition:transform .15s,filter .15s}
-.btn:hover{filter:brightness(1.08)}.btn:active{transform:scale(.98)}
-.btn-gold{background:var(--gold);color:var(--ink)}.btn-dark{background:var(--ink);color:var(--paper)}
-:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.stripe{display:flex;align-items:center;gap:7px;height:5px;overflow:hidden;padding-right:24px}
-.stripe span{display:block;height:5px;background:var(--gold);transform:skewX(-30deg)}
-.stripe span:first-child{flex:1;transform:none}
-
-/* top bar + header */
-.alert{background:var(--red);color:#fff}
-.alert .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding-block:8px;font-size:14px;font-weight:600}
-.alert a{color:var(--red);background:#fff;text-decoration:none;font-weight:700;padding:0 16px;min-height:44px;display:inline-flex;align-items:center;border-radius:3px}
-header{background:var(--ink);position:sticky;top:0;z-index:20}
-.hd{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 16px;padding-block:10px}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.brand img{height:50px;width:auto}
-.brand .sep{width:1px;height:42px;background:var(--brown)}
-.brand b{display:block;font-size:20px;color:var(--paper);line-height:1;letter-spacing:.02em}
-.brand small{font-size:12px;color:var(--line)}
-nav.main{display:flex;flex-wrap:wrap;gap:2px}
-nav.main a{color:var(--line);text-decoration:none;font-size:14px;font-weight:500;padding:10px 11px;border-bottom:2px solid transparent;transition:color .15s,background .15s,border-color .15s}
-nav.main a:hover{color:#fff;background:#3A2E24;border-bottom-color:#8A7660}
-nav.main a[aria-current]{color:#fff;font-weight:600;border-bottom-color:var(--gold)}
-.tools{display:flex;align-items:center;gap:10px}
-.lang{display:flex;border:1px solid #6E5A45;border-radius:3px;overflow:hidden}
-.lang button{background:transparent;color:var(--line);border:0;font:600 12px 'Plus Jakarta Sans',sans-serif;padding:0 10px;min-height:36px;cursor:pointer}
-.lang button:hover{background:#3A2E24;color:#fff}
-.lang button[aria-pressed=true]{background:var(--brown);color:#fff;font-weight:800}
-.menu-btn{display:none;background:transparent;border:1px solid #6E5A45;border-radius:3px;width:44px;height:44px;align-items:center;justify-content:center;cursor:pointer}
-@media (max-width:980px){.menu-btn{display:inline-flex}nav.main{display:none;order:9;width:100%;flex-direction:column}nav.main.open{display:flex}}
-
-/* hero */
-.hero{display:flex;flex-wrap:wrap;background:var(--ink)}
-.slides{flex:999 1 620px;min-width:0;position:relative;min-height:620px;overflow:hidden;background:#3A2E24}
-.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;opacity:0;transition:opacity .9s;visibility:hidden}
-.slide.on{opacity:1;visibility:visible}
-.slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
-.slide .txt{position:relative;padding:48px max(24px,5vw) 76px;display:flex;flex-direction:column;gap:16px;max-width:860px}
-.slide .eyebrow{color:var(--gold);letter-spacing:.14em}
-.slide h1,.slide h2{font-size:clamp(38px,4.6vw,72px);line-height:1.08;color:#fff}
-.slide p{font-size:18px;color:#F3EDE1;max-width:620px}
-.slide .go{color:#fff;font-weight:700;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;gap:10px}
-.slide .go:hover{text-decoration:underline}
-.bars{display:flex;gap:7px;padding-left:4px}.bars span{height:9px;background:var(--gold);transform:skewX(-24deg)}
-.arrow{position:absolute;top:50%;transform:translateY(-50%);width:56px;height:64px;background:var(--paper);border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2}
-.arrow:hover{background:#fff}.prev{left:0}.next{right:0}
-.dots{position:absolute;left:0;right:0;bottom:22px;display:flex;justify-content:center;gap:6px;z-index:2}
-.dots button{width:44px;height:24px;background:transparent;border:0;cursor:pointer;padding:0}
-.dots button::after{content:"";display:block;height:4px;background:#8A7660}
-.dots button[aria-current=true]::after{background:#fff}
-.credit{position:absolute;right:16px;bottom:24px;font-size:11px;color:var(--line);z-index:2}
-.side{flex:1 1 380px;display:flex;flex-direction:column;min-width:0}
-.contacts{background:var(--sand);padding:32px 36px;display:flex;flex-direction:column;gap:12px;flex-grow:1}
-.contacts h2{font-size:18px;font-weight:800;margin-bottom:10px}
-
-/* call boxes (shared by hero + kontak) */
-.call{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:96px;padding:18px 22px;border-radius:4px;color:#fff;text-decoration:none;transition:transform .15s,filter .15s,box-shadow .15s}
-.call:hover{color:#fff;filter:brightness(1.08);box-shadow:0 6px 18px rgba(0,0,0,.18)}
-.call:active{transform:scale(.98)}
-.call-110{background:var(--red)}.call-wa{background:var(--green)}
-.call .num{font-size:60px;line-height:1}
-.call .lbl{font-size:18px;font-weight:800;display:block}
-.call small{font-size:13px;opacity:.9;display:block}
-.call .wa{font-size:clamp(20px,1.6vw,24px);font-weight:800;line-height:1.1;white-space:nowrap;font-variant-numeric:tabular-nums;display:block}
-.call .ico{width:48px;height:48px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.call-110 .ico{color:var(--red)}.call-wa .ico{color:var(--green)}
-.call .ico svg{animation:ring 2.4s ease-in-out infinite}
-@keyframes ring{0%,80%,100%{transform:rotate(0)}85%{transform:rotate(-14deg)}90%{transform:rotate(14deg)}95%{transform:rotate(-8deg)}}
-.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding-top:6px}
-.facts div{border-top:2px solid #CFC4AE;padding-top:10px}
-.facts b{display:block;font-size:18px;font-weight:800}
-.facts span{display:block;font-size:13px;font-weight:700}
-.facts small{font-size:12px;color:var(--muted);line-height:1.45;display:block}
-.help{background:var(--ink);padding:28px 36px 32px}
-.help h2{font-size:22px;font-weight:700;color:var(--paper);margin-bottom:16px}
-.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.quick a{background:#3A2E24;border-bottom:3px solid var(--gold);padding:16px;text-decoration:none;min-height:84px;display:flex;flex-direction:column;gap:4px;transition:background .15s}
-.quick a:hover{background:#4A3A2C}
-.quick b{font-size:20px;font-weight:800;color:var(--paper);display:flex;justify-content:space-between}
-.quick b i{font-style:normal;color:var(--gold)}
-.quick span{font-size:13px;color:var(--line)}
-
-/* sections */
-section{padding:64px 0}
-.services{background:var(--khaki)}
-.row-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:24px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.card{background:#fff;border-top:4px solid var(--brown);border-radius:3px;padding:24px;display:flex;flex-direction:column;gap:10px;text-decoration:none;color:var(--ink);min-height:200px;transition:transform .15s,box-shadow .15s}
-.card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(43,33,24,.12);color:var(--ink)}
-.card .i{width:44px;height:44px;background:var(--sand);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--brown)}
-.card h3{font-size:21px;line-height:1.2}
-.card p{font-size:14px;color:var(--muted);flex-grow:1}
-.card .more{font-size:14px;font-weight:700;color:var(--brown)}
-.links{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:24px;font-size:14px;font-weight:600}
-.warn{background:var(--red);border-radius:4px;padding:22px 26px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;color:#fff}
-.warn .ico{width:52px;height:52px;border-radius:50%;background:#fff;color:var(--red);display:flex;align-items:center;justify-content:center}
-.warn .tag{display:inline-block;background:#fff;color:#B3261E;font-size:12px;font-weight:800;letter-spacing:.08em;padding:5px 10px;border-radius:2px;margin-bottom:6px}
-.warn h2{font-size:24px}.warn p{font-size:15px;color:#FFE3E0}
-.warn .btn{background:#fff;color:#B3261E}
-.chief{display:flex;flex-wrap:wrap;gap:56px;align-items:center}
-.chief figure{margin:0;flex:0 1 420px;max-width:420px;width:100%}
-.chief .photo{background:var(--khaki);border-radius:3px;padding:28px 12px 0}
-.chief figcaption{background:var(--ink);border-top:4px solid var(--gold);padding:14px 18px;color:var(--paper);font-size:15px;font-weight:700}
-.chief figcaption small{display:block;font-size:13px;font-weight:400;color:var(--line)}
-.chief .body{flex:1 1 420px;display:flex;flex-direction:column;gap:18px;min-width:0}
-.chief .body p{font-size:17px;line-height:1.7;color:#4A3E33}
-.news{background:var(--sand)}
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-.post{background:#fff;border-radius:3px;overflow:hidden;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
-.post:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(43,33,24,.12);color:var(--ink)}
-.post .img{aspect-ratio:16/9;background:#3A2E24;overflow:hidden}
-.post .img img{width:100%;height:100%;object-fit:cover;filter:saturate(.35) sepia(.15) contrast(1.02);transition:filter .3s}
-.post:hover .img img{filter:saturate(.8)}
-.post .b{padding:20px;display:flex;flex-direction:column;gap:10px;flex-grow:1}
-.post .meta{display:flex;gap:10px;align-items:center;font-size:13px;color:#6B5D4F}
-.post .meta b{background:var(--khaki);color:#4A3E33;font-size:12px;padding:4px 8px;border-radius:2px}
-.post h3{font-size:17px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.post p{font-size:14px;color:var(--muted);flex-grow:1}
-.post .src{font-size:13px;font-weight:700;color:var(--brown)}
-.ig{display:flex;flex-wrap:wrap;gap:40px;align-items:center}
-.ig .intro{flex:1 1 320px;display:flex;flex-direction:column;gap:16px}
-.ig .reels{flex:2 1 560px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;min-width:0}
-.reel{position:relative;aspect-ratio:9/16;border:0;padding:0;cursor:pointer;overflow:hidden;border-radius:4px;background:var(--ink);color:#fff;text-align:left;font-family:inherit}
-.reel img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) sepia(.35) brightness(.7);transition:transform .4s}
-.reel:hover img.bg{transform:scale(1.05)}
-.reel .logo{position:absolute;top:12px;left:12px;height:44px;width:auto}
-.reel .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(250,248,243,.92);color:var(--ink);display:flex;align-items:center;justify-content:center;transition:transform .15s}
-.reel:hover .play{transform:translate(-50%,-50%) scale(1.08)}
-.reel .cap{position:absolute;left:0;right:0;bottom:0;padding:14px;background:linear-gradient(transparent,rgba(30,22,16,.95));font-size:14px;font-weight:700;line-height:1.35}
-.reel .cap small{display:block;color:var(--gold);font-size:11px;letter-spacing:.12em}
-dialog{border:0;padding:0;background:var(--ink);color:var(--paper);border-radius:6px;width:min(420px,94vw);max-height:94vh}
-dialog::backdrop{background:rgba(10,8,6,.82)}
-dialog .bar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px}
-dialog iframe{display:block;width:100%;height:min(680px,76vh);border:0;background:#fff}
-dialog .x{background:transparent;border:1px solid #6E5A45;color:var(--paper);width:44px;height:44px;border-radius:3px;cursor:pointer;font-size:20px}
-.complaint{background:var(--ink);color:var(--paper)}
-.complaint .wrap{display:flex;flex-wrap:wrap;gap:48px}
-.complaint .l{flex:1 1 440px;display:flex;flex-direction:column;gap:20px}
-.complaint .eyebrow{color:var(--gold)}
-.complaint ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;counter-reset:s}
-.complaint li{display:flex;gap:14px;align-items:center;counter-increment:s}
-.complaint li::before{content:counter(s);width:32px;height:32px;border:1.5px solid var(--gold);color:var(--gold);font-weight:700;display:flex;align-items:center;justify-content:center;border-radius:2px;flex-shrink:0}
-.check{flex:1 1 360px;background:#3A2E24;border:1px solid #4A3A2C;border-radius:3px;padding:28px;display:flex;flex-direction:column;gap:12px;align-self:flex-start}
-.check label{font-size:14px;color:var(--line)}
-.check input{font:inherit;padding:0 14px;min-height:48px;border:1px solid #6E5A45;background:var(--ink);color:var(--paper);border-radius:3px}
-.check button{font:700 15px 'Plus Jakarta Sans',sans-serif;min-height:48px;background:transparent;color:var(--paper);border:1.5px solid var(--gold);border-radius:3px;cursor:pointer}
-.check button:hover{background:var(--gold);color:var(--ink)}
-.map{display:flex;flex-wrap:wrap;gap:40px}
-.map .frame{flex:1 1 520px;min-height:460px;background:var(--khaki);border-radius:3px;overflow:hidden;min-width:0;display:flex;flex-direction:column}
-.map iframe{flex:1;width:100%;min-height:420px;border:0;filter:saturate(.5) sepia(.15)}
-.map .addr{padding:14px 16px;background:#fff;font-size:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center}
-.map .info{flex:1 1 400px;display:flex;flex-direction:column;gap:18px;min-width:0}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.stats div{background:var(--sand);padding:12px 14px;border-radius:3px;font-size:12px;color:#6B5D4F}
-.stats b{display:block;font-size:18px;color:var(--ink)}
-.desa{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));column-gap:20px;border-top:1px solid var(--line)}
-.desa li{display:flex;justify-content:space-between;gap:8px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;font-weight:600}
-.desa li span{font-weight:400;color:#6B5D4F;font-size:13px}
-.note{font-size:13px;color:#6B5D4F}
-.contact{background:var(--khaki)}
-.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:24px}
-.box{background:#fff;padding:22px;border-radius:4px;display:flex;flex-direction:column;gap:6px}
-.box.y{background:#FFF1C2}
-.box span{font-size:13px;color:#6B5D4F;font-weight:600}
-.box b{font-size:15px;line-height:1.5}
-.night{position:relative;overflow:hidden;color:#fff;padding:80px 0 88px;background:#07090F radial-gradient(ellipse 40% 35% at 50% 0%,rgba(255,255,255,.1),transparent 70%)}
-.glow-b,.glow-r{position:absolute;top:-20%;width:60%;height:130%;pointer-events:none;animation:flash 2.4s ease-in-out infinite}
-.glow-b{left:-15%;background:radial-gradient(closest-side,rgba(40,110,255,.55),transparent)}
-.glow-r{right:-15%;background:radial-gradient(closest-side,rgba(240,30,40,.5),transparent);animation-delay:-1.2s}
-@keyframes flash{0%,100%{opacity:1}50%{opacity:.22}}
-.night .wrap{position:relative}
-.night .eyebrow{color:#8FB4FF}
-.notices{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,500px),1fr));gap:24px;margin:28px 0 20px}
-.notice{display:flex;flex-wrap:wrap;border:1px solid rgba(255,255,255,.16);background:rgba(10,14,24,.78);text-decoration:none;color:#fff;transition:border-color .15s}
-.notice:hover{color:#fff;border-color:rgba(255,255,255,.5)}
-.notice .flag{flex:0 0 190px;display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px 12px 0}
-.notice .flag img{width:92px}
-.notice .flag b{font-family:'Red Hat Display',sans-serif;font-size:15px}
-.notice .flag div{background:#fff;align-self:stretch;margin:6px -12px 0;padding:14px 8px;text-align:center;font:800 19px/1.1 'Red Hat Display',sans-serif}
-.red .flag{background:#B3261E}.red .flag div{color:#B3261E;border:3px solid #B3261E;border-top:0}
-.yel .flag{background:#F2C230;color:var(--ink)}.yel .flag div{color:var(--ink);border:3px solid #F2C230;border-top:0}
-.notice .t{flex:1 1 240px;padding:28px;display:flex;flex-direction:column;gap:12px;justify-content:center}
-.notice h3{font-size:27px;line-height:1.15}
-.notice p{color:#C9D2E3;font-size:15px}
-footer{background:#1E1712;color:var(--line);padding:48px 0 28px}
-footer .top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:32px}
-footer .id{display:flex;flex-direction:column;gap:16px;flex:1 1 360px}
-footer .logos{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-footer .logos img{height:64px;width:auto}
-footer a{color:var(--line)}
-footer nav{display:grid;grid-template-columns:1fr 1fr;gap:10px 40px;align-content:start;font-size:14px}
-.social{display:flex;gap:10px}
-.social a{color:var(--paper);font-size:14px;font-weight:600;border:1px solid #4A3A2C;border-radius:3px;padding:0 14px;min-height:40px;display:inline-flex;align-items:center;text-decoration:none}
-.social a:hover{background:#3A2E24}
-footer .bottom{border-top:1px solid #3A2E24;margin-top:32px;padding-top:20px;font-size:13px;color:#B9AC93;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
-@media (max-width:640px){.slides{min-height:560px}.contacts,.help{padding:24px}.call .num{font-size:48px}.stats{grid-template-columns:1fr 1fr}.ig .reels{grid-template-columns:repeat(3,minmax(140px,1fr));overflow-x:auto}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
-</style>
 </head>
 <body>
-
 <div class="alert"><div class="wrap">
 <span>Keadaan darurat? Hubungi Call Center Polri 110, gratis 24 jam</span>
 <a href="tel:110">Telepon 110</a>
 </div></div>
-
 <header>
 <div class="wrap hd">
-<a class="brand" href="#">
+<a class="brand" href="index.html">
 <img src="assets/polri.webp" alt="Lambang Polri" width="52" height="50">
 <img src="assets/polsek-kapuas-tengah.webp" alt="Lambang Polsek Kapuas Tengah" width="44" height="50">
 <span class="sep"></span>
 <span><b class="display">POLSEK KAPUAS TENGAH</b><small>Polres Kapuas · Polda Kalimantan Tengah</small></span>
 </a>
 <nav class="main" id="nav" aria-label="Menu utama">
-<a href="#" aria-current="page">Beranda</a>
-<a href="#kapolsek">Profil</a>
-<a href="#layanan">Layanan</a>
-<a href="#berita">Berita dan imbauan</a>
-<a href="#wilayah">Peta wilayah</a>
-<a href="#kontak">Kontak</a>
+<a href="index.html" aria-current="page">Beranda</a>
+<a href="profil.html">Profil</a>
+<a href="layanan.html">Layanan</a>
+<a href="berita.html">Berita dan imbauan</a>
+<a href="pencarian-orang.html">Pencarian orang</a>
+<a href="index.html#wilayah">Peta wilayah</a>
+<a href="index.html#kontak">Kontak</a>
 </nav>
 <div class="tools">
 <div class="lang" role="group" aria-label="Bahasa">
@@ -256,28 +45,35 @@ footer .bottom{border-top:1px solid #3A2E24;margin-top:32px;padding-top:20px;fon
 </div>
 <div class="stripe" aria-hidden="true"><span></span><span style="width:28px"></span><span style="width:18px"></span><span style="width:11px"></span><span style="width:6px"></span></div>
 </header>
-
 <main>
 <section class="hero" aria-label="Sorotan utama" style="padding:0">
 <div class="slides" id="slides" aria-roledescription="carousel">
 <div class="slide on">
-<img src="assets/hero-1.jpg" alt="Barisan personel Polri dalam apel" width="1600" height="1065">
+<img src="assets/hero-1.jpg" alt="Personel Polri berbaris dalam apel" width="1920" height="1280">
 <div class="txt"><span class="eyebrow">Kepolisian Sektor Kapuas Tengah</span>
 <h1 class="display">Presisi melayani, Isen Mulang menjaga.</h1>
 <div class="bars" aria-hidden="true"><span style="width:140px"></span><span style="width:24px"></span><span style="width:16px"></span><span style="width:10px"></span><span style="width:5px"></span></div>
 <p>Pusat informasi dan layanan digital untuk masyarakat Kecamatan Kapuas Tengah, Kabupaten Kapuas.</p>
-<a class="go" href="#layanan">Lihat layanan <span aria-hidden="true">→</span></a></div>
+<a class="go" href="layanan.html">Lihat layanan <span aria-hidden="true">→</span></a></div>
 </div>
 <div class="slide">
-<img src="assets/hero-2.jpg" alt="Personel Polri bersiaga di lapangan" width="1600" height="1065" loading="lazy">
-<div class="txt"><span class="eyebrow">Imbauan kamtibmas</span>
-<h2 class="display">Buka lahan tanpa bakar.</h2>
+<img src="assets/hero-2.jpg" alt="Personel Brimob Polri bersiaga" width="1920" height="1280" loading="lazy">
+<div class="txt"><span class="eyebrow">Siaga 24 jam</span>
+<h2 class="display">Cepat hadir saat Anda membutuhkan.</h2>
 <div class="bars" aria-hidden="true"><span style="width:140px"></span><span style="width:24px"></span><span style="width:16px"></span><span style="width:10px"></span><span style="width:5px"></span></div>
-<p>Kebakaran hutan dan lahan mengancam permukiman. Laporkan titik api ke 110 atau Bhabinkamtibmas desa Anda.</p>
-<a class="go" href="#imbauan">Baca imbauan <span aria-hidden="true">→</span></a></div>
+<p>Hubungi 110 untuk keadaan darurat, atau datang ke SPKT Polsek di Pujon kapan saja.</p>
+<a class="go" href="#kontak">Kontak penting <span aria-hidden="true">→</span></a></div>
 </div>
 <div class="slide">
-<img src="assets/hero-3.jpg" alt="Personel Polri memberi hormat" width="1600" height="776" loading="lazy">
+<img src="assets/hero-3.jpg" alt="Demonstrasi teknologi pengamanan Polri" width="1920" height="1280" loading="lazy">
+<div class="txt"><span class="eyebrow">Polri Presisi</span>
+<h2 class="display">Pelayanan yang makin modern.</h2>
+<div class="bars" aria-hidden="true"><span style="width:140px"></span><span style="width:24px"></span><span style="width:16px"></span><span style="width:10px"></span><span style="width:5px"></span></div>
+<p>Booking kunjungan, kirim pengaduan, dan pantau tiket Anda langsung dari ponsel.</p>
+<a class="go" href="#" data-form="book">Booking kunjungan <span aria-hidden="true">→</span></a></div>
+</div>
+<div class="slide">
+<img src="assets/hero-4.jpg" alt="Upacara bersama Polri dan aparatur pemerintah" width="1920" height="1280" loading="lazy">
 <div class="txt"><span class="eyebrow">Polisi bersama masyarakat</span>
 <h2 class="display">Hadir di setiap desa.</h2>
 <div class="bars" aria-hidden="true"><span style="width:140px"></span><span style="width:24px"></span><span style="width:16px"></span><span style="width:10px"></span><span style="width:5px"></span></div>
@@ -286,7 +82,7 @@ footer .bottom{border-top:1px solid #3A2E24;margin-top:32px;padding-top:20px;fon
 </div>
 <button class="arrow prev" type="button" aria-label="Slide sebelumnya"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2B2118" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
 <button class="arrow next" type="button" aria-label="Slide berikutnya"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2B2118" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-<div class="dots"><button type="button" aria-label="Slide 1" aria-current="true"></button><button type="button" aria-label="Slide 2"></button><button type="button" aria-label="Slide 3"></button></div>
+<div class="dots"><button type="button" aria-label="Slide 1" aria-current="true"></button><button type="button" aria-label="Slide 2"></button><button type="button" aria-label="Slide 3"></button><button type="button" aria-label="Slide 4"></button></div>
 <span class="credit">Foto ilustrasi</span>
 </div>
 
@@ -309,9 +105,9 @@ footer .bottom{border-top:1px solid #3A2E24;margin-top:32px;padding-top:20px;fon
 <div class="help">
 <h2>Ada yang bisa kami bantu?</h2>
 <div class="quick">
-<a href="#layanan"><b>Ajukan <i aria-hidden="true">→</i></b><span>SKCK dan surat kehilangan</span></a>
+<a href="#" data-form="book"><b>Ajukan <i aria-hidden="true">→</i></b><span>Booking kunjungan ke Polsek</span></a>
 <a href="#cek"><b>Cek <i aria-hidden="true">→</i></b><span>Status pengaduan</span></a>
-<a href="#pengaduan"><b>Lapor <i aria-hidden="true">→</i></b><span>Pengaduan masyarakat</span></a>
+<a href="#" data-form="ask"><b>Lapor <i aria-hidden="true">→</i></b><span>Pengaduan masyarakat</span></a>
 <a href="#wilayah"><b>Temukan <i aria-hidden="true">→</i></b><span>Bhabinkamtibmas desa</span></a>
 </div>
 </div>
@@ -320,14 +116,14 @@ footer .bottom{border-top:1px solid #3A2E24;margin-top:32px;padding-top:20px;fon
 
 <section class="services" id="layanan" aria-labelledby="layanan-h">
 <div class="wrap">
-<div class="row-head"><h2 id="layanan-h" class="display" style="font-size:34px;line-height:1.15">Layanan kepolisian</h2><a href="#" style="font-size:14px;font-weight:700">Semua layanan →</a></div>
+<div class="row-head"><h2 id="layanan-h" class="display" style="font-size:34px;line-height:1.15">Layanan kepolisian</h2><a href="layanan.html" style="font-size:14px;font-weight:700">Semua layanan →</a></div>
 <div class="cards">
-<a class="card" href="#"><span class="i"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6"/></svg></span><h3 class="display">SKCK</h3><p>Persyaratan, alur, dan biaya pembuatan Surat Keterangan Catatan Kepolisian.</p><span class="more">Lihat panduan →</span></a>
-<a class="card" href="#"><span class="i"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4M8 11h6"/></svg></span><h3 class="display">Surat kehilangan</h3><p>Laporkan kehilangan dokumen atau barang dan ketahui berkas yang perlu dibawa.</p><span class="more">Lihat panduan →</span></a>
-<a class="card" href="#pengaduan"><span class="i"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4zM8 9h8M8 12h5"/></svg></span><h3 class="display">Pengaduan</h3><p>Sampaikan laporan dan aspirasi secara online, lalu pantau statusnya.</p><span class="more">Buat pengaduan →</span></a>
-<a class="card" href="#kontak"><span class="i"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6zM9 12l2 2 4-4"/></svg></span><h3 class="display">SPKT</h3><p>Sentra Pelayanan Kepolisian Terpadu untuk laporan langsung di Mako Polsek, 24 jam.</p><span class="more">Lihat info →</span></a>
+<button class="card" type="button" data-svc="skck" data-label="SKCK"><span class="i"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6"/></svg></span><h3 class="display">SKCK</h3><p>Persyaratan, alur, dan biaya pembuatan Surat Keterangan Catatan Kepolisian.</p><span class="more">Lihat panduan →</span></button>
+<button class="card" type="button" data-svc="kehilangan" data-label="SURAT KEHILANGAN"><span class="i"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4M8 11h6"/></svg></span><h3 class="display">Surat kehilangan</h3><p>Laporkan kehilangan dokumen atau barang dan ketahui berkas yang perlu dibawa.</p><span class="more">Lihat panduan →</span></button>
+<button class="card" type="button" data-svc="pengaduan" data-label="PENGADUAN DAN PENDAMPINGAN"><span class="i"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4zM8 9h8M8 12h5"/></svg></span><h3 class="display">Pengaduan</h3><p>Sampaikan laporan dan aspirasi secara online, lalu pantau statusnya.</p><span class="more">Buat pengaduan →</span></button>
+<button class="card" type="button" data-svc="spkt" data-label="SPKT"><span class="i"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6zM9 12l2 2 4-4"/></svg></span><h3 class="display">SPKT</h3><p>Sentra Pelayanan Kepolisian Terpadu untuk laporan langsung di Mako Polsek, 24 jam.</p><span class="more">Lihat info →</span></button>
 </div>
-<div class="links"><span style="color:var(--muted);font-weight:700">Layanan lain</span><a href="#">Izin keramaian</a><a href="#">Laporan polisi</a><a href="#wilayah">Bhabinkamtibmas desa</a></div>
+<div class="links"><span style="color:var(--muted);font-weight:700">Layanan lain</span><a href="layanan.html#spkt">Izin keramaian</a><a href="layanan.html#pengaduan">Laporan polisi</a><a href="#wilayah">Bhabinkamtibmas desa</a></div>
 </div>
 </section>
 
@@ -335,7 +131,7 @@ footer .bottom{border-top:1px solid #3A2E24;margin-top:32px;padding-top:20px;fon
 <div class="wrap"><div class="warn">
 <span class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 1.5.8 2.5 2 3 0-3.5 1-6 1-8.5z"/></svg></span>
 <div style="flex:1 1 420px"><span class="tag">IMBAUAN · WASPADA KARHUTLA</span><h2 id="imbauan-h" class="display">Buka lahan tanpa bakar</h2><p>Musim kemarau rawan kebakaran hutan dan lahan. Jangan membersihkan lahan dengan cara membakar, dan segera laporkan titik api ke 110 atau Bhabinkamtibmas desa Anda.</p></div>
-<a class="btn" href="#berita">Baca imbauan →</a>
+<a class="btn" href="berita.html#imbauan">Baca imbauan →</a>
 </div></div>
 </section>
 
@@ -349,14 +145,14 @@ footer .bottom{border-top:1px solid #3A2E24;margin-top:32px;padding-top:20px;fon
 <span class="eyebrow">Sambutan Kapolsek</span>
 <h2 id="kapolsek-h" class="h2" style="font-size:clamp(28px,3.2vw,38px)">Hadir lebih dekat untuk masyarakat Kapuas Tengah</h2>
 <p>[Sambutan singkat Kapolsek, dua sampai tiga kalimat: komitmen pelayanan yang presisi dan humanis, keterbukaan, serta ajakan menjaga kamtibmas bersama.]</p>
-<div class="links" style="margin:0;border-top:1px solid var(--line);padding-top:16px;font-weight:700"><a href="#">Profil Polsek</a><a href="#">Struktur organisasi</a><a href="#">Tugas dan fungsi</a><a href="#wilayah">Wilayah hukum</a></div>
+<div class="links" style="margin:0;border-top:1px solid var(--line);padding-top:16px;font-weight:700"><a href="profil.html">Profil Polsek</a><a href="profil.html#struktur">Struktur organisasi</a><a href="profil.html#tugas">Tugas dan fungsi</a><a href="#wilayah">Wilayah hukum</a></div>
 </div>
 </div>
 </section>
 
 <section class="news" id="berita" aria-labelledby="berita-h">
 <div class="wrap">
-<div class="row-head"><div><span class="eyebrow">Berita dan kegiatan</span><h2 id="berita-h" class="h2">Kabar terbaru dari Polsek Kapuas Tengah</h2></div><a href="#" style="font-size:14px;font-weight:700">Semua berita →</a></div>
+<div class="row-head"><div><span class="eyebrow">Berita dan kegiatan</span><h2 id="berita-h" class="h2">Kabar terbaru dari Polsek Kapuas Tengah</h2></div><a href="berita.html" style="font-size:14px;font-weight:700">Semua berita →</a></div>
 <div class="grid3">
 <a class="post" href="https://analisnews.co.id/index.php/2026/11/05/polisi-peduli-pengangguran-kapolsek-kapuas-tengah-hadirkan-pendekatan-humanis-dan-bangun-kedekatan-dengan-masyarakat/" target="_blank" rel="noopener">
 <span class="img"><img src="assets/news-1.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=()=>this.remove();this.src='https://analisnews.co.id/wp-content/uploads/2026/11/IMG-20261105-WA0133.jpg'"></span>
@@ -399,7 +195,7 @@ footer .bottom{border-top:1px solid #3A2E24;margin-top:32px;padding-top:20px;fon
 <h2 id="pengaduan-h" class="h2" style="font-size:clamp(28px,3vw,36px)">Sampaikan laporan dan aspirasi Anda</h2>
 <p style="color:var(--line)">Identitas boleh dikosongkan. Cantumkan nomor HP jika ingin memantau status pengaduan dengan nomor tiket.</p>
 <ol><li>Isi formulir pengaduan</li><li>Terima nomor tiket</li><li>Pantau status penanganan</li></ol>
-<div><a class="btn btn-gold" href="#">Buat pengaduan</a></div>
+<div><button class="btn btn-gold" type="button" data-form="ask">Buat pengaduan</button></div>
 <p style="font-size:13px;color:#B9AC93">Formulir ini bukan untuk keadaan darurat. Untuk kejadian yang sedang berlangsung, hubungi 110.</p>
 </div>
 <!-- shortcut: no backend yet, the form only checks required fields; wire to Supabase when the ticket table exists -->
@@ -452,7 +248,7 @@ footer .bottom{border-top:1px solid #3A2E24;margin-top:32px;padding-top:20px;fon
 <span><span class="lbl">WhatsApp Polsek</span><span class="wa">0853 1551 5282</span><small>Informasi dan pelayanan</small></span>
 <span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.4-4.2A8 8 0 1 1 8.4 19z"/><path d="M9.5 9.5c.3 1.8 2.2 3.8 4 4.2l1-1.2 1.8.8-.4 1.6c-3 .3-6.4-3-6.2-6.2l1.6-.4.8 1.8z"/></svg></span>
 </a>
-<div class="box"><span>Alamat Mako</span><b>Jl. Damang Raban No. 01 RT 002, Desa Pujon, Kec. Kapuas Tengah, Kab. Kapuas, Kalimantan Tengah 73555</b></div>
+<a class="box" href="https://www.google.com/maps/dir/?api=1&destination=Polsek+Kapuas+Tengah,+Jl.+Damang+Raban+No.+01,+Pujon,+Kapuas,+Kalimantan+Tengah" target="_blank" rel="noopener" style="text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:6px"><span>Alamat Mako</span><b>Jl. Damang Raban No. 01 RT 002, Desa Pujon, Kec. Kapuas Tengah, Kab. Kapuas, Kalimantan Tengah 73555</b><b style="color:var(--brown);display:inline-flex;gap:8px;align-items:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> Buka petunjuk arah ↗</b></a>
 <div class="box y"><span>Jam layanan</span><b>SPKT: setiap hari, 24 jam</b><b>SKCK dan administrasi: Senin–Jumat, 08.00–15.00 WIB</b></div>
 </div>
 </div>
@@ -464,14 +260,14 @@ footer .bottom{border-top:1px solid #3A2E24;margin-top:32px;padding-top:20px;fon
 <span class="eyebrow">Informasi publik</span>
 <h2 id="info-h" class="display" style="font-size:40px;line-height:1.15">Bantu kami menemukan mereka</h2>
 <div class="notices">
-<a class="notice red" href="#"><span class="flag"><img src="assets/polri.webp" alt="" loading="lazy"><b>POLRI</b><div>DAFTAR<br>PENCARIAN ORANG</div></span><span class="t"><h3 class="display">Lihat daftar DPO</h3><p>Daftar orang yang dicari polisi di wilayah hukum Polsek Kapuas Tengah.</p><b>↳ Lihat daftar</b></span></a>
-<a class="notice yel" href="#"><span class="flag"><img src="assets/polri.webp" alt="" loading="lazy"><b>POLRI</b><div>ORANG<br>HILANG</div></span><span class="t"><h3 class="display">Lihat orang hilang</h3><p>Informasi warga yang dilaporkan hilang. Bantu kami mempertemukan mereka dengan keluarga.</p><b>↳ Lihat daftar</b></span></a>
+<a class="notice red" href="pencarian-orang.html#dpo"><span class="flag"><img src="assets/polri.webp" alt="" loading="lazy"><b>POLRI</b><div>DAFTAR<br>PENCARIAN ORANG</div></span><span class="t"><h3 class="display">Lihat daftar DPO</h3><p>Daftar orang yang dicari polisi di wilayah hukum Polsek Kapuas Tengah.</p><b>↳ Lihat daftar</b></span></a>
+<a class="notice yel" href="pencarian-orang.html#hilang"><span class="flag"><img src="assets/polri.webp" alt="" loading="lazy"><b>POLRI</b><div>ORANG<br>HILANG</div></span><span class="t"><h3 class="display">Lihat orang hilang</h3><p>Informasi warga yang dilaporkan hilang. Bantu kami mempertemukan mereka dengan keluarga.</p><b>↳ Lihat daftar</b></span></a>
 </div>
 <p style="font-size:13px;color:#AEB8CC">Jika Anda melihat orang dalam daftar ini, jangan bertindak sendiri. Hubungi 110 atau Polsek Kapuas Tengah.</p>
 </div>
 </section>
-</main>
 
+</main>
 <footer>
 <div class="wrap">
 <div class="top">
@@ -483,59 +279,117 @@ footer .bottom{border-top:1px solid #3A2E24;margin-top:32px;padding-top:20px;fon
 <img src="assets/polsek-kapuas-tengah.webp" alt="Lambang Polsek Kapuas Tengah" loading="lazy">
 </div>
 <b class="display" style="font-size:20px;color:var(--paper);letter-spacing:.02em">POLSEK KAPUAS TENGAH</b>
-<span style="font-size:14px">Jl. Damang Raban No. 01 RT 002, Desa Pujon, Kec. Kapuas Tengah, Kab. Kapuas, Kalimantan Tengah 73555</span>
+<a href="https://www.google.com/maps/dir/?api=1&destination=Polsek+Kapuas+Tengah,+Jl.+Damang+Raban+No.+01,+Pujon,+Kapuas,+Kalimantan+Tengah" target="_blank" rel="noopener" style="font-size:14px">Jl. Damang Raban No. 01 RT 002, Desa Pujon, Kec. Kapuas Tengah, Kab. Kapuas, Kalimantan Tengah 73555</a>
 <div class="social"><a href="https://www.instagram.com/polsek.kapuas.tengah/" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/Polsekkapuastengah01/" target="_blank" rel="noopener">Facebook</a></div>
 <span style="font-size:13px;color:var(--gold);letter-spacing:.1em;font-weight:700">RASTRA SEWAKOTTAMA</span>
 </div>
-<nav aria-label="Tautan footer"><a href="#kapolsek">Profil</a><a href="#pengaduan">Pengaduan</a><a href="#layanan">Layanan</a><a href="#wilayah">Peta wilayah</a><a href="#berita">Berita dan imbauan</a><a href="#kontak">Kontak</a></nav>
+<nav aria-label="Tautan footer"><a href="profil.html">Profil</a><a href="layanan.html">Layanan</a><a href="berita.html">Berita dan imbauan</a><a href="pencarian-orang.html">Pencarian orang</a><a href="index.html#wilayah">Peta wilayah</a><a href="index.html#kontak">Kontak</a></nav>
 </div>
 <div class="bottom"><span>© 2026 Polsek Kapuas Tengah, Polres Kapuas</span><span>Darurat: 110 · WhatsApp: 0853 1551 5282</span></div>
 </div>
 </footer>
-
-<script>
-// hero carousel: fixed 6 s interval, pauses on hover/focus, off for reduced motion
-const slides=[...document.querySelectorAll('.slide')],dots=[...document.querySelectorAll('.dots button')];
-let cur=0,timer;
-const show=i=>{cur=(i+slides.length)%slides.length;slides.forEach((s,k)=>s.classList.toggle('on',k===cur));dots.forEach((d,k)=>d.setAttribute('aria-current',k===cur))};
-const play=()=>{clearInterval(timer);if(!matchMedia('(prefers-reduced-motion: reduce)').matches)timer=setInterval(()=>show(cur+1),6000)};
-document.querySelector('.prev').onclick=()=>{show(cur-1);play()};
-document.querySelector('.next').onclick=()=>{show(cur+1);play()};
-dots.forEach((d,k)=>d.onclick=()=>{show(k);play()});
-const box=document.getElementById('slides');
-box.addEventListener('mouseenter',()=>clearInterval(timer));box.addEventListener('mouseleave',play);
-box.addEventListener('focusin',()=>clearInterval(timer));box.addEventListener('focusout',play);
-play();
-
-// mobile menu
-const mb=document.querySelector('.menu-btn'),nav=document.getElementById('nav');
-mb.onclick=()=>mb.setAttribute('aria-expanded',nav.classList.toggle('open'));
-nav.addEventListener('click',e=>{if(e.target.tagName==='A'){nav.classList.remove('open');mb.setAttribute('aria-expanded',false)}});
-
-// language toggle: shortcut: only switches state and <html lang>; translated copy for EN and Dayak Ngaju still to be written
-document.querySelectorAll('.lang button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('.lang button').forEach(x=>x.setAttribute('aria-pressed',x===b));
-  document.documentElement.lang=b.dataset.lang;
-});
-
-// reels play inside the page; clearing src on close stops the video
-const dlg=document.getElementById('reel-dlg'),frame=document.getElementById('reel-frame'),open=document.getElementById('reel-open');
-document.querySelectorAll('.reel').forEach(r=>r.onclick=()=>{
-  const id=r.dataset.reel;
-  frame.src='https://www.instagram.com/reel/'+id+'/embed/';
-  open.href='https://www.instagram.com/reel/'+id+'/';
-  dlg.showModal();
-});
-dlg.querySelector('.x').onclick=()=>dlg.close();
-dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
-dlg.addEventListener('close',()=>frame.src='about:blank');
-
-// status check: validate input at the boundary, no backend yet
-document.getElementById('cek').onsubmit=e=>{
-  e.preventDefault();
-  const t=e.target.tiket.value.trim(),h=e.target.hp.value.replace(/\D/g,''),m=document.getElementById('cek-msg');
-  m.textContent=!/^[A-Z0-9-]{6,}$/i.test(t)?'Masukkan nomor tiket yang valid.':h.length<10?'Masukkan nomor HP yang didaftarkan.':'Fitur cek status akan aktif setelah sistem pengaduan tersambung.';
-};
-</script>
+<dialog class="sheet" id="form-dlg" aria-label="Formulir">
+<div class="top"><b>FORMULIR</b><button class="x" type="button" aria-label="Tutup">×</button></div>
+<div class="body">
+<form class="form" novalidate>
+<div data-mode="book" class="form">
+<p style="color:var(--muted)">Pesan jadwal datang ke Mako Polsek agar tidak menunggu lama. Anda akan menerima nomor tiket.</p>
+<label for="f-layanan">Layanan</label><select id="f-layanan" name="layanan" required><option value="">Pilih…</option><option>SKCK</option><option>Surat keterangan kehilangan</option><option>Pengaduan dan pendampingan</option><option>SPKT lainnya</option></select>
+<div class="two"><div class="form"><label for="f-nama">Nama lengkap</label><input id="f-nama" name="nama" autocomplete="name" required></div>
+<div class="form"><label for="f-hp">Nomor HP (WhatsApp)</label><input id="f-hp" name="hp" type="tel" inputmode="tel" autocomplete="tel" required placeholder="0812 3456 7890"></div></div>
+<div class="two"><div class="form"><label for="f-tgl">Tanggal kunjungan</label><input id="f-tgl" name="tanggal" type="date" required></div>
+<div class="form"><label for="f-jam">Jam</label><select id="f-jam" name="jam"><option>08.00 WIB</option><option>09.00 WIB</option><option>10.00 WIB</option><option>11.00 WIB</option><option>12.00 WIB</option><option>13.00 WIB</option><option>14.00 WIB</option></select></div></div>
+<label for="f-cat">Catatan (opsional)</label><textarea id="f-cat" name="catatan" style="min-height:80px"></textarea>
+</div>
+<div data-mode="ask" class="form">
+<p style="color:var(--muted)">Sampaikan laporan, aspirasi, atau pertanyaan. Identitas boleh dikosongkan, tetapi cantumkan nomor HP jika ingin dihubungi kembali. Untuk keadaan darurat, hubungi 110.</p>
+<label for="f-kat">Kategori</label><select id="f-kat" name="kategori" required><option value="">Pilih…</option><option>Pertanyaan layanan</option><option>Tindak pidana (pencurian, penipuan, penganiayaan)</option><option>Kekerasan terhadap perempuan atau anak</option><option>Gangguan kamtibmas atau konflik warga</option><option>Narkoba</option><option>Kebakaran hutan dan lahan</option><option>Orang hilang</option><option>Pelayanan atau perilaku petugas</option><option>Lainnya</option></select>
+<label for="f-isi">Ceritakan apa yang terjadi atau yang ingin ditanyakan</label><textarea id="f-isi" name="isi" required placeholder="Apa, kapan, di mana, siapa yang terlibat"></textarea>
+<label for="f-desa">Desa (opsional)</label><input id="f-desa" name="desa">
+<div class="two"><div class="form"><label for="f-nama2">Nama (opsional)</label><input id="f-nama2" name="nama" autocomplete="name"></div>
+<div class="form"><label for="f-hp2">Nomor HP (opsional)</label><input id="f-hp2" name="hp" type="tel" inputmode="tel" autocomplete="tel"></div></div>
+</div>
+<p class="err" role="alert"></p>
+<button class="btn btn-gold" type="submit">Dapatkan nomor tiket</button>
+</form>
+<div class="result" hidden>
+<div class="ticket"><span style="font-size:13px;font-weight:700;color:#8A6A1E">NOMOR TIKET ANDA</span><span class="no"></span><span class="sum" style="font-size:14px;color:var(--muted)"></span></div>
+<p style="margin:16px 0;color:var(--muted)">Simpan nomor ini, lalu kirim tiket ke WhatsApp Polsek agar tercatat dan dikonfirmasi petugas.</p>
+<a class="btn send" style="background:var(--green);color:#fff" target="_blank" rel="noopener" href="#">Kirim ke WhatsApp Polsek</a>
+</div>
+</div>
+</dialog>
+<dialog class="sheet" id="svc-dlg" aria-label="Detail layanan"><div class="top"><b>LAYANAN</b><button class="x" type="button" aria-label="Tutup">×</button></div><div class="body"></div></dialog>
+<template id="svc-skck"><div class="svc"><h2 class="display">Surat Keterangan Catatan Kepolisian (SKCK)</h2>
+<p class="what">SKCK adalah surat resmi dari Polri yang menerangkan ada atau tidaknya catatan kriminal seseorang. Surat ini umumnya diminta untuk melamar pekerjaan, mendaftar CPNS atau PPPK, keperluan pendidikan, hingga pengurusan visa.</p>
+<div class="note">Polsek menerbitkan SKCK untuk keperluan umum warga sesuai alamat KTP. Keperluan tertentu, misalnya CPNS atau ke luar negeri, diterbitkan di tingkat Polres, Polda, atau Mabes. Tanyakan ke petugas bila ragu.</div>
+<div class="cols">
+<div class="panel"><h3>Berkas yang perlu dibawa</h3><ul>
+<li>Fotokopi KTP (tunjukkan yang asli)</li><li>Fotokopi Kartu Keluarga</li><li>Fotokopi akta kelahiran atau ijazah</li>
+<li>Pas foto berwarna latar merah, ukuran 4×6 (jumlah sesuai ketentuan loket)</li><li>Fotokopi paspor, bila untuk keperluan luar negeri</li><li>Biaya PNBP Rp30.000</li></ul></div>
+<div class="panel"><h3>Alur di Polsek</h3><ol>
+<li>Datang ke loket SKCK dengan berkas lengkap</li><li>Isi formulir daftar pertanyaan</li><li>Pengambilan sidik jari oleh petugas</li><li>Bayar PNBP Rp30.000</li><li>Petugas memverifikasi data, SKCK dicetak dan diserahkan</li></ol></div>
+</div>
+<div class="panel"><h3>Bisa daftar online dulu</h3><ol>
+<li>Unduh aplikasi Polri Super App (Presisi)</li><li>Pilih menu SKCK, isi formulir, dan unggah berkas</li><li>Bayar dan simpan barcode</li><li>Datang ke loket dengan barcode dan berkas asli untuk mencetak SKCK</li></ol></div>
+<p class="src">Biaya mengacu pada PP 60/2016 tentang PNBP di lingkungan Polri. Persyaratan dapat berubah; konfirmasi ke petugas sebelum datang.</p>
+<h3>Langkah berikutnya</h3>
+<div class="ctas">
+<button class="cta book" type="button" data-form="book" data-layanan="SKCK"><b>Booking kunjungan</b><span>Pilih hari dan jam datang ke Polsek, dapatkan nomor tiket</span></button>
+<button class="cta ask" type="button" data-form="ask" data-kategori="Pertanyaan layanan"><b>Kirim pertanyaan atau pengaduan</b><span>Isi formulir online, dapatkan nomor tiket</span></button>
+<a class="cta wa" href="https://wa.me/6285315515282" target="_blank" rel="noopener"><b>Chat WhatsApp Polsek</b><span>Untuk pertanyaan cepat</span></a>
+</div></div></template>
+<template id="svc-kehilangan"><div class="svc"><h2 class="display">Surat Keterangan Tanda Lapor Kehilangan (SKTLK)</h2>
+<p class="what">SKTLK adalah surat dari kepolisian yang menerangkan bahwa Anda telah melaporkan kehilangan barang atau dokumen. Surat ini menjadi syarat untuk mengurus dokumen pengganti di instansi penerbitnya. Pembuatannya gratis.</p>
+<div class="cols">
+<div class="panel"><h3>Barang dan dokumen yang biasa memerlukan surat ini</h3><ul>
+<li>KTP, Kartu Keluarga, akta kelahiran, buku nikah</li><li>SIM, STNK, BPKB</li><li>Buku tabungan, kartu ATM, kartu kredit</li><li>Ijazah dan dokumen pendidikan</li><li>Kartu BPJS dan kartu asuransi</li><li>Sertifikat tanah</li><li>Telepon seluler (sertakan nomor IMEI bila ada)</li></ul></div>
+<div class="panel"><h3>Berkas yang perlu dibawa</h3><ul>
+<li>KTP atau identitas pelapor</li><li>Fotokopi dokumen yang hilang, bila ada</li><li>Surat keterangan dari instansi penerbit, bila tidak ada fotokopi</li><li>Surat pengantar desa, bila diminta untuk kehilangan KTP</li></ul></div>
+</div>
+<div class="panel"><h3>Alur</h3><ol>
+<li>Datang ke SPKT Polsek</li><li>Sampaikan barang atau dokumen yang hilang</li><li>Jelaskan kronologi: waktu, tempat, dan ciri barang</li><li>Petugas membuat SKTLK dan menandatanganinya</li><li>Bawa SKTLK ke instansi penerbit untuk mengurus pengganti</li></ol></div>
+<div class="note">Kehilangan BPKB atau sertifikat tanah harus dilaporkan langsung di kantor polisi. Memberikan keterangan palsu dapat dikenai sanksi pidana.</div>
+<h3>Langkah berikutnya</h3>
+<div class="ctas">
+<button class="cta book" type="button" data-form="book" data-layanan="Surat keterangan kehilangan"><b>Booking kunjungan</b><span>Pilih hari dan jam datang ke Polsek, dapatkan nomor tiket</span></button>
+<button class="cta ask" type="button" data-form="ask" data-kategori="Pertanyaan layanan"><b>Kirim pertanyaan atau pengaduan</b><span>Isi formulir online, dapatkan nomor tiket</span></button>
+<a class="cta wa" href="https://wa.me/6285315515282" target="_blank" rel="noopener"><b>Chat WhatsApp Polsek</b><span>Untuk pertanyaan cepat</span></a>
+</div></div></template>
+<template id="svc-pengaduan"><div class="svc"><h2 class="display">Pengaduan masyarakat dan pendampingan</h2>
+<p class="what">Laporkan setiap kejadian yang merugikan Anda atau mengganggu keamanan lingkungan. Melapor ke polisi tidak dipungut biaya. Jika ada yang meminta bayaran, laporkan ke Propam.</p>
+<div class="cols">
+<div class="panel"><h3>Kapan sebaiknya melapor</h3><ul>
+<li>Menjadi korban atau saksi tindak pidana: pencurian, penipuan, penganiayaan</li><li>Kekerasan dalam rumah tangga, kekerasan terhadap perempuan atau anak</li><li>Konflik antarwarga atau sengketa yang berpotensi memanas</li><li>Peredaran narkoba di lingkungan Anda</li><li>Pembakaran hutan dan lahan</li><li>Keluhan atas pelayanan atau perilaku petugas</li></ul></div>
+<div class="panel"><h3>Pendampingan yang tersedia</h3><ul>
+<li>Bhabinkamtibmas desa membantu mediasi masalah warga</li><li>Korban kekerasan terhadap perempuan dan anak dirujuk ke Unit PPA Polres Kapuas</li><li>Pelapor berhak mendapat informasi perkembangan penanganan</li></ul></div>
+</div>
+<div class="panel"><h3>Alur</h3><ol>
+<li>Datang ke SPKT atau isi formulir online</li><li>Laporan diterima dan dicatat, Anda menerima tanda bukti atau nomor tiket</li><li>Petugas menindaklanjuti: klarifikasi, mediasi, atau penyelidikan</li><li>Anda dihubungi untuk perkembangan penanganan</li></ol></div>
+<div class="note">Untuk kejadian yang sedang berlangsung, jangan menunggu. Hubungi 110.</div>
+<h3>Langkah berikutnya</h3>
+<div class="ctas">
+<button class="cta book" type="button" data-form="book" data-layanan="Pengaduan dan pendampingan"><b>Booking kunjungan</b><span>Pilih hari dan jam datang ke Polsek, dapatkan nomor tiket</span></button>
+<button class="cta ask" type="button" data-form="ask" data-kategori="Pertanyaan layanan"><b>Kirim pertanyaan atau pengaduan</b><span>Isi formulir online, dapatkan nomor tiket</span></button>
+<a class="cta wa" href="https://wa.me/6285315515282" target="_blank" rel="noopener"><b>Chat WhatsApp Polsek</b><span>Untuk pertanyaan cepat</span></a>
+</div></div></template>
+<template id="svc-spkt"><div class="svc"><h2 class="display">Sentra Pelayanan Kepolisian Terpadu (SPKT)</h2>
+<p class="what">SPKT adalah pintu pelayanan utama di Mako Polsek Kapuas Tengah, Pujon. Petugas piket siaga setiap hari, 24 jam.</p>
+<div class="cols">
+<div class="panel"><h3>Layanan di SPKT Polsek</h3><ul>
+<li>Penerimaan laporan polisi dan pengaduan</li><li>Surat Keterangan Tanda Lapor Kehilangan</li><li>Pemberitahuan dan izin keramaian kegiatan masyarakat</li><li>Bantuan polisi untuk keadaan darurat</li><li>Rujukan ke Bhabinkamtibmas desa</li><li>Informasi layanan SKCK (loket Unit Intelkam)</li></ul></div>
+<div class="panel"><h3>Jam layanan</h3><ul>
+<li>SPKT: setiap hari, 24 jam</li><li>SKCK dan administrasi: Senin–Jumat, 08.00–15.00 WIB</li></ul>
+<h3 style="margin-top:16px">Lokasi</h3><p>Jl. Damang Raban No. 01 RT 002, Desa Pujon, Kec. Kapuas Tengah, Kab. Kapuas, Kalimantan Tengah 73555</p>
+<p style="margin-top:10px"><a href="https://www.google.com/maps/dir/?api=1&destination=Polsek+Kapuas+Tengah,+Jl.+Damang+Raban+No.+01,+Pujon,+Kapuas,+Kalimantan+Tengah" target="_blank" rel="noopener">Petunjuk arah di Google Maps ↗</a></p></div>
+</div>
+<div class="note">Untuk izin keramaian, ajukan beberapa hari sebelum acara dengan membawa KTP penanggung jawab dan rincian kegiatan.</div>
+<h3>Langkah berikutnya</h3>
+<div class="ctas">
+<button class="cta book" type="button" data-form="book" data-layanan="SPKT lainnya"><b>Booking kunjungan</b><span>Pilih hari dan jam datang ke Polsek, dapatkan nomor tiket</span></button>
+<button class="cta ask" type="button" data-form="ask" data-kategori="Pertanyaan layanan"><b>Kirim pertanyaan atau pengaduan</b><span>Isi formulir online, dapatkan nomor tiket</span></button>
+<a class="cta wa" href="https://wa.me/6285315515282" target="_blank" rel="noopener"><b>Chat WhatsApp Polsek</b><span>Untuk pertanyaan cepat</span></a>
+</div></div></template>
+<script src="assets/site.js" defer></script>
 </body>
 </html>
