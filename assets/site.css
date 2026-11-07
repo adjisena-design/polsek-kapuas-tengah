@@ -295,3 +295,16 @@ dialog.sheet .x{background:transparent;border:1px solid #6E5A45;color:var(--pape
 .tools{gap:8px}.arrow{display:none}
 .alert .wrap{font-size:13px}.alert a{min-height:40px}
 }
+/* phone: service cards as a sideways swipe row; each gesture locks to one axis */
+@media (max-width:640px){
+.services .cards{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior:contain;touch-action:pan-x pan-y;margin:0 -24px;padding:0 24px 12px;scroll-padding-inline:24px;scrollbar-width:none}
+.services .cards::-webkit-scrollbar{display:none}
+.services .card{flex:0 0 80%;scroll-snap-align:start;min-height:0}
+.row-head{flex-wrap:nowrap;align-items:center}.row-head>a{white-space:nowrap}.row-head h2{font-size:26px!important}
+.notices{grid-template-columns:1fr 1fr;gap:10px}
+.notice{flex-direction:column;flex-wrap:nowrap}
+.notice .flag{flex:none;padding:14px 8px 0;gap:6px}.notice .flag img{width:48px}.notice .flag b{font-size:12px}
+.notice .flag div{font-size:13px;padding:8px 4px;margin:4px -8px 0}
+.notice .t{flex:1;padding:14px 12px;gap:8px;justify-content:flex-start}
+.notice h3{font-size:17px}.notice p{font-size:13px}.notice .t b{font-size:13px}
+}
