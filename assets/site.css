@@ -361,3 +361,28 @@ details.panel[open]>summary{margin-bottom:10px}
 .wcard.hilang .wtag{color:#F2C230}
 .wmore{align-self:center;background:#fff;color:#07090F}
 input[type=file]{font:14px 'Plus Jakarta Sans',sans-serif}
+
+/* hero slide 2: Pencarian orang banner with pulsing police lights */
+.sl-dpo{background:#07090F radial-gradient(ellipse 50% 40% at 50% 0%,rgba(255,255,255,.08),transparent 70%);justify-content:center}
+.sl-dpo .glow-b{animation-duration:1.1s}.sl-dpo .glow-r{animation-duration:1.1s;animation-delay:-.55s}
+.lightbar{position:absolute;top:0;left:50%;transform:translateX(-50%);display:flex;width:min(70%,520px);height:10px;border-radius:0 0 8px 8px;overflow:hidden}
+.lightbar span{flex:1;animation:strobe .55s steps(2,jump-none) infinite}
+.lightbar span:first-child{background:#2F6BFF}.lightbar span:last-child{background:#FF2A2A;animation-delay:-.275s}
+@keyframes strobe{0%{opacity:1}100%{opacity:.15}}
+.sl-dpo .txt{max-width:980px}
+.sl-dpo .eyebrow{color:#8FB4FF}
+.dpo-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:8px}
+.dc{position:relative;display:flex;flex-direction:column;gap:10px;padding:22px;border-radius:6px;text-decoration:none;color:#fff;min-height:190px;transition:transform .2s,box-shadow .2s}
+.dc:hover{transform:translateY(-3px)}
+.dc.red{background:linear-gradient(160deg,#C62828,#7A1010);box-shadow:0 0 40px rgba(240,30,40,.45);border-top:6px solid #FF8A80}
+.dc.yel{background:linear-gradient(160deg,#F2C230,#B8860B);color:#1A1405;box-shadow:0 0 40px rgba(242,194,48,.35);border-top:6px solid #FFF1C2}
+.slide .dc img{position:static;width:58px;height:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+.dc b{font:900 clamp(20px,2.4vw,30px)/1.1 'Red Hat Display',sans-serif;letter-spacing:.01em;text-transform:uppercase}
+.dc span{font-size:14px;font-weight:700;margin-top:auto}
+@media (max-width:640px){.dpo-cards{gap:10px}.dc{padding:14px;min-height:170px}.slide .dc img{width:44px}.dc b{font-size:17px}.dc span{font-size:12px}}
+@media (prefers-reduced-motion:reduce){.sl-dpo .glow-b,.sl-dpo .glow-r,.lightbar span{animation:none}}
+
+/* DPO photos: muted until hovered or focused */
+.wcard img{filter:grayscale(.9) contrast(1.05) brightness(.9);transition:filter .3s}
+.wcard:hover img,.wcard:focus-within img{filter:none}
+.slides:has(.sl-dpo.on) .credit{display:none}

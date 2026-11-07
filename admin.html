@@ -7,48 +7,62 @@
 <title>Konsol — Polsek Kapuas Tengah</title>
 <link rel="icon" href="assets/polsek-kapuas-tengah.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Red+Hat+Display:wght@700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=5">
-<link rel="stylesheet" href="assets/admin.css?v=1">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Red+Hat+Display:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/admin.css?v=2">
 </head>
-<body class="adm">
-<main id="login" class="login" hidden>
-<form class="card" id="login-f" novalidate>
-<img src="assets/polsek-kapuas-tengah.webp" alt="" width="64" height="64">
-<h1>Konsol Polsek Kapuas Tengah</h1>
+<body>
+
+<main id="login" class="lg" hidden>
+<section class="lg-art">
+<div class="glow-b" aria-hidden="true"></div><div class="glow-w" aria-hidden="true"></div><div class="glow-r" aria-hidden="true"></div>
+<div class="lightbar" aria-hidden="true"><span></span><span></span><span></span></div>
+<div class="lg-in">
+<div class="logos"><img src="assets/polri.webp" alt="Polri" width="72" height="72"><img src="assets/polda-kalteng.webp" alt="Polda Kalimantan Tengah" width="72" height="72"><img src="assets/polsek-kapuas-tengah.webp" alt="Polsek Kapuas Tengah" width="72" height="72"></div>
+<p class="eyebrow"><span></span>Khusus personel Polsek</p>
+<h1>Konsol<br><em>Polsek Kapuas Tengah</em></h1>
+<p class="meta">Polres Kapuas · Polda Kalimantan Tengah</p>
+<p class="meta"><b>Mako: Jl. Damang Raban No. 01, Desa Pujon</b></p>
+</div>
+</section>
+<section class="lg-side">
+<form class="lg-card" id="login-f" novalidate>
+<span class="badge"><i></i>Konsol, bukan halaman publik</span>
+<h2>Masuk</h2>
+<p class="muted">Masukkan kode akses pribadi dari Kapolsek atau Owner. Satu kode untuk satu orang; setiap tindakan tercatat atas nama pemegang kode.</p>
+<p class="notice" id="login-msg" role="status" hidden></p>
 <label for="code">Kode akses</label>
 <input id="code" name="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX-XXXX" required>
-<p class="err" role="alert"></p>
-<button class="btn btn-gold" type="submit">Masuk</button>
-<p class="hint">Kode akses diberikan oleh Kapolsek atau Owner. Kode bisa dicabut dan dibuat ulang kapan saja.</p>
+<button class="btn primary block" type="submit">Masuk</button>
+<p class="muted small">Kode hilang atau bocor? Minta Kapolsek atau Owner mencabut dan membuat kode baru.</p>
 </form>
+<a class="lg-back" href="index.html">Ke situs publik Polsek Kapuas Tengah</a>
+</section>
 </main>
 
-<div id="app" hidden>
-<header class="abar">
-<a href="index.html" class="brand"><img src="assets/polsek-kapuas-tengah.webp" alt="" width="36" height="36"><b>Konsol Polsek</b></a>
-<nav id="menu" aria-label="Menu konsol">
-<button type="button" data-v="dashboard">Dasbor</button>
-<button type="button" data-v="bookings">Booking</button>
-<button type="button" data-v="reports">Pengaduan</button>
-<button type="button" data-v="posts">Berita &amp; imbauan</button>
-<button type="button" data-v="wanted">Pencarian orang</button>
-<button type="button" data-v="personnel">Personel</button>
-<button type="button" data-v="log" data-boss>Log</button>
-<button type="button" data-v="admins" data-boss>Akses</button>
-</nav>
-<div class="who"><span id="who"></span><button type="button" id="logout">Keluar</button></div>
+<div id="app" class="app" hidden>
+<aside class="side" id="side">
+<a class="brand" href="#/dasbor"><img src="assets/polsek-kapuas-tengah.webp" alt="" width="40" height="40"><span><small>KONSOL POLSEK</small><b>Kapuas Tengah</b></span></a>
+<nav id="menu" aria-label="Menu konsol"></nav>
+<p class="side-foot">Setiap tindakan tercatat atas nama Anda</p>
+</aside>
+<div class="main">
+<header class="top">
+<button class="menu-btn" type="button" id="menu-btn" aria-label="Buka menu" aria-controls="side" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+<div class="ctx"><b>Mako Polsek Kapuas Tengah</b><span>Polres Kapuas · Polda Kalimantan Tengah</span></div>
+<div class="me"><span class="av" id="av"></span><span class="who"><b id="me-name"></b><small id="me-role"></small></span><button class="btn ghost" type="button" id="logout"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Keluar</button></div>
 </header>
 <section class="view" id="view" aria-live="polite"></section>
 </div>
+</div>
 
-<dialog id="edit" class="sheet" aria-label="Sunting data">
-<div class="top"><b id="edit-t">SUNTING</b><button class="x" type="button" aria-label="Tutup">×</button></div>
-<div class="body"><form class="form" id="edit-f" novalidate></form></div>
+<dialog class="drawer" id="drawer" aria-labelledby="dr-title">
+<header><div><small id="dr-kicker"></small><h2 id="dr-title"></h2></div><button class="btn ghost" type="button" data-close>Tutup</button></header>
+<div class="dr-body" id="dr-body"></div>
+<footer id="dr-foot"></footer>
 </dialog>
 
 <div id="toast" role="status"></div>
 <script src="assets/sb.js?v=5" defer></script>
-<script src="assets/admin.js?v=1" defer></script>
+<script src="assets/admin.js?v=2" defer></script>
 </body>
 </html>
