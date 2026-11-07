@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Red+Hat+Display:wght@700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=4">
+<link rel="stylesheet" href="assets/site.css?v=5">
 <link rel="preload" as="image" href="assets/hero-1.jpg">
 </head>
 <body>
@@ -154,7 +154,7 @@
 <section class="news" id="berita" aria-labelledby="berita-h">
 <div class="wrap">
 <div class="row-head"><div><span class="eyebrow">Berita dan kegiatan</span><h2 id="berita-h" class="h2">Kabar terbaru dari Polsek Kapuas Tengah</h2></div><a href="berita.html" style="font-size:14px;font-weight:700">Semua berita →</a></div>
-<div class="grid3">
+<div class="grid3" data-feed="home">
 <a class="post" href="https://analisnews.co.id/index.php/2026/11/05/polisi-peduli-pengangguran-kapolsek-kapuas-tengah-hadirkan-pendekatan-humanis-dan-bangun-kedekatan-dengan-masyarakat/" target="_blank" rel="noopener">
 <span class="img"><img src="assets/news-1.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=()=>this.remove();this.src='https://analisnews.co.id/wp-content/uploads/2026/11/IMG-20261105-WA0133.jpg'"></span>
 <span class="b"><span class="meta"><b>Binmas</b>5 November 2026</span><h3>Polisi peduli pengangguran, Kapolsek Kapuas Tengah hadirkan pendekatan humanis dan bangun kedekatan dengan masyarakat</h3><p>Program Polisi Peduli Pengangguran (POLIRAN) digelar di Desa Pujon untuk membuka ruang dialog dengan warga.</p><span class="src">Baca di analisnews.co.id ↗</span></span></a>
@@ -199,11 +199,10 @@
 <div><button class="btn btn-gold" type="button" data-form="ask">Buat pengaduan</button></div>
 <p style="font-size:13px;color:#B9AC93">Formulir ini bukan untuk keadaan darurat. Untuk kejadian yang sedang berlangsung, hubungi 110.</p>
 </div>
-<!-- shortcut: no backend yet, the form only checks required fields; wire to Supabase when the ticket table exists -->
 <form class="check" id="cek" novalidate>
 <h3 style="font-size:18px">Cek status pengaduan</h3>
 <label for="tiket">Nomor tiket</label>
-<input id="tiket" name="tiket" required placeholder="PKT-2026-000123" autocomplete="off">
+<input id="tiket" name="tiket" required placeholder="PG-261107-ABCDE" autocomplete="off">
 <label for="hp">Nomor HP yang didaftarkan</label>
 <input id="hp" name="hp" type="tel" required inputmode="tel" placeholder="0812 3456 7890" autocomplete="tel">
 <p id="cek-msg" role="status" style="font-size:13px;color:#F2C230;min-height:20px"></p>
@@ -299,7 +298,7 @@
 <div class="two"><div class="form"><label for="f-nama">Nama lengkap</label><input id="f-nama" name="nama" autocomplete="name" required></div>
 <div class="form"><label for="f-hp">Nomor HP (WhatsApp)</label><input id="f-hp" name="hp" type="tel" inputmode="tel" autocomplete="tel" required placeholder="0812 3456 7890"></div></div>
 <div class="two"><div class="form"><label for="f-tgl">Tanggal kunjungan</label><input id="f-tgl" name="tanggal" type="date" required></div>
-<div class="form"><label for="f-jam">Jam</label><select id="f-jam" name="jam"><option>08.00 WIB</option><option>09.00 WIB</option><option>10.00 WIB</option><option>11.00 WIB</option><option>12.00 WIB</option><option>13.00 WIB</option><option>14.00 WIB</option></select></div></div>
+<div class="form"><label for="f-jam">Jam</label><select id="f-jam" name="jam"><option value="08:00">08.00 WIB</option><option value="09:00">09.00 WIB</option><option value="10:00">10.00 WIB</option><option value="11:00">11.00 WIB</option><option value="13:00">13.00 WIB</option><option value="14:00">14.00 WIB</option></select></div></div>
 <label for="f-cat">Catatan (opsional)</label><textarea id="f-cat" name="catatan" style="min-height:80px"></textarea>
 </div>
 <div data-mode="ask" class="form">
@@ -309,14 +308,15 @@
 <label for="f-desa">Desa (opsional)</label><input id="f-desa" name="desa">
 <div class="two"><div class="form"><label for="f-nama2">Nama (opsional)</label><input id="f-nama2" name="nama" autocomplete="name"></div>
 <div class="form"><label for="f-hp2">Nomor HP (opsional)</label><input id="f-hp2" name="hp" type="tel" inputmode="tel" autocomplete="tel"></div></div>
+<label for="f-file">Foto atau video pendukung (opsional, maks. 5 berkas, 50 MB per berkas)</label><input id="f-file" name="files" type="file" accept="image/*,video/*" multiple>
 </div>
 <p class="err" role="alert"></p>
 <button class="btn btn-gold" type="submit">Dapatkan nomor tiket</button>
 </form>
 <div class="result" hidden>
 <div class="ticket"><span style="font-size:13px;font-weight:700;color:#8A6A1E">NOMOR TIKET ANDA</span><span class="no"></span><span class="sum" style="font-size:14px;color:var(--muted)"></span></div>
-<p style="margin:16px 0;color:var(--muted)">Simpan nomor ini, lalu kirim tiket ke WhatsApp Polsek agar tercatat dan dikonfirmasi petugas.</p>
-<a class="btn send" style="background:var(--green);color:#fff" target="_blank" rel="noopener" href="#">Kirim ke WhatsApp Polsek</a>
+<p style="margin:16px 0;color:var(--muted)">Data Anda sudah tercatat di sistem Polsek dengan status <b>diterima</b>. Simpan nomor tiket ini untuk cek status. Anda juga bisa mengabari petugas lewat WhatsApp.</p>
+<a class="btn send" style="background:var(--green);color:#fff" target="_blank" rel="noopener" href="#">Kabari lewat WhatsApp (opsional)</a>
 </div>
 </div>
 </dialog>
@@ -391,6 +391,7 @@
 <button class="cta ask" type="button" data-form="ask" data-kategori="Pertanyaan layanan"><b>Kirim pertanyaan atau pengaduan</b><span>Isi formulir online, dapatkan nomor tiket</span></button>
 <a class="cta wa" href="https://wa.me/6285315515282" target="_blank" rel="noopener"><b>Chat WhatsApp Polsek</b><span>Untuk pertanyaan cepat</span></a>
 </div></div></template>
-<script src="assets/site.js?v=4" defer></script>
+<script src="assets/sb.js?v=5" defer></script>
+<script src="assets/site.js?v=5" defer></script>
 </body>
 </html>

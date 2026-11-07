@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Konsol — Polsek Kapuas Tengah</title>
+<link rel="icon" href="assets/polsek-kapuas-tengah.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Red+Hat+Display:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=5">
+<link rel="stylesheet" href="assets/admin.css?v=1">
+</head>
+<body class="adm">
+<main id="login" class="login" hidden>
+<form class="card" id="login-f" novalidate>
+<img src="assets/polsek-kapuas-tengah.webp" alt="" width="64" height="64">
+<h1>Konsol Polsek Kapuas Tengah</h1>
+<label for="code">Kode akses</label>
+<input id="code" name="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX-XXXX" required>
+<p class="err" role="alert"></p>
+<button class="btn btn-gold" type="submit">Masuk</button>
+<p class="hint">Kode akses diberikan oleh Kapolsek atau Owner. Kode bisa dicabut dan dibuat ulang kapan saja.</p>
+</form>
+</main>
+
+<div id="app" hidden>
+<header class="abar">
+<a href="index.html" class="brand"><img src="assets/polsek-kapuas-tengah.webp" alt="" width="36" height="36"><b>Konsol Polsek</b></a>
+<nav id="menu" aria-label="Menu konsol">
+<button type="button" data-v="dashboard">Dasbor</button>
+<button type="button" data-v="bookings">Booking</button>
+<button type="button" data-v="reports">Pengaduan</button>
+<button type="button" data-v="posts">Berita &amp; imbauan</button>
+<button type="button" data-v="wanted">Pencarian orang</button>
+<button type="button" data-v="personnel">Personel</button>
+<button type="button" data-v="log" data-boss>Log</button>
+<button type="button" data-v="admins" data-boss>Akses</button>
+</nav>
+<div class="who"><span id="who"></span><button type="button" id="logout">Keluar</button></div>
+</header>
+<section class="view" id="view" aria-live="polite"></section>
+</div>
+
+<dialog id="edit" class="sheet" aria-label="Sunting data">
+<div class="top"><b id="edit-t">SUNTING</b><button class="x" type="button" aria-label="Tutup">×</button></div>
+<div class="body"><form class="form" id="edit-f" novalidate></form></div>
+</dialog>
+
+<div id="toast" role="status"></div>
+<script src="assets/sb.js?v=5" defer></script>
+<script src="assets/admin.js?v=1" defer></script>
+</body>
+</html>

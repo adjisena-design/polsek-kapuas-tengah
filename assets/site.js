@@ -92,54 +92,156 @@ if (sd) $$('[data-svc]').forEach(c => c.onclick = () => {
 });
 
 // booking + complaint form (one dialog, two modes). No backend yet:
-// shortcut: ticket is generated in the browser and delivered by WhatsApp; replace with a Supabase insert when the table exists
+// booking and complaint forms: saved through Supabase RPCs, the ticket number comes from the server
 const fd = $('#form-dlg');
 if (fd) {
-  const f = $('form', fd), out = $('.result', fd), err = $('.err', fd);
+  const f = $('form', fd), out = $('.result', fd), err = $('.err', fd), sub = $('[type=submit]', f);
+  const jam = f.elements.jam, tgl = f.elements.tanggal;
+  const slots = async () => {
+    [...jam.options].forEach(o => { o.disabled = false; o.textContent = o.textContent.replace(' (penuh)', ''); });
+    if (!tgl.value) return;
+    try {
+      const taken = await rpc('booked_slots', { p_tanggal: tgl.value });
+      [...jam.options].forEach(o => { if (taken.includes(o.value)) { o.disabled = true; o.textContent += ' (penuh)'; } });
+      if (jam.selectedOptions[0]?.disabled) jam.value = [...jam.options].find(o => !o.disabled)?.value ?? '';
+    } catch { /* server checks again on submit */ }
+  };
+  tgl.addEventListener('change', slots);
   const open = (mode, from, pre = {}) => {
     f.reset(); err.textContent = ''; out.hidden = true; f.hidden = false;
     f.dataset.mode = mode;
     $$('[data-mode]', f).forEach(el => el.hidden = el.dataset.mode !== mode);
     $$('[data-mode] [name]', f).forEach(el => el.disabled = el.closest('[data-mode]').hidden);
     $('.top b', fd).textContent = mode === 'book' ? 'BOOKING KUNJUNGAN' : 'PENGADUAN DAN PERTANYAAN';
-    Object.entries(pre).forEach(([k, v]) => { if (f.elements[k]) f.elements[k].value = v; });
-    const d = f.elements.tanggal; d.min = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
+    Object.entries(pre).forEach(([k, v]) => { if (f.elements[k] && v) f.elements[k].value = v; });
+    tgl.min = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
+    slots();
     grow(fd, from);
   };
   document.addEventListener('click', e => {
     const b = e.target.closest('[data-form]'); if (!b) return;
     e.preventDefault(); e.stopPropagation(); open(b.dataset.form, b, { layanan: b.dataset.layanan || '', kategori: b.dataset.kategori || '' });
   });
-  f.onsubmit = e => {
+  f.onsubmit = async e => {
     e.preventDefault();
     const v = Object.fromEntries(new FormData(f)), mode = f.dataset.mode;
     const hp = (v.hp || '').replace(/\D/g, '');
+    const files = mode === 'ask' ? [...(f.elements.files?.files || [])] : [];
     let msg = '';
     if (mode === 'book') {
       const day = v.tanggal && new Date(v.tanggal + 'T00:00').getDay();
-      msg = !v.nama?.trim() ? 'Isi nama Anda.' : hp.length < 10 ? 'Isi nomor HP yang aktif.' : !v.layanan ? 'Pilih layanan.' : !v.tanggal || v.tanggal < f.elements.tanggal.min ? 'Pilih tanggal mulai besok.' : (day === 0 || day === 6) ? 'Kunjungan layanan administrasi hanya Senin–Jumat.' : '';
+      msg = !v.nama?.trim() ? 'Isi nama Anda.' : hp.length < 10 ? 'Isi nomor HP yang aktif.' : !v.layanan ? 'Pilih layanan.' : !v.tanggal || v.tanggal < tgl.min ? 'Pilih tanggal mulai besok.' : (day === 0 || day === 6) ? 'Kunjungan layanan administrasi hanya Senin–Jumat.' : !v.jam ? 'Semua jam pada tanggal ini sudah penuh. Pilih tanggal lain.' : '';
     } else {
-      msg = !v.kategori ? 'Pilih kategori.' : (v.isi || '').trim().length < 20 ? 'Ceritakan minimal 20 karakter.' : (v.hp && hp.length < 10) ? 'Nomor HP tidak valid.' : '';
+      msg = !v.kategori ? 'Pilih kategori.' : (v.isi || '').trim().length < 20 ? 'Ceritakan minimal 20 karakter.' : (v.hp && hp.length < 10) ? 'Nomor HP tidak valid.'
+        : files.length > 5 ? 'Maksimal 5 berkas.' : files.some(x => x.size > 50 * 1024 * 1024) ? 'Ukuran tiap berkas maksimal 50 MB.' : files.some(x => !/^(image|video)\//.test(x.type)) ? 'Lampiran hanya boleh foto atau video.' : '';
     }
     err.textContent = msg; if (msg) return;
-    const no = (mode === 'book' ? 'BK-' : 'PG-') + new Date().toISOString().slice(2, 10).replace(/-/g, '') + '-' + Math.random().toString(36).slice(2, 6).toUpperCase();
-    const lines = mode === 'book'
-      ? [`Booking kunjungan Polsek Kapuas Tengah`, `Tiket: ${no}`, `Nama: ${v.nama}`, `HP: ${v.hp}`, `Layanan: ${v.layanan}`, `Tanggal: ${v.tanggal} pukul ${v.jam}`, v.catatan && `Catatan: ${v.catatan}`]
-      : [`Pengaduan/pertanyaan Polsek Kapuas Tengah`, `Tiket: ${no}`, `Kategori: ${v.kategori}`, v.desa && `Desa: ${v.desa}`, `Isi: ${v.isi}`, `Nama: ${v.nama || '-'}`, `HP: ${v.hp || '-'}`];
-    $('.no', out).textContent = no;
-    $('.sum', out).textContent = lines.filter(Boolean).slice(2).join(' · ');
-    $('.send', out).href = `https://wa.me/${WA}?text=${encodeURIComponent(lines.filter(Boolean).join('\n'))}`;
-    f.hidden = true; out.hidden = false;
+    sub.disabled = true; const label = sub.textContent; sub.textContent = files.length ? 'Mengunggah lampiran…' : 'Mengirim…';
+    try {
+      let no;
+      if (mode === 'book') {
+        no = await rpc('book', { p_layanan: v.layanan, p_nama: v.nama, p_hp: v.hp, p_tanggal: v.tanggal, p_jam: v.jam, p_catatan: v.catatan || null });
+      } else {
+        const paths = [];
+        for (const x of files) {
+          const path = `${crypto.randomUUID()}/${safeName(x.name)}`;
+          await sb(`/storage/v1/object/laporan/${path}`, { method: 'POST', body: x, headers: { 'Content-Type': x.type } });
+          paths.push(path);
+        }
+        no = await rpc('report', { p_kategori: v.kategori, p_isi: v.isi, p_desa: v.desa || null, p_nama: v.nama || null, p_hp: v.hp || null, p_files: paths });
+      }
+      const lines = mode === 'book'
+        ? [`Booking kunjungan Polsek Kapuas Tengah`, `Tiket: ${no}`, `Nama: ${v.nama}`, `Layanan: ${v.layanan}`, `Tanggal: ${v.tanggal} pukul ${v.jam} WIB`]
+        : [`Pengaduan/pertanyaan Polsek Kapuas Tengah`, `Tiket: ${no}`, `Kategori: ${v.kategori}`, v.desa && `Desa: ${v.desa}`, files.length && `Lampiran: ${files.length} berkas`];
+      $('.no', out).textContent = no;
+      $('.sum', out).textContent = lines.filter(Boolean).slice(2).join(' · ');
+      $('.send', out).href = `https://wa.me/${WA}?text=${encodeURIComponent(lines.filter(Boolean).join('\n'))}`;
+      f.hidden = true; out.hidden = false;
+    } catch (x) {
+      err.textContent = x.message;
+      if (mode === 'book') slots();
+    } finally { sub.disabled = false; sub.textContent = label; }
   };
 }
 
-// status check on homepage: validate only, no backend yet
+// status check on homepage
 const ck = $('#cek');
-if (ck) ck.onsubmit = e => {
+if (ck) ck.onsubmit = async e => {
   e.preventDefault();
   const t = ck.tiket.value.trim(), h = ck.hp.value.replace(/\D/g, ''), m = $('#cek-msg');
-  m.textContent = !/^[A-Z0-9-]{6,}$/i.test(t) ? 'Masukkan nomor tiket yang valid.' : h.length < 10 ? 'Masukkan nomor HP yang didaftarkan.' : 'Fitur cek status akan aktif setelah sistem pengaduan tersambung. Sementara, tanyakan lewat WhatsApp Polsek.';
+  if (!/^[A-Z]{2}-\d{6}-[A-Z0-9]{5}$/i.test(t)) return m.textContent = 'Masukkan nomor tiket yang valid, contoh PG-261107-ABCDE.';
+  m.textContent = 'Memeriksa…';
+  try {
+    const r = await rpc('ticket_status', { p_ticket: t, p_hp: h });
+    m.textContent = !r ? 'Tiket tidak ditemukan. Periksa nomor tiket dan nomor HP yang didaftarkan.'
+      : `${r.jenis}: status ${r.status.toUpperCase()}${r.jadwal ? ', jadwal ' + r.jadwal : ''}. Dicatat ${new Date(r.dibuat).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}.`;
+  } catch (x) { m.textContent = x.message; }
 };
+
+// ---------- content from the database; the static HTML stays as fallback if the request fails ----------
+const blankImg = '<span class="img blank"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h13v14H6a2 2 0 0 1-2-2zM17 9h3v8a2 2 0 0 1-2 2M7 9h7M7 12h7M7 15h4"/></svg></span>';
+const img = u => u ? `<span class="img"><img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.outerHTML=blankImg"></span>` : blankImg;
+const postLink = p => p.source_url ? ` href="${esc(p.source_url)}"${p.source_url.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}` : '';
+const postSrc = p => !p.source_url ? '' : p.source_url.startsWith('http') ? `Baca di ${esc(new URL(p.source_url).hostname.replace(/^www\./, ''))} ↗` : 'Baca selengkapnya →';
+const postCard = p => {
+  const tag = p.source_url ? 'a' : 'article', im = p.kind === 'imbauan';
+  return `<${tag} class="post${im ? ' imb' : ''}" data-cat="${p.kind}"${postLink(p)}>${img(p.image_url)}<span class="b"><span class="meta"><b>${im ? 'Imbauan' : 'Berita'}</b>${esc(p.date_label)}${p.place ? ' · ' + esc(p.place) : ''}</span><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p>${postSrc(p) ? `<span class="src">${postSrc(p)}</span>` : ''}</span></${tag}>`;
+};
+const feeds = $$('[data-feed]');
+if (feeds.length) sb('/rest/v1/posts?select=*&order=published_on.desc,created_at.desc').then(ps => {
+  if (!ps.length) return;
+  const berita = ps.filter(p => p.kind === 'berita');
+  const home = $('[data-feed=home]'); if (home) home.innerHTML = berita.slice(0, 3).map(postCard).join('');
+  const feat = $('[data-feed=feature]'), grid = $('[data-feed=posts]');
+  if (feat && berita[0]) {
+    const p = berita[0];
+    feat.outerHTML = `<a class="feature" data-feed="feature"${postLink(p) || ' href="#"'} style="margin-top:10px">${img(p.image_url)}<span class="b"><span class="meta" style="font-size:13px;color:#6B5D4F">${esc(p.date_label)}${p.place ? ' · ' + esc(p.place) : ''}</span><h2 class="display">${esc(p.title)}</h2><p style="color:var(--muted)">${esc(p.summary)}</p>${postSrc(p) ? `<span class="src" style="font-weight:700;color:var(--brown)">${postSrc(p)}</span>` : ''}</span></a>`;
+  }
+  if (grid) {
+    grid.innerHTML = ps.filter(p => p !== berita[0]).map(postCard).join('');
+    const n = { all: ps.length, berita: berita.length, imbauan: ps.length - berita.length };
+    $$('.tabs button').forEach(b => { const s = $('sup', b); if (s) s.textContent = n[b.dataset.f]; });
+  }
+}).catch(() => {});
+
+const grpBox = $$('[data-grp]');
+if (grpBox.length) sb('/rest/v1/personnel?select=*&order=sort.asc').then(rows => {
+  if (!rows.length) return;
+  const user = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>';
+  const person = r => `<article class="person"><div class="ph">${r.photo_url ? `<img src="${esc(r.photo_url)}" alt="${esc(r.name)}" loading="lazy">` : user}</div><div class="t"><small>${esc(r.jabatan)}</small><b>${esc(r.name)}</b><span>${esc(r.description)}</span></div></article>`;
+  grpBox.forEach(box => {
+    const g = rows.filter(r => r.grp === box.dataset.grp); if (!g.length) return;
+    if (box.dataset.grp === 'kapolsek') {
+      const k = g[0];
+      box.innerHTML = `<img src="${esc(k.photo_url || 'assets/kapolsek.webp')}" alt="${esc(k.name)}" width="520" height="450"><div class="t"><span class="rank">${esc(k.jabatan)}</span><h3 class="display" style="font-size:clamp(22px,2.6vw,30px)">${esc(k.name)}</h3><p style="color:var(--muted)">${esc(k.description)}</p></div>`;
+    } else box.innerHTML = g.map(person).join('');
+  });
+}).catch(() => {});
+
+// wanted list: Polsek's own entries plus weekly copies from Kejati Kalteng and Pusiknas Polri, each linked to its source
+const wd = $('#wanted');
+if (wd) Promise.all([
+  sb('/rest/v1/wanted?select=id,kind,source,name,crime,detail,photo_url,source_url&published=eq.true&order=created_at.desc&limit=5000'),
+  sb('/rest/v1/sync_runs?select=source,at&ok=eq.true&order=at.desc&limit=20'),
+]).then(([rows, runs]) => {
+  const grid = $('.wgrid', wd), more = $('.wmore', wd), note = $('.wnote', wd), q = $('.wsearch', wd), tabs = $$('.wtabs button', wd);
+  const SRC = { polsek: 'Polsek Kapuas Tengah', kejati: 'Kejati Kalimantan Tengah', pusiknas: 'Pusiknas Polri' };
+  let src = 'polsek', shown = 24;
+  const fmt = d => new Date(d).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+  const card = r => `<article class="wcard ${r.kind}">${r.photo_url ? `<img src="${esc(r.photo_url)}" alt="Foto ${esc(r.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<div><span class="wtag">${r.kind === 'dpo' ? 'DPO' : 'Orang hilang'}</span><b>${esc(r.name)}</b>${r.crime ? `<span>${esc(r.crime)}</span>` : ''}${r.detail ? `<small>${esc(r.detail)}</small>` : ''}${r.source_url ? `<a href="${esc(r.source_url)}" target="_blank" rel="noopener">Lihat di ${SRC[r.source]} ↗</a>` : `<small>Sumber: ${SRC[r.source]}</small>`}</div></article>`;
+  const draw = () => {
+    const t = q.value.trim().toLowerCase();
+    const list = rows.filter(r => r.source === src && (!t || `${r.name} ${r.crime ?? ''} ${r.detail ?? ''}`.toLowerCase().includes(t)));
+    grid.innerHTML = list.slice(0, shown).map(card).join('') || `<div class="empty"><p>${t ? 'Tidak ada yang cocok dengan pencarian.' : 'Belum ada data yang dipublikasikan.'}</p></div>`;
+    more.hidden = list.length <= shown;
+    const run = runs.find(x => x.source === src);
+    note.textContent = `${list.length} data` + (src === 'polsek' ? ', diterbitkan petugas Polsek.' : run ? `, disalin dari situs resmi ${SRC[src]} pada ${fmt(run.at)}.` : '.');
+  };
+  tabs.forEach(b => b.onclick = () => { src = b.dataset.src; shown = 24; tabs.forEach(x => x.setAttribute('aria-selected', x === b)); draw(); });
+  q.oninput = () => { shown = 24; draw(); };
+  more.onclick = () => { shown += 48; draw(); };
+  draw();
+}).catch(() => { $('.wnote', wd).textContent = 'Daftar belum bisa dimuat. Coba muat ulang halaman.'; });
 
 // news page filter
 const tabs = $$('.tabs button');

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Red+Hat+Display:wght@700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=4">
+<link rel="stylesheet" href="assets/site.css?v=5">
 </head>
 <body>
 <div class="alert"><div class="wrap">
@@ -70,9 +70,15 @@
 <div class="panel" style="background:rgba(255,255,255,.06)"><h3>Siapkan</h3><ul style="color:#E6DED0"><li>KTP pelapor dan Kartu Keluarga (bukti hubungan keluarga)</li><li>Foto terbaru orang yang hilang</li><li>Ciri fisik, pakaian terakhir, dan barang yang dibawa</li><li>Waktu dan lokasi terakhir terlihat</li><li>Nomor HP dan akun media sosial orang tersebut, bila ada</li></ul></div>
 <div class="panel" style="background:rgba(255,255,255,.06)"><h3>Alur</h3><ol style="color:#E6DED0"><li>Hubungi 110 atau datang ke SPKT Polsek</li><li>Buat laporan dan serahkan data di atas</li><li>Petugas memverifikasi dan mulai pencarian bersama Bhabinkamtibmas</li><li>Informasi disebarkan, termasuk di halaman ini bila keluarga setuju</li><li>Kabari polisi segera bila orang tersebut sudah ditemukan</li></ol></div>
 </div></div></article>
-<h2 class="display" style="font-size:26px">Daftar saat ini</h2>
-<div class="explain swipe"><div class="empty"><b style="color:#FF8A80">DPO</b><p>Belum ada data yang dipublikasikan.</p></div><div class="empty"><b style="color:#F2C230">Orang hilang</b><p>Belum ada data yang dipublikasikan.</p></div></div>
-<p style="font-size:13px;color:#AEB8CC">Data diterbitkan oleh petugas Polsek. Punya informasi? Kirim lewat <a href="https://wa.me/6285315515282" target="_blank" rel="noopener" style="color:#8FB4FF">WhatsApp Polsek</a> atau formulir pengaduan.</p>
+<h2 class="display" style="font-size:26px" id="daftar">Daftar saat ini</h2>
+<div class="wanted" id="wanted">
+<div class="wtabs" role="tablist" aria-label="Sumber data"><button type="button" role="tab" data-src="polsek" aria-selected="true">Polsek Kapuas Tengah</button><button type="button" role="tab" data-src="kejati" aria-selected="false">Kejati Kalimantan Tengah</button><button type="button" role="tab" data-src="pusiknas" aria-selected="false">Nasional (Pusiknas Polri)</button></div>
+<input class="wsearch" type="search" placeholder="Cari nama atau tindak pidana" aria-label="Cari nama atau tindak pidana">
+<p class="wnote" role="status"></p>
+<div class="wgrid"><div class="empty"><b style="color:#FF8A80">DPO</b><p>Belum ada data yang dipublikasikan.</p></div><div class="empty"><b style="color:#F2C230">Orang hilang</b><p>Belum ada data yang dipublikasikan.</p></div></div>
+<button class="btn wmore" type="button" hidden>Tampilkan lebih banyak</button>
+</div>
+<p style="font-size:13px;color:#AEB8CC">Data Polsek diterbitkan oleh petugas Polsek Kapuas Tengah. Data Kejati dan nasional disalin otomatis setiap minggu dari situs resminya; tiap kartu menautkan ke halaman sumber. Punya informasi? Kirim lewat <a href="https://wa.me/6285315515282" target="_blank" rel="noopener" style="color:#8FB4FF">WhatsApp Polsek</a> atau formulir pengaduan.</p>
 </div></section>
 </main>
 <footer>
@@ -105,7 +111,7 @@
 <div class="two"><div class="form"><label for="f-nama">Nama lengkap</label><input id="f-nama" name="nama" autocomplete="name" required></div>
 <div class="form"><label for="f-hp">Nomor HP (WhatsApp)</label><input id="f-hp" name="hp" type="tel" inputmode="tel" autocomplete="tel" required placeholder="0812 3456 7890"></div></div>
 <div class="two"><div class="form"><label for="f-tgl">Tanggal kunjungan</label><input id="f-tgl" name="tanggal" type="date" required></div>
-<div class="form"><label for="f-jam">Jam</label><select id="f-jam" name="jam"><option>08.00 WIB</option><option>09.00 WIB</option><option>10.00 WIB</option><option>11.00 WIB</option><option>12.00 WIB</option><option>13.00 WIB</option><option>14.00 WIB</option></select></div></div>
+<div class="form"><label for="f-jam">Jam</label><select id="f-jam" name="jam"><option value="08:00">08.00 WIB</option><option value="09:00">09.00 WIB</option><option value="10:00">10.00 WIB</option><option value="11:00">11.00 WIB</option><option value="13:00">13.00 WIB</option><option value="14:00">14.00 WIB</option></select></div></div>
 <label for="f-cat">Catatan (opsional)</label><textarea id="f-cat" name="catatan" style="min-height:80px"></textarea>
 </div>
 <div data-mode="ask" class="form">
@@ -115,17 +121,19 @@
 <label for="f-desa">Desa (opsional)</label><input id="f-desa" name="desa">
 <div class="two"><div class="form"><label for="f-nama2">Nama (opsional)</label><input id="f-nama2" name="nama" autocomplete="name"></div>
 <div class="form"><label for="f-hp2">Nomor HP (opsional)</label><input id="f-hp2" name="hp" type="tel" inputmode="tel" autocomplete="tel"></div></div>
+<label for="f-file">Foto atau video pendukung (opsional, maks. 5 berkas, 50 MB per berkas)</label><input id="f-file" name="files" type="file" accept="image/*,video/*" multiple>
 </div>
 <p class="err" role="alert"></p>
 <button class="btn btn-gold" type="submit">Dapatkan nomor tiket</button>
 </form>
 <div class="result" hidden>
 <div class="ticket"><span style="font-size:13px;font-weight:700;color:#8A6A1E">NOMOR TIKET ANDA</span><span class="no"></span><span class="sum" style="font-size:14px;color:var(--muted)"></span></div>
-<p style="margin:16px 0;color:var(--muted)">Simpan nomor ini, lalu kirim tiket ke WhatsApp Polsek agar tercatat dan dikonfirmasi petugas.</p>
-<a class="btn send" style="background:var(--green);color:#fff" target="_blank" rel="noopener" href="#">Kirim ke WhatsApp Polsek</a>
+<p style="margin:16px 0;color:var(--muted)">Data Anda sudah tercatat di sistem Polsek dengan status <b>diterima</b>. Simpan nomor tiket ini untuk cek status. Anda juga bisa mengabari petugas lewat WhatsApp.</p>
+<a class="btn send" style="background:var(--green);color:#fff" target="_blank" rel="noopener" href="#">Kabari lewat WhatsApp (opsional)</a>
 </div>
 </div>
 </dialog>
-<script src="assets/site.js?v=4" defer></script>
+<script src="assets/sb.js?v=5" defer></script>
+<script src="assets/site.js?v=5" defer></script>
 </body>
 </html>
