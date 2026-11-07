@@ -6,14 +6,43 @@ const hd = $('header');
 const setH = () => document.documentElement.style.setProperty('--hh', hd.offsetHeight + 'px');
 new ResizeObserver(setH).observe(hd); setH();
 
-// mobile menu
+// collapsible menu: overlays the page (never pushes it); opens on hover, click pins it open
 const mb = $('.menu-btn'), nav = $('#nav');
-mb.onclick = () => mb.setAttribute('aria-expanded', nav.classList.toggle('open'));
-nav.addEventListener('click', e => { if (e.target.tagName === 'A') { nav.classList.remove('open'); mb.setAttribute('aria-expanded', false); } });
+let pinned = false, hoverT;
+const setOpen = o => { nav.classList.toggle('open', o); mb.setAttribute('aria-expanded', o); if (!o) pinned = false; };
+mb.onclick = () => { if (pinned) setOpen(false); else { pinned = true; setOpen(true); } };
+if (matchMedia('(hover: hover)').matches) {
+  [mb, nav].forEach(el => {
+    el.addEventListener('mouseenter', () => { clearTimeout(hoverT); if (getComputedStyle(mb).display !== 'none') setOpen(true); });
+    el.addEventListener('mouseleave', () => { if (!pinned) hoverT = setTimeout(() => setOpen(false), 200); });
+  });
+}
+document.addEventListener('click', e => { if (nav.classList.contains('open') && !nav.contains(e.target) && !mb.contains(e.target)) setOpen(false); });
+addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+// close when the user scrolls the page from outside the menu (wheel or touch), not on programmatic scrolls
+['wheel', 'touchmove'].forEach(ev => addEventListener(ev, e => { if (nav.classList.contains('open') && !nav.contains(e.target) && !mb.contains(e.target)) setOpen(false); }, { passive: true }));
+
+// in-page jumps: land the target just below the sticky header, then correct once late content (images, map) has settled
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const go = (t, smooth = true) => {
+  const fix = () => { const d = t.getBoundingClientRect().top - hd.offsetHeight - ($('.svc-tabs')?.offsetHeight || 0) - 16; if (Math.abs(d) > 4) scrollBy({ top: d }); };
+  t.scrollIntoView({ behavior: smooth && !reduce ? 'smooth' : 'auto' });
+  // wait until the scroll has actually stopped, then correct for content that shifted on the way
+  let last = -1, still = 0; const t0 = Date.now();
+  const tick = () => { if (scrollY === last) still++; else { still = 0; last = scrollY; } if (still > 4 || Date.now() - t0 > 3000) { fix(); setTimeout(fix, 400); } else requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+};
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href*="#"]'); if (!a || a.hasAttribute('data-form')) return;
+  const u = new URL(a.href); if (u.pathname !== location.pathname || !u.hash) return;
+  const t = document.getElementById(decodeURIComponent(u.hash.slice(1))); if (!t) return;
+  e.preventDefault(); setOpen(false); history.pushState(null, '', u.hash); go(t);
+});
+addEventListener('load', () => { const t = location.hash && document.getElementById(location.hash.slice(1)); if (t) go(t, false); });
 
 // language toggle: shortcut: only switches state and <html lang>; EN and Dayak Ngaju copy still to be written
 $$('.lang button').forEach(b => b.onclick = () => {
-  $$('.lang button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  $$('.lang button').forEach(x => x.setAttribute('aria-pressed', x.dataset.lang === b.dataset.lang));
   document.documentElement.lang = b.dataset.lang;
 });
 
@@ -37,11 +66,10 @@ $$('dialog').forEach(d => {
   $$('.x', d).forEach(x => x.onclick = () => d.close());
   d.addEventListener('click', e => { if (e.target === d) d.close(); });
 });
-const grow = (dlg, from) => { // open the sheet so it appears to grow out of the clicked element
-  const r = from.getBoundingClientRect();
-  dlg.style.transformOrigin = `${r.left + r.width / 2}px ${r.top + r.height / 2}px`;
-  dlg.showModal(); dlg.scrollTop = 0;
-};
+const grow = dlg => { dlg.showModal(); dlg.scrollTop = 0; };
+// on phones keep only the first detail panel of each service open
+const collapse = root => { if (matchMedia('(max-width:640px)').matches) $$('.svc', root).forEach(s => $$('details.panel', s).forEach((d, i) => d.open = i === 0)); };
+collapse(document);
 
 // instagram reels play in a pop-up; clearing src on close stops the video
 const rd = $('#reel-dlg');
@@ -58,7 +86,7 @@ if (rd) {
 // service detail sheet (homepage cards): content comes from <template id="svc-…">
 const sd = $('#svc-dlg');
 if (sd) $$('[data-svc]').forEach(c => c.onclick = () => {
-  $('.body', sd).replaceChildren($('#svc-' + c.dataset.svc).content.cloneNode(true));
+  $('.body', sd).replaceChildren($('#svc-' + c.dataset.svc).content.cloneNode(true)); collapse(sd);
   $('.top b', sd).textContent = c.dataset.label || 'LAYANAN';
   grow(sd, c);
 });
@@ -119,3 +147,18 @@ tabs.forEach(t => t.onclick = () => {
   tabs.forEach(x => x.setAttribute('aria-pressed', x === t));
   $$('[data-cat]').forEach(p => p.hidden = t.dataset.f !== 'all' && p.dataset.cat !== t.dataset.f);
 });
+
+// layanan page: one service at a time; the single CTA block follows the chosen tab
+const tabs2 = $$('.svc-tabs [data-tab]');
+if (tabs2.length) {
+  const nb = $('.next-steps [data-form="book"]');
+  const pick = (id, scroll) => {
+    if (!document.getElementById(id)) id = tabs2[0].dataset.tab;
+    tabs2.forEach(b => b.setAttribute('aria-selected', b.dataset.tab === id));
+    $$('.svc-panel').forEach(p => p.hidden = p.id !== id);
+    nb.dataset.layanan = { skck: 'SKCK', kehilangan: 'Surat keterangan kehilangan', pengaduan: 'Pengaduan dan pendampingan', spkt: 'SPKT lainnya' }[id];
+    if (scroll) { history.replaceState(null, '', '#' + id); scrollTo({ top: $('.svc-tabs').offsetTop - hd.offsetHeight + 1, behavior: reduce ? 'auto' : 'smooth' }); }
+  };
+  tabs2.forEach(b => b.onclick = () => pick(b.dataset.tab, true));
+  pick(location.hash.slice(1), false);
+}

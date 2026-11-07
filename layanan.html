@@ -9,11 +9,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Red+Hat+Display:wght@700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=3">
+<link rel="stylesheet" href="assets/site.css?v=4">
 </head>
 <body>
 <div class="alert"><div class="wrap">
-<span>Keadaan darurat? Hubungi Call Center Polri 110, gratis 24 jam</span>
+<span><span class="full">Keadaan darurat? Hubungi Call Center Polri 110, gratis 24 jam</span><span class="short">Keadaan darurat?</span></span>
 <a href="tel:110">Telepon 110</a>
 </div></div>
 <header>
@@ -32,6 +32,7 @@
 <a href="pencarian-orang.html">Pencarian orang</a>
 <a href="index.html#wilayah">Peta wilayah</a>
 <a href="index.html#kontak">Kontak</a>
+<div class="lang lang-m" role="group" aria-label="Bahasa"><button type="button" data-lang="id" aria-pressed="true">ID</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="nij" aria-pressed="false">NGAJU</button></div>
 </nav>
 <div class="tools">
 <div class="lang" role="group" aria-label="Bahasa">
@@ -49,94 +50,62 @@
 <p class="crumb"><a href="index.html">Beranda</a> / Layanan</p>
 <span class="eyebrow">Layanan kepolisian</span>
 <h1 class="display">Urus keperluan Anda tanpa bolak-balik</h1>
-<p>Siapkan berkas dari rumah, booking jam kunjungan, lalu datang ke Mako Polsek. Untuk pertanyaan cepat, chat WhatsApp Polsek.</p>
+<p>Pilih layanan, siapkan berkas dari rumah, lalu booking jam kunjungan ke Mako Polsek.</p>
 </div></section>
-<section style="background:var(--sand);padding:40px 0"><div class="wrap" style="display:flex;flex-direction:column;gap:20px">
-<div class="cgrid" style="margin:0"><a class="call call-110" href="tel:110" aria-label="Telepon 110, darurat, gratis 24 jam">
-<span style="display:flex;align-items:center;gap:18px"><span class="num display">110</span><span><span class="lbl">Darurat</span><small>Gratis, 24 jam</small></span></span>
-<span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span>
-</a>
-<a class="call call-wa" href="https://wa.me/6285315515282" target="_blank" rel="noopener" aria-label="Chat WhatsApp Polsek 0853 1551 5282">
-<span><span class="lbl">WhatsApp Polsek</span><span class="wa">0853 1551 5282</span><small>Informasi dan pelayanan</small></span>
-<span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.4-4.2A8 8 0 1 1 8.4 19z"/><path d="M9.5 9.5c.3 1.8 2.2 3.8 4 4.2l1-1.2 1.8.8-.4 1.6c-3 .3-6.4-3-6.2-6.2l1.6-.4.8 1.8z"/></svg></span>
-</a></div>
-<div class="ctas">
-<button class="cta book" type="button" data-form="book" data-layanan=""><b>Booking kunjungan</b><span>Pilih hari dan jam datang ke Polsek, dapatkan nomor tiket</span></button>
-<button class="cta ask" type="button" data-form="ask" data-kategori="Pertanyaan layanan"><b>Kirim pertanyaan atau pengaduan</b><span>Isi formulir online, dapatkan nomor tiket</span></button>
-<a class="cta wa" href="https://wa.me/6285315515282" target="_blank" rel="noopener"><b>Chat WhatsApp Polsek</b><span>Untuk pertanyaan cepat</span></a>
-</div>
-<div style="display:flex;flex-wrap:wrap;gap:8px"><a class="btn" style="background:#fff;color:var(--ink);border:1px solid #CFC4AE" href="#skck">SKCK</a><a class="btn" style="background:#fff;color:var(--ink);border:1px solid #CFC4AE" href="#kehilangan">Surat kehilangan</a><a class="btn" style="background:#fff;color:var(--ink);border:1px solid #CFC4AE" href="#pengaduan">Pengaduan</a><a class="btn" style="background:#fff;color:var(--ink);border:1px solid #CFC4AE" href="#spkt">SPKT</a></div>
-</div></section>
-<section id="skck" style=""><div class="wrap"><div class="svc"><h2 class="display">Surat Keterangan Catatan Kepolisian (SKCK)</h2>
+<div class="svc-tabs" role="tablist" aria-label="Pilih layanan"><div class="wrap"><button type="button" role="tab" data-tab="skck" aria-selected="true">SKCK</button><button type="button" role="tab" data-tab="kehilangan" aria-selected="false">Surat kehilangan</button><button type="button" role="tab" data-tab="pengaduan" aria-selected="false">Pengaduan</button><button type="button" role="tab" data-tab="spkt" aria-selected="false">SPKT</button></div></div>
+<section style="padding:40px 0 24px"><div class="wrap">
+<div class="svc-panel" id="skck" role="tabpanel"><div class="svc"><h2 class="display">Surat Keterangan Catatan Kepolisian (SKCK)</h2>
 <p class="what">SKCK adalah surat resmi dari Polri yang menerangkan ada atau tidaknya catatan kriminal seseorang. Surat ini umumnya diminta untuk melamar pekerjaan, mendaftar CPNS atau PPPK, keperluan pendidikan, hingga pengurusan visa.</p>
 <div class="note">Polsek menerbitkan SKCK untuk keperluan umum warga sesuai alamat KTP. Keperluan tertentu, misalnya CPNS atau ke luar negeri, diterbitkan di tingkat Polres, Polda, atau Mabes. Tanyakan ke petugas bila ragu.</div>
 <div class="cols">
-<div class="panel"><h3>Berkas yang perlu dibawa</h3><ul>
+<details class="panel" open><summary>Berkas yang perlu dibawa</summary><ul>
 <li>Fotokopi KTP (tunjukkan yang asli)</li><li>Fotokopi Kartu Keluarga</li><li>Fotokopi akta kelahiran atau ijazah</li>
-<li>Pas foto berwarna latar merah, ukuran 4×6 (jumlah sesuai ketentuan loket)</li><li>Fotokopi paspor, bila untuk keperluan luar negeri</li><li>Biaya PNBP Rp30.000</li></ul></div>
-<div class="panel"><h3>Alur di Polsek</h3><ol>
-<li>Datang ke loket SKCK dengan berkas lengkap</li><li>Isi formulir daftar pertanyaan</li><li>Pengambilan sidik jari oleh petugas</li><li>Bayar PNBP Rp30.000</li><li>Petugas memverifikasi data, SKCK dicetak dan diserahkan</li></ol></div>
+<li>Pas foto berwarna latar merah, ukuran 4×6 (jumlah sesuai ketentuan loket)</li><li>Fotokopi paspor, bila untuk keperluan luar negeri</li><li>Biaya PNBP Rp30.000</li></ul></details>
+<details class="panel" open><summary>Alur di Polsek</summary><ol>
+<li>Datang ke loket SKCK dengan berkas lengkap</li><li>Isi formulir daftar pertanyaan</li><li>Pengambilan sidik jari oleh petugas</li><li>Bayar PNBP Rp30.000</li><li>Petugas memverifikasi data, SKCK dicetak dan diserahkan</li></ol></details>
 </div>
-<div class="panel"><h3>Bisa daftar online dulu</h3><ol>
-<li>Unduh aplikasi Polri Super App (Presisi)</li><li>Pilih menu SKCK, isi formulir, dan unggah berkas</li><li>Bayar dan simpan barcode</li><li>Datang ke loket dengan barcode dan berkas asli untuk mencetak SKCK</li></ol></div>
-<p class="src">Biaya mengacu pada PP 60/2016 tentang PNBP di lingkungan Polri. Persyaratan dapat berubah; konfirmasi ke petugas sebelum datang.</p>
-<h3>Langkah berikutnya</h3>
+<details class="panel" open><summary>Bisa daftar online dulu</summary><ol>
+<li>Unduh aplikasi Polri Super App (Presisi)</li><li>Pilih menu SKCK, isi formulir, dan unggah berkas</li><li>Bayar dan simpan barcode</li><li>Datang ke loket dengan barcode dan berkas asli untuk mencetak SKCK</li></ol></details>
+<p class="src">Biaya mengacu pada PP 60/2016 tentang PNBP di lingkungan Polri. Persyaratan dapat berubah; konfirmasi ke petugas sebelum datang.</p></div></div><div class="svc-panel" id="kehilangan" role="tabpanel" hidden><div class="svc"><h2 class="display">Surat Keterangan Tanda Lapor Kehilangan (SKTLK)</h2>
+<p class="what">SKTLK adalah surat dari kepolisian yang menerangkan bahwa Anda telah melaporkan kehilangan barang atau dokumen. Surat ini menjadi syarat untuk mengurus dokumen pengganti di instansi penerbitnya. Pembuatannya gratis.</p>
+<div class="cols">
+<details class="panel" open><summary>Barang dan dokumen yang biasa memerlukan surat ini</summary><ul>
+<li>KTP, Kartu Keluarga, akta kelahiran, buku nikah</li><li>SIM, STNK, BPKB</li><li>Buku tabungan, kartu ATM, kartu kredit</li><li>Ijazah dan dokumen pendidikan</li><li>Kartu BPJS dan kartu asuransi</li><li>Sertifikat tanah</li><li>Telepon seluler (sertakan nomor IMEI bila ada)</li></ul></details>
+<details class="panel" open><summary>Berkas yang perlu dibawa</summary><ul>
+<li>KTP atau identitas pelapor</li><li>Fotokopi dokumen yang hilang, bila ada</li><li>Surat keterangan dari instansi penerbit, bila tidak ada fotokopi</li><li>Surat pengantar desa, bila diminta untuk kehilangan KTP</li></ul></details>
+</div>
+<details class="panel" open><summary>Alur</summary><ol>
+<li>Datang ke SPKT Polsek</li><li>Sampaikan barang atau dokumen yang hilang</li><li>Jelaskan kronologi: waktu, tempat, dan ciri barang</li><li>Petugas membuat SKTLK dan menandatanganinya</li><li>Bawa SKTLK ke instansi penerbit untuk mengurus pengganti</li></ol></details>
+<div class="note">Kehilangan BPKB atau sertifikat tanah harus dilaporkan langsung di kantor polisi. Memberikan keterangan palsu dapat dikenai sanksi pidana.</div></div></div><div class="svc-panel" id="pengaduan" role="tabpanel" hidden><div class="svc"><h2 class="display">Pengaduan masyarakat dan pendampingan</h2>
+<p class="what">Laporkan setiap kejadian yang merugikan Anda atau mengganggu keamanan lingkungan. Melapor ke polisi tidak dipungut biaya. Jika ada yang meminta bayaran, laporkan ke Propam.</p>
+<div class="cols">
+<details class="panel" open><summary>Kapan sebaiknya melapor</summary><ul>
+<li>Menjadi korban atau saksi tindak pidana: pencurian, penipuan, penganiayaan</li><li>Kekerasan dalam rumah tangga, kekerasan terhadap perempuan atau anak</li><li>Konflik antarwarga atau sengketa yang berpotensi memanas</li><li>Peredaran narkoba di lingkungan Anda</li><li>Pembakaran hutan dan lahan</li><li>Keluhan atas pelayanan atau perilaku petugas</li></ul></details>
+<details class="panel" open><summary>Pendampingan yang tersedia</summary><ul>
+<li>Bhabinkamtibmas desa membantu mediasi masalah warga</li><li>Korban kekerasan terhadap perempuan dan anak dirujuk ke Unit PPA Polres Kapuas</li><li>Pelapor berhak mendapat informasi perkembangan penanganan</li></ul></details>
+</div>
+<details class="panel" open><summary>Alur</summary><ol>
+<li>Datang ke SPKT atau isi formulir online</li><li>Laporan diterima dan dicatat, Anda menerima tanda bukti atau nomor tiket</li><li>Petugas menindaklanjuti: klarifikasi, mediasi, atau penyelidikan</li><li>Anda dihubungi untuk perkembangan penanganan</li></ol></details>
+<div class="note">Untuk kejadian yang sedang berlangsung, jangan menunggu. Hubungi 110.</div></div></div><div class="svc-panel" id="spkt" role="tabpanel" hidden><div class="svc"><h2 class="display">Sentra Pelayanan Kepolisian Terpadu (SPKT)</h2>
+<p class="what">SPKT adalah pintu pelayanan utama di Mako Polsek Kapuas Tengah, Pujon. Petugas piket siaga setiap hari, 24 jam.</p>
+<div class="cols">
+<details class="panel" open><summary>Layanan di SPKT Polsek</summary><ul>
+<li>Penerimaan laporan polisi dan pengaduan</li><li>Surat Keterangan Tanda Lapor Kehilangan</li><li>Pemberitahuan dan izin keramaian kegiatan masyarakat</li><li>Bantuan polisi untuk keadaan darurat</li><li>Rujukan ke Bhabinkamtibmas desa</li><li>Informasi layanan SKCK (loket Unit Intelkam)</li></ul></details>
+<details class="panel" open><summary>Jam layanan</summary><ul>
+<li>SPKT: setiap hari, 24 jam</li><li>SKCK dan administrasi: Senin–Jumat, 08.00–15.00 WIB</li></ul>
+<h3 style="margin-top:16px">Lokasi</h3><p>Jl. Damang Raban No. 01 RT 002, Desa Pujon, Kec. Kapuas Tengah, Kab. Kapuas, Kalimantan Tengah 73555</p>
+<p style="margin-top:10px"><a href="https://www.google.com/maps/dir/?api=1&destination=Polsek+Kapuas+Tengah,+Jl.+Damang+Raban+No.+01,+Pujon,+Kapuas,+Kalimantan+Tengah" target="_blank" rel="noopener">Petunjuk arah di Google Maps ↗</a></p></details>
+</div>
+<div class="note">Untuk izin keramaian, ajukan beberapa hari sebelum acara dengan membawa KTP penanggung jawab dan rincian kegiatan.</div></div></div>
+</div></section>
+<section style="background:var(--sand);padding:40px 0 56px"><div class="wrap next-steps">
+<h2 class="h2" style="font-size:26px;margin-bottom:16px">Langkah berikutnya</h2>
 <div class="ctas">
 <button class="cta book" type="button" data-form="book" data-layanan="SKCK"><b>Booking kunjungan</b><span>Pilih hari dan jam datang ke Polsek, dapatkan nomor tiket</span></button>
 <button class="cta ask" type="button" data-form="ask" data-kategori="Pertanyaan layanan"><b>Kirim pertanyaan atau pengaduan</b><span>Isi formulir online, dapatkan nomor tiket</span></button>
 <a class="cta wa" href="https://wa.me/6285315515282" target="_blank" rel="noopener"><b>Chat WhatsApp Polsek</b><span>Untuk pertanyaan cepat</span></a>
-</div></div></div></section>
-<section id="kehilangan" style="background:var(--khaki)"><div class="wrap"><div class="svc"><h2 class="display">Surat Keterangan Tanda Lapor Kehilangan (SKTLK)</h2>
-<p class="what">SKTLK adalah surat dari kepolisian yang menerangkan bahwa Anda telah melaporkan kehilangan barang atau dokumen. Surat ini menjadi syarat untuk mengurus dokumen pengganti di instansi penerbitnya. Pembuatannya gratis.</p>
-<div class="cols">
-<div class="panel"><h3>Barang dan dokumen yang biasa memerlukan surat ini</h3><ul>
-<li>KTP, Kartu Keluarga, akta kelahiran, buku nikah</li><li>SIM, STNK, BPKB</li><li>Buku tabungan, kartu ATM, kartu kredit</li><li>Ijazah dan dokumen pendidikan</li><li>Kartu BPJS dan kartu asuransi</li><li>Sertifikat tanah</li><li>Telepon seluler (sertakan nomor IMEI bila ada)</li></ul></div>
-<div class="panel"><h3>Berkas yang perlu dibawa</h3><ul>
-<li>KTP atau identitas pelapor</li><li>Fotokopi dokumen yang hilang, bila ada</li><li>Surat keterangan dari instansi penerbit, bila tidak ada fotokopi</li><li>Surat pengantar desa, bila diminta untuk kehilangan KTP</li></ul></div>
 </div>
-<div class="panel"><h3>Alur</h3><ol>
-<li>Datang ke SPKT Polsek</li><li>Sampaikan barang atau dokumen yang hilang</li><li>Jelaskan kronologi: waktu, tempat, dan ciri barang</li><li>Petugas membuat SKTLK dan menandatanganinya</li><li>Bawa SKTLK ke instansi penerbit untuk mengurus pengganti</li></ol></div>
-<div class="note">Kehilangan BPKB atau sertifikat tanah harus dilaporkan langsung di kantor polisi. Memberikan keterangan palsu dapat dikenai sanksi pidana.</div>
-<h3>Langkah berikutnya</h3>
-<div class="ctas">
-<button class="cta book" type="button" data-form="book" data-layanan="Surat keterangan kehilangan"><b>Booking kunjungan</b><span>Pilih hari dan jam datang ke Polsek, dapatkan nomor tiket</span></button>
-<button class="cta ask" type="button" data-form="ask" data-kategori="Pertanyaan layanan"><b>Kirim pertanyaan atau pengaduan</b><span>Isi formulir online, dapatkan nomor tiket</span></button>
-<a class="cta wa" href="https://wa.me/6285315515282" target="_blank" rel="noopener"><b>Chat WhatsApp Polsek</b><span>Untuk pertanyaan cepat</span></a>
-</div></div></div></section>
-<section id="pengaduan" style=""><div class="wrap"><div class="svc"><h2 class="display">Pengaduan masyarakat dan pendampingan</h2>
-<p class="what">Laporkan setiap kejadian yang merugikan Anda atau mengganggu keamanan lingkungan. Melapor ke polisi tidak dipungut biaya. Jika ada yang meminta bayaran, laporkan ke Propam.</p>
-<div class="cols">
-<div class="panel"><h3>Kapan sebaiknya melapor</h3><ul>
-<li>Menjadi korban atau saksi tindak pidana: pencurian, penipuan, penganiayaan</li><li>Kekerasan dalam rumah tangga, kekerasan terhadap perempuan atau anak</li><li>Konflik antarwarga atau sengketa yang berpotensi memanas</li><li>Peredaran narkoba di lingkungan Anda</li><li>Pembakaran hutan dan lahan</li><li>Keluhan atas pelayanan atau perilaku petugas</li></ul></div>
-<div class="panel"><h3>Pendampingan yang tersedia</h3><ul>
-<li>Bhabinkamtibmas desa membantu mediasi masalah warga</li><li>Korban kekerasan terhadap perempuan dan anak dirujuk ke Unit PPA Polres Kapuas</li><li>Pelapor berhak mendapat informasi perkembangan penanganan</li></ul></div>
-</div>
-<div class="panel"><h3>Alur</h3><ol>
-<li>Datang ke SPKT atau isi formulir online</li><li>Laporan diterima dan dicatat, Anda menerima tanda bukti atau nomor tiket</li><li>Petugas menindaklanjuti: klarifikasi, mediasi, atau penyelidikan</li><li>Anda dihubungi untuk perkembangan penanganan</li></ol></div>
-<div class="note">Untuk kejadian yang sedang berlangsung, jangan menunggu. Hubungi 110.</div>
-<h3>Langkah berikutnya</h3>
-<div class="ctas">
-<button class="cta book" type="button" data-form="book" data-layanan="Pengaduan dan pendampingan"><b>Booking kunjungan</b><span>Pilih hari dan jam datang ke Polsek, dapatkan nomor tiket</span></button>
-<button class="cta ask" type="button" data-form="ask" data-kategori="Pertanyaan layanan"><b>Kirim pertanyaan atau pengaduan</b><span>Isi formulir online, dapatkan nomor tiket</span></button>
-<a class="cta wa" href="https://wa.me/6285315515282" target="_blank" rel="noopener"><b>Chat WhatsApp Polsek</b><span>Untuk pertanyaan cepat</span></a>
-</div></div></div></section>
-<section id="spkt" style="background:var(--khaki)"><div class="wrap"><div class="svc"><h2 class="display">Sentra Pelayanan Kepolisian Terpadu (SPKT)</h2>
-<p class="what">SPKT adalah pintu pelayanan utama di Mako Polsek Kapuas Tengah, Pujon. Petugas piket siaga setiap hari, 24 jam.</p>
-<div class="cols">
-<div class="panel"><h3>Layanan di SPKT Polsek</h3><ul>
-<li>Penerimaan laporan polisi dan pengaduan</li><li>Surat Keterangan Tanda Lapor Kehilangan</li><li>Pemberitahuan dan izin keramaian kegiatan masyarakat</li><li>Bantuan polisi untuk keadaan darurat</li><li>Rujukan ke Bhabinkamtibmas desa</li><li>Informasi layanan SKCK (loket Unit Intelkam)</li></ul></div>
-<div class="panel"><h3>Jam layanan</h3><ul>
-<li>SPKT: setiap hari, 24 jam</li><li>SKCK dan administrasi: Senin–Jumat, 08.00–15.00 WIB</li></ul>
-<h3 style="margin-top:16px">Lokasi</h3><p>Jl. Damang Raban No. 01 RT 002, Desa Pujon, Kec. Kapuas Tengah, Kab. Kapuas, Kalimantan Tengah 73555</p>
-<p style="margin-top:10px"><a href="https://www.google.com/maps/dir/?api=1&destination=Polsek+Kapuas+Tengah,+Jl.+Damang+Raban+No.+01,+Pujon,+Kapuas,+Kalimantan+Tengah" target="_blank" rel="noopener">Petunjuk arah di Google Maps ↗</a></p></div>
-</div>
-<div class="note">Untuk izin keramaian, ajukan beberapa hari sebelum acara dengan membawa KTP penanggung jawab dan rincian kegiatan.</div>
-<h3>Langkah berikutnya</h3>
-<div class="ctas">
-<button class="cta book" type="button" data-form="book" data-layanan="SPKT lainnya"><b>Booking kunjungan</b><span>Pilih hari dan jam datang ke Polsek, dapatkan nomor tiket</span></button>
-<button class="cta ask" type="button" data-form="ask" data-kategori="Pertanyaan layanan"><b>Kirim pertanyaan atau pengaduan</b><span>Isi formulir online, dapatkan nomor tiket</span></button>
-<a class="cta wa" href="https://wa.me/6285315515282" target="_blank" rel="noopener"><b>Chat WhatsApp Polsek</b><span>Untuk pertanyaan cepat</span></a>
-</div></div></div></section>
+</div></section>
 </main>
 <footer>
 <div class="wrap">
@@ -189,6 +158,6 @@
 </div>
 </div>
 </dialog>
-<script src="assets/site.js?v=3" defer></script>
+<script src="assets/site.js?v=4" defer></script>
 </body>
 </html>

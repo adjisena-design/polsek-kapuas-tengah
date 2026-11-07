@@ -9,11 +9,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Red+Hat+Display:wght@700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=3">
+<link rel="stylesheet" href="assets/site.css?v=4">
 </head>
 <body>
 <div class="alert"><div class="wrap">
-<span>Keadaan darurat? Hubungi Call Center Polri 110, gratis 24 jam</span>
+<span><span class="full">Keadaan darurat? Hubungi Call Center Polri 110, gratis 24 jam</span><span class="short">Keadaan darurat?</span></span>
 <a href="tel:110">Telepon 110</a>
 </div></div>
 <header>
@@ -32,6 +32,7 @@
 <a href="pencarian-orang.html" aria-current="page">Pencarian orang</a>
 <a href="index.html#wilayah">Peta wilayah</a>
 <a href="index.html#kontak">Kontak</a>
+<div class="lang lang-m" role="group" aria-label="Bahasa"><button type="button" data-lang="id" aria-pressed="true">ID</button><button type="button" data-lang="en" aria-pressed="false">EN</button><button type="button" data-lang="nij" aria-pressed="false">NGAJU</button></div>
 </nav>
 <div class="tools">
 <div class="lang" role="group" aria-label="Bahasa">
@@ -53,7 +54,7 @@
 <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:20px"><button class="btn btn-gold" type="button" data-form="ask" data-kategori="Orang hilang">Laporkan orang hilang</button><a class="btn" style="background:var(--red);color:#fff" href="tel:110">Telepon 110</a></div>
 </div></section>
 <section class="night" style="padding:56px 0"><div class="wrap" style="display:flex;flex-direction:column;gap:24px">
-<div class="explain">
+<div class="explain swipe">
 <article class="r" id="dpo"><span class="eyebrow" style="color:#FF8A80">Merah</span><h2 class="display" style="font-size:30px">Daftar Pencarian Orang (DPO)</h2>
 <p style="color:#E6DED0">Orang yang telah ditetapkan sebagai tersangka atau diduga kuat terlibat tindak pidana, lalu tidak diketahui keberadaannya atau tidak memenuhi panggilan penyidik secara sah.</p>
 <h3 style="font-size:16px">Siapa yang masuk daftar ini</h3><ul><li>Tersangka yang melarikan diri</li><li>Tersangka yang tidak memenuhi panggilan resmi</li><li>Terpidana yang belum menjalani putusan</li></ul>
@@ -65,12 +66,12 @@
 </div>
 <article style="background:rgba(10,14,24,.78);border:1px solid rgba(255,255,255,.16);border-radius:4px;padding:28px;color:#fff">
 <h2 class="display" style="font-size:26px;margin-bottom:16px">Cara melaporkan orang hilang</h2>
-<div class="svc"><div class="cols">
+<div class="svc"><div class="cols swipe">
 <div class="panel" style="background:rgba(255,255,255,.06)"><h3>Siapkan</h3><ul style="color:#E6DED0"><li>KTP pelapor dan Kartu Keluarga (bukti hubungan keluarga)</li><li>Foto terbaru orang yang hilang</li><li>Ciri fisik, pakaian terakhir, dan barang yang dibawa</li><li>Waktu dan lokasi terakhir terlihat</li><li>Nomor HP dan akun media sosial orang tersebut, bila ada</li></ul></div>
 <div class="panel" style="background:rgba(255,255,255,.06)"><h3>Alur</h3><ol style="color:#E6DED0"><li>Hubungi 110 atau datang ke SPKT Polsek</li><li>Buat laporan dan serahkan data di atas</li><li>Petugas memverifikasi dan mulai pencarian bersama Bhabinkamtibmas</li><li>Informasi disebarkan, termasuk di halaman ini bila keluarga setuju</li><li>Kabari polisi segera bila orang tersebut sudah ditemukan</li></ol></div>
 </div></div></article>
 <h2 class="display" style="font-size:26px">Daftar saat ini</h2>
-<div class="explain"><div class="empty"><b style="color:#FF8A80">DPO</b><p>Belum ada data yang dipublikasikan.</p></div><div class="empty"><b style="color:#F2C230">Orang hilang</b><p>Belum ada data yang dipublikasikan.</p></div></div>
+<div class="explain swipe"><div class="empty"><b style="color:#FF8A80">DPO</b><p>Belum ada data yang dipublikasikan.</p></div><div class="empty"><b style="color:#F2C230">Orang hilang</b><p>Belum ada data yang dipublikasikan.</p></div></div>
 <p style="font-size:13px;color:#AEB8CC">Data diterbitkan oleh petugas Polsek. Punya informasi? Kirim lewat <a href="https://wa.me/6285315515282" target="_blank" rel="noopener" style="color:#8FB4FF">WhatsApp Polsek</a> atau formulir pengaduan.</p>
 </div></section>
 </main>
@@ -125,6 +126,6 @@
 </div>
 </div>
 </dialog>
-<script src="assets/site.js?v=3" defer></script>
+<script src="assets/site.js?v=4" defer></script>
 </body>
 </html>
