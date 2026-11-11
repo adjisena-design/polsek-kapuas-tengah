@@ -391,3 +391,13 @@ input[type=file]{font:14px 'Plus Jakarta Sans',sans-serif}
 [hidden]{display:none!important}
 /* iOS Safari gives date inputs an intrinsic width wider than the form */
 input[type=date]{-webkit-appearance:none;appearance:none;min-width:0;max-width:100%;width:100%;display:block}
+
+/* per-document requirement cards inside a service (e.g. loss reports) */
+.svc .panel.wide{margin-top:16px}
+.docs{display:grid;align-items:start;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:10px;margin-top:12px}
+.doc{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:0}
+.doc summary{cursor:pointer;font-weight:700;padding:12px 14px;list-style:none;display:flex;justify-content:space-between;gap:10px}
+.doc summary::-webkit-details-marker{display:none}
+.doc summary::after{content:"+";color:var(--brown);font-weight:800}
+.doc[open] summary::after{content:"–"}
+.doc ul{margin:0;padding:0 14px 14px 32px;font-size:14px}

@@ -1,5 +1,5 @@
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
-const WA = '6285315515282';
+const WA = document.body.dataset.wa || '6285315515282';
 
 // sticky header height drives scroll-padding so anchor jumps land below it
 const hd = $('header');
@@ -293,7 +293,7 @@ if (tabs2.length) {
     if (!document.getElementById(id)) id = tabs2[0].dataset.tab;
     tabs2.forEach(b => b.setAttribute('aria-selected', b.dataset.tab === id));
     $$('.svc-panel').forEach(p => p.hidden = p.id !== id);
-    nb.dataset.layanan = { skck: 'SKCK', kehilangan: 'Surat keterangan kehilangan', pengaduan: 'Pengaduan dan pendampingan', spkt: 'SPKT lainnya' }[id];
+    nb.dataset.layanan = tabs2.find(x => x.dataset.tab === id)?.dataset.layanan || '';
     if (scroll) { history.replaceState(null, '', '#' + id); scrollTo({ top: $('.svc-tabs').offsetTop - hd.offsetHeight + 1, behavior: reduce ? 'auto' : 'smooth' }); }
   };
   tabs2.forEach(b => b.onclick = () => pick(b.dataset.tab, true));

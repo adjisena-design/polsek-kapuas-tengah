@@ -1,0 +1,3074 @@
+{
+ "settings": {
+  "wa": "6285315515282",
+  "wa_display": "0853 1551 5282",
+  "address": "Jl. Damang Raban No. 01 RT 002, Desa Pujon, Kec. Kapuas Tengah, Kab. Kapuas, Kalimantan Tengah 73555",
+  "maps": "https://www.google.com/maps/dir/?api=1&destination=Polsek+Kapuas+Tengah,+Jl.+Damang+Raban+No.+01,+Pujon,+Kapuas,+Kalimantan+Tengah",
+  "instagram": "https://www.instagram.com/polsek.kapuas.tengah/",
+  "instagram_handle": "@polsek.kapuas.tengah",
+  "facebook": "https://www.facebook.com/Polsekkapuastengah01/"
+ },
+ "hero": [
+  {
+   "sort": 1,
+   "active": true,
+   "kind": "photo",
+   "image_url": "assets/hero-1.jpg",
+   "alt": {
+    "id": "Personel Polri berbaris dalam apel",
+    "en": "Polri officers lined up at a parade",
+    "nij": "Personel Polri babaris huang apel"
+   },
+   "eyebrow": {
+    "id": "Kepolisian Sektor Kapuas Tengah",
+    "en": "Kapuas Tengah Police Sector",
+    "nij": "Kepolisian Sektor Kapuas Tengah"
+   },
+   "title": {
+    "id": "Presisi melayani, Isen Mulang menjaga.",
+    "en": "Serving with precision, guarding with Isen Mulang.",
+    "nij": "Presisi melayani, Isen Mulang mahaga."
+   },
+   "body": {
+    "id": "Pusat informasi dan layanan digital untuk masyarakat Kecamatan Kapuas Tengah, Kabupaten Kapuas.",
+    "en": "Information and digital services for the people of Kapuas Tengah District, Kapuas Regency.",
+    "nij": "Pusat informasi tuntang pelayanan digital akan warga Kecamatan Kapuas Tengah, Kabupaten Kapuas."
+   },
+   "cta": {
+    "id": "Lihat layanan",
+    "en": "See services",
+    "nij": "Ite pelayanan"
+   },
+   "href": "layanan.html"
+  },
+  {
+   "sort": 2,
+   "active": true,
+   "kind": "dpo",
+   "image_url": null,
+   "alt": {
+    "id": "",
+    "en": "",
+    "nij": ""
+   },
+   "eyebrow": {
+    "id": "Pencarian orang",
+    "en": "Wanted and missing",
+    "nij": "Manggau oloh"
+   },
+   "title": {
+    "id": "Bantu kami menemukan mereka.",
+    "en": "Help us find them.",
+    "nij": "Tulung ikei manggau ewen."
+   },
+   "body": {
+    "id": "",
+    "en": "",
+    "nij": ""
+   },
+   "cta": {
+    "id": "",
+    "en": "",
+    "nij": ""
+   },
+   "href": "pencarian-orang.html"
+  },
+  {
+   "sort": 3,
+   "active": true,
+   "kind": "photo",
+   "image_url": "assets/hero-2.jpg",
+   "alt": {
+    "id": "Personel Brimob Polri bersiaga",
+    "en": "Polri Brimob officers on standby",
+    "nij": "Personel Brimob Polri siaga"
+   },
+   "eyebrow": {
+    "id": "Siaga 24 jam",
+    "en": "On call 24 hours",
+    "nij": "Siaga 24 jam"
+   },
+   "title": {
+    "id": "Cepat hadir saat Anda membutuhkan.",
+    "en": "Quick to arrive when you need us.",
+    "nij": "Capat dumah amun keton parlu."
+   },
+   "body": {
+    "id": "Hubungi 110 untuk keadaan darurat, atau datang ke SPKT Polsek di Pujon kapan saja.",
+    "en": "Call 110 in an emergency, or come to the Polsek SPKT in Pujon at any time.",
+    "nij": "Hubungi 110 amun aton kahakuyan, atawa dumah akan SPKT Polsek intu Pujon genep katika."
+   },
+   "cta": {
+    "id": "Kontak penting",
+    "en": "Key contacts",
+    "nij": "Kontak penting"
+   },
+   "href": "#kontak"
+  },
+  {
+   "sort": 4,
+   "active": true,
+   "kind": "photo",
+   "image_url": "assets/hero-3.jpg",
+   "alt": {
+    "id": "Demonstrasi teknologi pengamanan Polri",
+    "en": "Demonstration of Polri security technology",
+    "nij": "Demonstrasi teknologi pengamanan Polri"
+   },
+   "eyebrow": {
+    "id": "Polri Presisi",
+    "en": "Polri Presisi",
+    "nij": "Polri Presisi"
+   },
+   "title": {
+    "id": "Pelayanan yang makin modern.",
+    "en": "Ever more modern service.",
+    "nij": "Pelayanan je tambah modern."
+   },
+   "body": {
+    "id": "Booking kunjungan, kirim pengaduan, dan pantau tiket Anda langsung dari ponsel.",
+    "en": "Book a visit, send a report, and track your ticket straight from your phone.",
+    "nij": "Booking kunjungan, kirim pengaduan, tuntang pantau tiket keton langsung bara HP."
+   },
+   "cta": {
+    "id": "Booking kunjungan",
+    "en": "Book a visit",
+    "nij": "Booking kunjungan"
+   },
+   "href": "#booking"
+  },
+  {
+   "sort": 5,
+   "active": true,
+   "kind": "photo",
+   "image_url": "assets/hero-4.jpg",
+   "alt": {
+    "id": "Upacara bersama Polri dan aparatur pemerintah",
+    "en": "Joint ceremony of Polri and government officials",
+    "nij": "Upacara hapumpong Polri tuntang aparatur pamarentah"
+   },
+   "eyebrow": {
+    "id": "Polisi bersama masyarakat",
+    "en": "Police with the community",
+    "nij": "Polisi hapumpong warga"
+   },
+   "title": {
+    "id": "Hadir di setiap desa.",
+    "en": "Present in every village.",
+    "nij": "Aton intu genep lewu."
+   },
+   "body": {
+    "id": "Bhabinkamtibmas siap mendengar laporan dan aspirasi warga di 13 desa Kapuas Tengah.",
+    "en": "Village police officers (Bhabinkamtibmas) are ready to hear residents' reports and concerns in all 13 villages of Kapuas Tengah.",
+    "nij": "Bhabinkamtibmas siap mahining laporan tuntang aspirasi warga intu 13 lewu Kapuas Tengah."
+   },
+   "cta": {
+    "id": "Cari Bhabinkamtibmas",
+    "en": "Find your village officer",
+    "nij": "Gau Bhabinkamtibmas"
+   },
+   "href": "#wilayah"
+  }
+ ],
+ "services": [
+  {
+   "slug": "kehilangan",
+   "sort": 1,
+   "active": true,
+   "bookable": true,
+   "icon": "search",
+   "name": {
+    "id": "Surat kehilangan",
+    "en": "Loss report",
+    "nij": "Surat kanihau"
+   },
+   "card": {
+    "id": "Laporkan kehilangan dokumen atau barang dan ketahui berkas yang perlu dibawa.",
+    "en": "Report lost documents or items and find out what to bring.",
+    "nij": "Laporan dokumen atawa barang je nihau tuntang katawan berkas je parlu imbit."
+   },
+   "cta": {
+    "id": "Lihat panduan →",
+    "en": "See guide →",
+    "nij": "Ite panduan →"
+   },
+   "title": {
+    "id": "Surat Keterangan Tanda Lapor Kehilangan (SKTLK)",
+    "en": "Loss Report Certificate (SKTLK)",
+    "nij": "Surat Keterangan Tanda Lapor Kanihau (SKTLK)"
+   },
+   "intro": {
+    "id": "SKTLK adalah surat dari kepolisian yang menerangkan bahwa Anda telah melaporkan kehilangan barang atau dokumen. Surat ini menjadi syarat untuk mengurus dokumen pengganti di instansi penerbitnya. Pembuatannya gratis.",
+    "en": "The SKTLK is a police letter stating that you have reported a lost item or document. You need it to get a replacement from the issuing office. It is free.",
+    "nij": "SKTLK iete surat bara kepolisian je manerangan keton jari malaporan barang atawa dokumen je nihau. Surat tuh manjadi syarat akan mangurus dokumen pangganti intu instansi je manerbit. Maawi ie gratis."
+   },
+   "note": {
+    "id": "",
+    "en": "",
+    "nij": ""
+   },
+   "sections": [
+    {
+     "type": "list",
+     "title": {
+      "id": "Berkas umum",
+      "en": "General documents",
+      "nij": "Berkas umum"
+     },
+     "items": [
+      {
+       "id": "KTP atau identitas pelapor",
+       "en": "ID card or identity of the reporter",
+       "nij": "KTP atawa identitas pelapor"
+      },
+      {
+       "id": "Fotokopi dokumen yang hilang, bila ada",
+       "en": "Copy of the lost document, if available",
+       "nij": "Fotokopi dokumen je nihau, amun aton"
+      },
+      {
+       "id": "Surat keterangan dari instansi penerbit, bila tidak ada fotokopi",
+       "en": "A letter from the issuing office, if there is no copy",
+       "nij": "Surat keterangan bara instansi penerbit, amun dia aton fotokopi"
+      }
+     ]
+    },
+    {
+     "type": "steps",
+     "title": {
+      "id": "Alur",
+      "en": "Steps",
+      "nij": "Alur"
+     },
+     "items": [
+      {
+       "id": "Datang ke SPKT Polsek",
+       "en": "Come to the Polsek SPKT",
+       "nij": "Dumah akan SPKT Polsek"
+      },
+      {
+       "id": "Sampaikan barang atau dokumen yang hilang",
+       "en": "Tell us what item or document was lost",
+       "nij": "Sampaian barang atawa dokumen je nihau"
+      },
+      {
+       "id": "Jelaskan kronologi: waktu, tempat, dan ciri barang",
+       "en": "Explain what happened: time, place and description of the item",
+       "nij": "Jelasan kronologi: wayah, eka, tuntang ciri barang"
+      },
+      {
+       "id": "Petugas membuat SKTLK dan menandatanganinya",
+       "en": "The officer prepares and signs the SKTLK",
+       "nij": "Petugas maawi SKTLK tuntang manandatangani"
+      },
+      {
+       "id": "Bawa SKTLK ke instansi penerbit untuk mengurus pengganti",
+       "en": "Take the SKTLK to the issuing office to get a replacement",
+       "nij": "Imbit SKTLK akan instansi penerbit akan mangurus pangganti"
+      }
+     ]
+    },
+    {
+     "type": "cards",
+     "title": {
+      "id": "Persyaratan per dokumen di SPKT Polsek Kapuas Tengah",
+      "en": "Requirements per document at the Kapuas Tengah Police Sector SPKT",
+      "nij": "Syarat genep dokumen intu SPKT Polsek Kapuas Tengah"
+     },
+     "items": [],
+     "cards": [
+      {
+       "title": {
+        "id": "Sertifikat tanah (SKHT)",
+        "en": "Land certificate (SKHT)",
+        "nij": "Sertifikat petak (SKHT)"
+       },
+       "items": [
+        {
+         "id": "Iklan koran 3 kali",
+         "en": "Newspaper notice, 3 times",
+         "nij": "Iklan koran 3 kali"
+        },
+        {
+         "id": "Surat keterangan dari camat, lurah setempat, dan rekomendasi dari BPN",
+         "en": "Letter from the sub-district head and local village head, and a recommendation from BPN (land agency)",
+         "nij": "Surat keterangan bara camat, lurah setempat, tuntang rekomendasi bara BPN"
+        },
+        {
+         "id": "Surat pernyataan pemilik tanah",
+         "en": "Statement from the land owner",
+         "nij": "Surat pernyataan tempun petak"
+        },
+        {
+         "id": "KTP pelapor",
+         "en": "Reporter's ID card",
+         "nij": "KTP pelapor"
+        },
+        {
+         "id": "Fotokopi surat yang hilang",
+         "en": "Copy of the lost document",
+         "nij": "Fotokopi surat je nihau"
+        }
+       ]
+      },
+      {
+       "title": {
+        "id": "Bilyet giro",
+        "en": "Giro slip",
+        "nij": "Bilyet giro"
+       },
+       "items": [
+        {
+         "id": "Surat keterangan dari bank",
+         "en": "Letter from the bank",
+         "nij": "Surat keterangan bara bank"
+        },
+        {
+         "id": "Surat pernyataan pemilik giro bermeterai",
+         "en": "Giro owner's statement with a duty stamp",
+         "nij": "Surat pernyataan tempun giro bameterai"
+        },
+        {
+         "id": "KTP pelapor atau pemilik giro",
+         "en": "ID card of the reporter or giro owner",
+         "nij": "KTP pelapor atawa tempun giro"
+        }
+       ]
+      },
+      {
+       "title": {
+        "id": "Kartu Jamsostek",
+        "en": "Jamsostek card",
+        "nij": "Kartu Jamsostek"
+       },
+       "items": [
+        {
+         "id": "Surat pengantar dari Jamsostek (nomor KPJ)",
+         "en": "Cover letter from Jamsostek (KPJ number)",
+         "nij": "Surat pengantar bara Jamsostek (nomor KPJ)"
+        },
+        {
+         "id": "KTP pelapor",
+         "en": "Reporter's ID card",
+         "nij": "KTP pelapor"
+        }
+       ]
+      },
+      {
+       "title": {
+        "id": "KTP",
+        "en": "ID card (KTP)",
+        "nij": "KTP"
+       },
+       "items": [
+        {
+         "id": "Fotokopi KTP atau surat keterangan dari lurah",
+         "en": "Copy of the ID card or a letter from the village head",
+         "nij": "Fotokopi KTP atawa surat keterangan bara lurah"
+        },
+        {
+         "id": "Fotokopi Kartu Keluarga (KK)",
+         "en": "Copy of the Family Card (KK)",
+         "nij": "Fotokopi Kartu Keluarga (KK)"
+        },
+        {
+         "id": "KTP pelapor",
+         "en": "Reporter's ID card",
+         "nij": "KTP pelapor"
+        }
+       ]
+      },
+      {
+       "title": {
+        "id": "Kartu ATM atau buku tabungan",
+        "en": "ATM card or savings book",
+        "nij": "Kartu ATM atawa buku tabungan"
+       },
+       "items": [
+        {
+         "id": "Surat keterangan dari bank",
+         "en": "Letter from the bank",
+         "nij": "Surat keterangan bara bank"
+        },
+        {
+         "id": "KTP pelapor",
+         "en": "Reporter's ID card",
+         "nij": "KTP pelapor"
+        }
+       ]
+      },
+      {
+       "title": {
+        "id": "SIM",
+        "en": "Driving licence (SIM)",
+        "nij": "SIM"
+       },
+       "items": [
+        {
+         "id": "Fotokopi SIM atau nomor SIM",
+         "en": "Copy of the licence or the licence number",
+         "nij": "Fotokopi SIM atawa nomor SIM"
+        },
+        {
+         "id": "KTP pelapor",
+         "en": "Reporter's ID card",
+         "nij": "KTP pelapor"
+        }
+       ]
+      },
+      {
+       "title": {
+        "id": "Kartu Asabri",
+        "en": "Asabri card",
+        "nij": "Kartu Asabri"
+       },
+       "items": [
+        {
+         "id": "Surat keterangan dari Asabri atau fotokopi kartu Asabri",
+         "en": "Letter from Asabri or a copy of the Asabri card",
+         "nij": "Surat keterangan bara Asabri atawa fotokopi kartu Asabri"
+        },
+        {
+         "id": "KTP pelapor dan surat pernyataan dari pemilik Asabri bermeterai",
+         "en": "Reporter's ID card and a statement from the Asabri holder with a duty stamp",
+         "nij": "KTP pelapor tuntang surat pernyataan bara tempun Asabri bameterai"
+        }
+       ]
+      },
+      {
+       "title": {
+        "id": "Karpeg",
+        "en": "Civil servant card (Karpeg)",
+        "nij": "Karpeg"
+       },
+       "items": [
+        {
+         "id": "Surat keterangan dari instansi yang bersangkutan atau nomor Karpeg",
+         "en": "Letter from the employing agency or the Karpeg number",
+         "nij": "Surat keterangan bara instansi je bahubungan atawa nomor Karpeg"
+        },
+        {
+         "id": "KTP pelapor",
+         "en": "Reporter's ID card",
+         "nij": "KTP pelapor"
+        }
+       ]
+      },
+      {
+       "title": {
+        "id": "STNK",
+        "en": "Vehicle registration (STNK)",
+        "nij": "STNK"
+       },
+       "items": [
+        {
+         "id": "Fotokopi BPKB atau STNK",
+         "en": "Copy of the BPKB or STNK",
+         "nij": "Fotokopi BPKB atawa STNK"
+        },
+        {
+         "id": "KTP pelapor",
+         "en": "Reporter's ID card",
+         "nij": "KTP pelapor"
+        }
+       ]
+      },
+      {
+       "title": {
+        "id": "BPKB",
+        "en": "Vehicle ownership book (BPKB)",
+        "nij": "BPKB"
+       },
+       "items": [
+        {
+         "id": "Iklan koran 2 kali",
+         "en": "Newspaper notice, 2 times",
+         "nij": "Iklan koran 2 kali"
+        },
+        {
+         "id": "Surat pernyataan hilang dari pemilik kendaraan bermeterai",
+         "en": "Vehicle owner's statement of loss with a duty stamp",
+         "nij": "Surat pernyataan nihau bara tempun kendaraan bameterai"
+        },
+        {
+         "id": "Fotokopi BPKB atau STNK",
+         "en": "Copy of the BPKB or STNK",
+         "nij": "Fotokopi BPKB atawa STNK"
+        },
+        {
+         "id": "Blangko pengecekan rangka dan mesin kendaraan dari Samsat",
+         "en": "Chassis and engine check form from Samsat",
+         "nij": "Blangko pengecekan rangka tuntang mesin kendaraan bara Samsat"
+        },
+        {
+         "id": "KTP pemilik BPKB dan pelapor (BAP)",
+         "en": "ID cards of the BPKB owner and the reporter (BAP)",
+         "nij": "KTP tempun BPKB tuntang pelapor (BAP)"
+        }
+       ]
+      },
+      {
+       "title": {
+        "id": "Ijazah",
+        "en": "School diploma",
+        "nij": "Ijazah"
+       },
+       "items": [
+        {
+         "id": "Surat keterangan dari sekolah atau universitas yang bersangkutan",
+         "en": "Letter from the school or university",
+         "nij": "Surat keterangan bara sakola atawa universitas je bahubungan"
+        },
+        {
+         "id": "Fotokopi KTP pelapor",
+         "en": "Copy of the reporter's ID card",
+         "nij": "Fotokopi KTP pelapor"
+        }
+       ]
+      },
+      {
+       "title": {
+        "id": "Akta kelahiran",
+        "en": "Birth certificate",
+        "nij": "Akta kalahiran"
+       },
+       "items": [
+        {
+         "id": "Fotokopi akta atau surat keterangan dari lurah, desa, atau Dukcapil",
+         "en": "Copy of the certificate or a letter from the village head, village office or civil registry (Dukcapil)",
+         "nij": "Fotokopi akta atawa surat keterangan bara lurah, lewu, atawa Dukcapil"
+        },
+        {
+         "id": "Fotokopi Kartu Keluarga (KK)",
+         "en": "Copy of the Family Card (KK)",
+         "nij": "Fotokopi Kartu Keluarga (KK)"
+        },
+        {
+         "id": "KTP pelapor",
+         "en": "Reporter's ID card",
+         "nij": "KTP pelapor"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "warning": {
+    "id": "Kehilangan BPKB atau sertifikat tanah harus dilaporkan langsung di kantor polisi. Memberikan keterangan palsu dapat dikenai sanksi pidana.",
+    "en": "A lost BPKB or land certificate must be reported in person at the police station. Giving false information may carry criminal penalties.",
+    "nij": "BPKB atawa sertifikat petak je nihau musti ilaporan langsung intu kantor polisi. Manenga keterangan palsu tau kena sanksi pidana."
+   },
+   "source": {
+    "id": "Sumber: papan persyaratan SPKT Polsek Kapuas Tengah. Persyaratan dapat berubah; konfirmasi ke petugas sebelum datang.",
+    "en": "Source: the requirements board at the Kapuas Tengah Police Sector SPKT. Requirements may change; confirm with an officer before coming.",
+    "nij": "Sumber: papan syarat SPKT Polsek Kapuas Tengah. Syarat tau baubah; konfirmasi akan petugas solake dumah."
+   }
+  },
+  {
+   "slug": "keramaian",
+   "sort": 2,
+   "active": true,
+   "bookable": true,
+   "icon": "flag",
+   "name": {
+    "id": "Izin keramaian",
+    "en": "Event permit",
+    "nij": "Izin keramaian"
+   },
+   "card": {
+    "id": "Persyaratan dan alur mengurus izin untuk acara warga yang mengundang banyak orang.",
+    "en": "Requirements and steps for a permit for community events that draw a crowd.",
+    "nij": "Syarat tuntang alur mangurus izin akan acara warga je mangundang are oloh."
+   },
+   "cta": {
+    "id": "Lihat panduan →",
+    "en": "See guide →",
+    "nij": "Ite panduan →"
+   },
+   "title": {
+    "id": "Surat Izin Keramaian (SIK)",
+    "en": "Event Permit (SIK)",
+    "nij": "Surat Izin Keramaian (SIK)"
+   },
+   "intro": {
+    "id": "Surat Izin Keramaian diperlukan untuk kegiatan masyarakat yang mengundang banyak orang, misalnya pesta pernikahan, hiburan, pertandingan olahraga, atau acara adat.",
+    "en": "An event permit is required for community activities that draw a crowd, such as weddings, entertainment, sports matches or customary ceremonies.",
+    "nij": "Surat Izin Keramaian iparlu akan kagiatan warga je mangundang are oloh, kilau pesta kawin, hiburan, pertandingan olahraga, atawa acara adat."
+   },
+   "note": {
+    "id": "",
+    "en": "",
+    "nij": ""
+   },
+   "sections": [
+    {
+     "type": "list",
+     "title": {
+      "id": "Persyaratan",
+      "en": "Requirements",
+      "nij": "Syarat"
+     },
+     "items": [
+      {
+       "id": "Surat pengantar atau rekomendasi dari Kepala Desa",
+       "en": "Cover letter or recommendation from the village head",
+       "nij": "Surat pengantar atawa rekomendasi bara Kepala Lewu"
+      },
+      {
+       "id": "Fotokopi KTP penanggung jawab sebanyak 1 lembar",
+       "en": "1 copy of the organizer's ID card",
+       "nij": "Fotokopi KTP penanggung jawab 1 lembar"
+      },
+      {
+       "id": "Meterai Rp10.000 sebanyak 1 lembar",
+       "en": "1 duty stamp of Rp10,000",
+       "nij": "Meterai Rp10.000 1 lembar"
+      }
+     ]
+    },
+    {
+     "type": "list",
+     "title": {
+      "id": "Alur",
+      "en": "Steps",
+      "nij": "Alur"
+     },
+     "items": [
+      {
+       "id": "Siapkan berkas persyaratan",
+       "en": "Prepare the required documents",
+       "nij": "Siapkan berkas syarat"
+      },
+      {
+       "id": "Booking kunjungan atau datang langsung ke Mako Polsek",
+       "en": "Book a visit or come directly to the Polsek station",
+       "nij": "Booking kunjungan atawa dumah langsung akan Mako Polsek"
+      },
+      {
+       "id": "Sampaikan rincian acara: waktu, tempat, dan perkiraan jumlah tamu",
+       "en": "Give the event details: time, place and expected number of guests",
+       "nij": "Sampaian rincian acara: wayah, eka, tuntang kira-kira jumlah tamu"
+      },
+      {
+       "id": "Petugas memeriksa berkas dan menerbitkan surat izin",
+       "en": "An officer checks the documents and issues the permit",
+       "nij": "Petugas mamariksa berkas tuntang manerbit surat izin"
+      },
+      {
+       "id": "Simpan surat izin selama acara berlangsung",
+       "en": "Keep the permit with you during the event",
+       "nij": "Simpan surat izin salama acara"
+      }
+     ]
+    }
+   ],
+   "warning": {
+    "id": "Ajukan beberapa hari sebelum acara. Persyaratan dapat berubah; konfirmasi ke petugas sebelum datang.",
+    "en": "Apply a few days before the event. Requirements may change; confirm with an officer before coming.",
+    "nij": "Ajukan pira andau solake acara. Syarat tau baubah; konfirmasi akan petugas solake dumah."
+   },
+   "source": {
+    "id": "Sumber: papan persyaratan Polsek Kapuas Tengah.",
+    "en": "Source: the Kapuas Tengah Police Sector requirements board.",
+    "nij": "Sumber: papan syarat Polsek Kapuas Tengah."
+   }
+  },
+  {
+   "slug": "pengaduan",
+   "sort": 3,
+   "active": true,
+   "bookable": true,
+   "icon": "chat",
+   "name": {
+    "id": "Pengaduan",
+    "en": "Reports",
+    "nij": "Pengaduan"
+   },
+   "card": {
+    "id": "Sampaikan laporan dan aspirasi secara online, lalu pantau statusnya.",
+    "en": "Send reports and concerns online, then track their status.",
+    "nij": "Sampaian laporan tuntang aspirasi online, limbah te pantau status."
+   },
+   "cta": {
+    "id": "Buat pengaduan →",
+    "en": "Make a report →",
+    "nij": "Gawi pengaduan →"
+   },
+   "title": {
+    "id": "Pengaduan masyarakat dan pendampingan",
+    "en": "Public reports and assistance",
+    "nij": "Pengaduan warga tuntang pendampingan"
+   },
+   "intro": {
+    "id": "Laporkan setiap kejadian yang merugikan Anda atau mengganggu keamanan lingkungan. Melapor ke polisi tidak dipungut biaya. Jika ada yang meminta bayaran, laporkan ke Propam.",
+    "en": "Report anything that harms you or disturbs the safety of your neighbourhood. Reporting to the police is free. If anyone asks for payment, report it to Propam.",
+    "nij": "Laporan genep kajadian je marugi keton atawa mangganggu kaamanan lingkungan. Malapor akan polisi dia bayar. Amun aton oloh je maminta bayaran, laporan akan Propam."
+   },
+   "note": {
+    "id": "",
+    "en": "",
+    "nij": ""
+   },
+   "sections": [
+    {
+     "type": "list",
+     "title": {
+      "id": "Kapan sebaiknya melapor",
+      "en": "When to report",
+      "nij": "Kareh labih bahalap malapor"
+     },
+     "items": [
+      {
+       "id": "Menjadi korban atau saksi tindak pidana: pencurian, penipuan, penganiayaan",
+       "en": "You are a victim of or witness to a crime: theft, fraud, assault",
+       "nij": "Manjadi korban atawa saksi tindak pidana: mangakal, mangkeme, mamukul"
+      },
+      {
+       "id": "Kekerasan dalam rumah tangga, kekerasan terhadap perempuan atau anak",
+       "en": "Domestic violence, violence against women or children",
+       "nij": "Kekerasan huang huma, kekerasan akan bawi atawa anak"
+      },
+      {
+       "id": "Konflik antarwarga atau sengketa yang berpotensi memanas",
+       "en": "Disputes between residents that could escalate",
+       "nij": "Konflik hapus warga atawa sengketa je tau manjadi panas"
+      },
+      {
+       "id": "Peredaran narkoba di lingkungan Anda",
+       "en": "Drug dealing in your neighbourhood",
+       "nij": "Peredaran narkoba intu lingkungan keton"
+      },
+      {
+       "id": "Pembakaran hutan dan lahan",
+       "en": "Burning of forest and land",
+       "nij": "Manunu hutan tuntang petak"
+      },
+      {
+       "id": "Keluhan atas pelayanan atau perilaku petugas",
+       "en": "Complaints about service or officer conduct",
+       "nij": "Keluhan akan pelayanan atawa perilaku petugas"
+      }
+     ]
+    },
+    {
+     "type": "list",
+     "title": {
+      "id": "Pendampingan yang tersedia",
+      "en": "Assistance available",
+      "nij": "Pendampingan je aton"
+     },
+     "items": [
+      {
+       "id": "Bhabinkamtibmas desa membantu mediasi masalah warga",
+       "en": "The village officer helps mediate residents' problems",
+       "nij": "Bhabinkamtibmas lewu manulung mediasi masalah warga"
+      },
+      {
+       "id": "Korban kekerasan terhadap perempuan dan anak dirujuk ke Unit PPA Polres Kapuas",
+       "en": "Victims of violence against women and children are referred to the PPA Unit of Polres Kapuas",
+       "nij": "Korban kekerasan akan bawi tuntang anak irujuk akan Unit PPA Polres Kapuas"
+      },
+      {
+       "id": "Pelapor berhak mendapat informasi perkembangan penanganan",
+       "en": "Reporters are entitled to updates on how their case is handled",
+       "nij": "Pelapor bahak mandinu informasi perkembangan penanganan"
+      }
+     ]
+    },
+    {
+     "type": "steps",
+     "title": {
+      "id": "Alur",
+      "en": "Steps",
+      "nij": "Alur"
+     },
+     "items": [
+      {
+       "id": "Datang ke SPKT atau isi formulir online",
+       "en": "Come to the SPKT or fill in the online form",
+       "nij": "Dumah akan SPKT atawa isi formulir online"
+      },
+      {
+       "id": "Laporan diterima dan dicatat, Anda menerima tanda bukti atau nomor tiket",
+       "en": "Your report is received and recorded; you get a receipt or ticket number",
+       "nij": "Laporan itarima tuntang isurat, keton tarima tanda bukti atawa nomor tiket"
+      },
+      {
+       "id": "Petugas menindaklanjuti: klarifikasi, mediasi, atau penyelidikan",
+       "en": "An officer follows up: clarification, mediation or investigation",
+       "nij": "Petugas manindaklanjuti: klarifikasi, mediasi, atawa penyelidikan"
+      },
+      {
+       "id": "Anda dihubungi untuk perkembangan penanganan",
+       "en": "You are contacted with updates",
+       "nij": "Keton ihubungi akan perkembangan penanganan"
+      }
+     ]
+    }
+   ],
+   "warning": {
+    "id": "Untuk kejadian yang sedang berlangsung, jangan menunggu. Hubungi 110.",
+    "en": "For anything happening right now, do not wait. Call 110.",
+    "nij": "Akan kajadian je hindai tuntang, ela manunggu. Hubungi 110."
+   },
+   "source": {
+    "id": "",
+    "en": "",
+    "nij": ""
+   }
+  },
+  {
+   "slug": "spkt",
+   "sort": 4,
+   "active": true,
+   "bookable": true,
+   "icon": "shield",
+   "name": {
+    "id": "SPKT",
+    "en": "",
+    "nij": ""
+   },
+   "card": {
+    "id": "Sentra Pelayanan Kepolisian Terpadu untuk laporan langsung di Mako Polsek, 24 jam.",
+    "en": "Integrated Police Service Center for in-person reports at the Polsek station, 24 hours.",
+    "nij": "Sentra Pelayanan Kepolisian Terpadu akan laporan langsung intu Mako Polsek, 24 jam."
+   },
+   "cta": {
+    "id": "Lihat info →",
+    "en": "See info →",
+    "nij": "Ite info →"
+   },
+   "title": {
+    "id": "Sentra Pelayanan Kepolisian Terpadu (SPKT)",
+    "en": "Integrated Police Service Center (SPKT)",
+    "nij": "Sentra Pelayanan Kepolisian Terpadu (SPKT)"
+   },
+   "intro": {
+    "id": "SPKT adalah pintu pelayanan utama di Mako Polsek Kapuas Tengah, Pujon. Petugas piket siaga setiap hari, 24 jam.",
+    "en": "The SPKT is the main service desk at the Kapuas Tengah Police Sector station in Pujon. Duty officers are on hand every day, 24 hours.",
+    "nij": "SPKT iete bawi pelayanan utama intu Mako Polsek Kapuas Tengah, Pujon. Petugas piket siaga genep andau, 24 jam."
+   },
+   "note": {
+    "id": "",
+    "en": "",
+    "nij": ""
+   },
+   "sections": [
+    {
+     "type": "list",
+     "title": {
+      "id": "Layanan di SPKT Polsek",
+      "en": "Services at the Polsek SPKT",
+      "nij": "Pelayanan intu SPKT Polsek"
+     },
+     "items": [
+      {
+       "id": "Penerimaan laporan polisi dan pengaduan",
+       "en": "Receiving police reports and complaints",
+       "nij": "Panarimaan laporan polisi tuntang pengaduan"
+      },
+      {
+       "id": "Surat Keterangan Tanda Lapor Kehilangan",
+       "en": "Loss Report Certificate",
+       "nij": "Surat Keterangan Tanda Lapor Kanihau"
+      },
+      {
+       "id": "Surat Izin Keramaian untuk kegiatan masyarakat",
+       "en": "Event permits for community activities",
+       "nij": "Surat Izin Keramaian akan kagiatan warga"
+      },
+      {
+       "id": "Bantuan polisi untuk keadaan darurat",
+       "en": "Police assistance in emergencies",
+       "nij": "Bantuan polisi akan kahakuyan"
+      },
+      {
+       "id": "Rujukan ke Bhabinkamtibmas desa",
+       "en": "Referral to the village officer",
+       "nij": "Rujukan akan Bhabinkamtibmas lewu"
+      }
+     ]
+    },
+    {
+     "type": "list",
+     "title": {
+      "id": "Jam layanan",
+      "en": "Service hours",
+      "nij": "Jam pelayanan"
+     },
+     "items": [
+      {
+       "id": "SPKT: setiap hari, 24 jam",
+       "en": "SPKT: every day, 24 hours",
+       "nij": "SPKT: genep andau, 24 jam"
+      },
+      {
+       "id": "Layanan administrasi: Senin–Jumat, 08.00–15.00 WIB",
+       "en": "Administrative services: Monday–Friday, 08.00–15.00 WIB",
+       "nij": "Pelayanan administrasi: Senin–Jumat, 08.00–15.00 WIB"
+      }
+     ]
+    }
+   ],
+   "warning": {
+    "id": "",
+    "en": "",
+    "nij": ""
+   },
+   "source": {
+    "id": "",
+    "en": "",
+    "nij": ""
+   }
+  }
+ ],
+ "villages": [
+  {
+   "sort": 1,
+   "name": "Bajuh",
+   "bhabin": ""
+  },
+  {
+   "sort": 2,
+   "name": "Barunang",
+   "bhabin": ""
+  },
+  {
+   "sort": 3,
+   "name": "Buhut Jaya",
+   "bhabin": ""
+  },
+  {
+   "sort": 4,
+   "name": "Hurung Pukung",
+   "bhabin": ""
+  },
+  {
+   "sort": 5,
+   "name": "Karukus",
+   "bhabin": ""
+  },
+  {
+   "sort": 6,
+   "name": "Kayu Bulan",
+   "bhabin": ""
+  },
+  {
+   "sort": 7,
+   "name": "Kota Baru",
+   "bhabin": ""
+  },
+  {
+   "sort": 8,
+   "name": "Manis",
+   "bhabin": ""
+  },
+  {
+   "sort": 9,
+   "name": "Marapit",
+   "bhabin": ""
+  },
+  {
+   "sort": 10,
+   "name": "Masaran",
+   "bhabin": ""
+  },
+  {
+   "sort": 11,
+   "name": "Penda Muntei",
+   "bhabin": ""
+  },
+  {
+   "sort": 12,
+   "name": "Pujon",
+   "bhabin": ""
+  },
+  {
+   "sort": 13,
+   "name": "Tapen",
+   "bhabin": ""
+  }
+ ],
+ "texts": [
+  {
+   "key": "Polsek Kapuas Tengah — Polres Kapuas, Polda Kalimantan Tengah",
+   "page": "Beranda",
+   "sort": 0,
+   "id": "Polsek Kapuas Tengah — Polres Kapuas, Polda Kalimantan Tengah",
+   "en": "Kapuas Tengah Police Sector — Polres Kapuas, Central Kalimantan Regional Police",
+   "nij": "Polsek Kapuas Tengah — Polres Kapuas, Polda Kalimantan Tengah"
+  },
+  {
+   "key": "Keadaan darurat? Hubungi Call Center Polri 110, gratis 24 jam",
+   "page": "Semua halaman",
+   "sort": 1,
+   "id": "Keadaan darurat? Hubungi Call Center Polri 110, gratis 24 jam",
+   "en": "Emergency? Call the Polri Call Center 110, free, 24 hours",
+   "nij": "Aton kahakuyan? Hubungi Call Center Polri 110, gratis 24 jam"
+  },
+  {
+   "key": "Keadaan darurat?",
+   "page": "Semua halaman",
+   "sort": 2,
+   "id": "Keadaan darurat?",
+   "en": "Emergency?",
+   "nij": "Aton kahakuyan?"
+  },
+  {
+   "key": "Telepon 110",
+   "page": "Semua halaman",
+   "sort": 3,
+   "id": "Telepon 110",
+   "en": "Call 110",
+   "nij": "Telepon 110"
+  },
+  {
+   "key": "Lambang Polri",
+   "page": "Semua halaman",
+   "sort": 4,
+   "id": "Lambang Polri",
+   "en": "Polri emblem",
+   "nij": "Lambang Polri"
+  },
+  {
+   "key": "Lambang Polsek Kapuas Tengah",
+   "page": "Semua halaman",
+   "sort": 5,
+   "id": "Lambang Polsek Kapuas Tengah",
+   "en": "Kapuas Tengah Police Sector emblem",
+   "nij": "Lambang Polsek Kapuas Tengah"
+  },
+  {
+   "key": "POLSEK KAPUAS TENGAH",
+   "page": "Semua halaman",
+   "sort": 6,
+   "id": "POLSEK KAPUAS TENGAH",
+   "en": "",
+   "nij": ""
+  },
+  {
+   "key": "Polres Kapuas · Polda Kalimantan Tengah",
+   "page": "Semua halaman",
+   "sort": 7,
+   "id": "Polres Kapuas · Polda Kalimantan Tengah",
+   "en": "Polres Kapuas · Central Kalimantan Police",
+   "nij": "Polres Kapuas · Polda Kalimantan Tengah"
+  },
+  {
+   "key": "Menu utama",
+   "page": "Semua halaman",
+   "sort": 8,
+   "id": "Menu utama",
+   "en": "Main menu",
+   "nij": "Menu utama"
+  },
+  {
+   "key": "Beranda",
+   "page": "Semua halaman",
+   "sort": 9,
+   "id": "Beranda",
+   "en": "Home",
+   "nij": "Huma"
+  },
+  {
+   "key": "Profil",
+   "page": "Semua halaman",
+   "sort": 10,
+   "id": "Profil",
+   "en": "Profile",
+   "nij": "Profil"
+  },
+  {
+   "key": "Layanan",
+   "page": "Semua halaman",
+   "sort": 11,
+   "id": "Layanan",
+   "en": "Services",
+   "nij": "Pelayanan"
+  },
+  {
+   "key": "Berita dan imbauan",
+   "page": "Semua halaman",
+   "sort": 12,
+   "id": "Berita dan imbauan",
+   "en": "News and advisories",
+   "nij": "Habar tuntang pesan"
+  },
+  {
+   "key": "Pencarian orang",
+   "page": "Semua halaman",
+   "sort": 13,
+   "id": "Pencarian orang",
+   "en": "Wanted and missing",
+   "nij": "Manggau oloh"
+  },
+  {
+   "key": "Peta wilayah",
+   "page": "Semua halaman",
+   "sort": 14,
+   "id": "Peta wilayah",
+   "en": "Area map",
+   "nij": "Peta wilayah"
+  },
+  {
+   "key": "Kontak",
+   "page": "Semua halaman",
+   "sort": 15,
+   "id": "Kontak",
+   "en": "Contact",
+   "nij": "Kontak"
+  },
+  {
+   "key": "Bahasa",
+   "page": "Semua halaman",
+   "sort": 16,
+   "id": "Bahasa",
+   "en": "Language",
+   "nij": "Basa"
+  },
+  {
+   "key": "Bahasa Dayak Ngaju",
+   "page": "Semua halaman",
+   "sort": 20,
+   "id": "Bahasa Dayak Ngaju",
+   "en": "Dayak Ngaju language",
+   "nij": "Basa Dayak Ngaju"
+  },
+  {
+   "key": "Buka menu",
+   "page": "Semua halaman",
+   "sort": 21,
+   "id": "Buka menu",
+   "en": "Open menu",
+   "nij": "Buka menu"
+  },
+  {
+   "key": "Sorotan utama",
+   "page": "Beranda",
+   "sort": 22,
+   "id": "Sorotan utama",
+   "en": "Highlights",
+   "nij": "Sorotan utama"
+  },
+  {
+   "key": "Bantu kami menemukan mereka.",
+   "page": "Beranda",
+   "sort": 23,
+   "id": "Bantu kami menemukan mereka.",
+   "en": "Help us find them.",
+   "nij": "Tulung ikei manggau ewen."
+  },
+  {
+   "key": "Slide sebelumnya",
+   "page": "Beranda",
+   "sort": 24,
+   "id": "Slide sebelumnya",
+   "en": "Previous slide",
+   "nij": "Slide solake"
+  },
+  {
+   "key": "Slide berikutnya",
+   "page": "Beranda",
+   "sort": 25,
+   "id": "Slide berikutnya",
+   "en": "Next slide",
+   "nij": "Slide limbah"
+  },
+  {
+   "key": "Foto ilustrasi",
+   "page": "Beranda",
+   "sort": 31,
+   "id": "Foto ilustrasi",
+   "en": "Illustrative photo",
+   "nij": "Foto ilustrasi"
+  },
+  {
+   "key": "Kontak dan bantuan cepat",
+   "page": "Beranda",
+   "sort": 32,
+   "id": "Kontak dan bantuan cepat",
+   "en": "Contacts and quick help",
+   "nij": "Kontak tuntang bantuan capat"
+  },
+  {
+   "key": "Kontak penting",
+   "page": "Beranda",
+   "sort": 33,
+   "id": "Kontak penting",
+   "en": "Key contacts",
+   "nij": "Kontak penting"
+  },
+  {
+   "key": "Telepon 110, darurat, gratis 24 jam",
+   "page": "Beranda",
+   "sort": 34,
+   "id": "Telepon 110, darurat, gratis 24 jam",
+   "en": "Call 110, emergency, free 24 hours",
+   "nij": "Telepon 110, kahakuyan, gratis 24 jam"
+  },
+  {
+   "key": "Darurat",
+   "page": "Beranda",
+   "sort": 35,
+   "id": "Darurat",
+   "en": "Emergency",
+   "nij": "Kahakuyan"
+  },
+  {
+   "key": "Call Center Polri, gratis 24 jam",
+   "page": "Beranda",
+   "sort": 36,
+   "id": "Call Center Polri, gratis 24 jam",
+   "en": "Polri Call Center, free 24 hours",
+   "nij": "Call Center Polri, gratis 24 jam"
+  },
+  {
+   "key": "Chat WhatsApp Polsek 0853 1551 5282",
+   "page": "Beranda",
+   "sort": 37,
+   "id": "Chat WhatsApp Polsek 0853 1551 5282",
+   "en": "Chat with the Polsek on WhatsApp 0853 1551 5282",
+   "nij": "Chat WhatsApp Polsek 0853 1551 5282"
+  },
+  {
+   "key": "WhatsApp Polsek",
+   "page": "Beranda",
+   "sort": 38,
+   "id": "WhatsApp Polsek",
+   "en": "Polsek WhatsApp",
+   "nij": "WhatsApp Polsek"
+  },
+  {
+   "key": "Informasi dan pelayanan",
+   "page": "Beranda",
+   "sort": 39,
+   "id": "Informasi dan pelayanan",
+   "en": "Information and services",
+   "nij": "Informasi tuntang pelayanan"
+  },
+  {
+   "key": "24 jam",
+   "page": "Beranda",
+   "sort": 40,
+   "id": "24 jam",
+   "en": "24 hours",
+   "nij": "24 jam"
+  },
+  {
+   "key": "SPKT",
+   "page": "Beranda",
+   "sort": 41,
+   "id": "SPKT",
+   "en": "",
+   "nij": ""
+  },
+  {
+   "key": "Laporan langsung di Mako Polsek, Pujon",
+   "page": "Beranda",
+   "sort": 42,
+   "id": "Laporan langsung di Mako Polsek, Pujon",
+   "en": "Report in person at the Polsek station, Pujon",
+   "nij": "Laporan langsung intu Mako Polsek, Pujon"
+  },
+  {
+   "key": "13 desa",
+   "page": "Beranda",
+   "sort": 43,
+   "id": "13 desa",
+   "en": "13 villages",
+   "nij": "13 lewu"
+  },
+  {
+   "key": "Bhabinkamtibmas",
+   "page": "Beranda",
+   "sort": 44,
+   "id": "Bhabinkamtibmas",
+   "en": "",
+   "nij": ""
+  },
+  {
+   "key": "Polisi terdekat di desa Anda",
+   "page": "Beranda",
+   "sort": 45,
+   "id": "Polisi terdekat di desa Anda",
+   "en": "The officer closest to your village",
+   "nij": "Polisi je paling tukep intu lewu keton"
+  },
+  {
+   "key": "Ada yang bisa kami bantu?",
+   "page": "Beranda",
+   "sort": 46,
+   "id": "Ada yang bisa kami bantu?",
+   "en": "How can we help?",
+   "nij": "Aton je tau ikei tulung?"
+  },
+  {
+   "key": "Ajukan",
+   "page": "Beranda",
+   "sort": 47,
+   "id": "Ajukan",
+   "en": "Apply",
+   "nij": "Ajukan"
+  },
+  {
+   "key": "Booking kunjungan ke Polsek",
+   "page": "Beranda",
+   "sort": 48,
+   "id": "Booking kunjungan ke Polsek",
+   "en": "Book a visit to the Polsek",
+   "nij": "Booking kunjungan akan Polsek"
+  },
+  {
+   "key": "Cek",
+   "page": "Beranda",
+   "sort": 49,
+   "id": "Cek",
+   "en": "Check",
+   "nij": "Cek"
+  },
+  {
+   "key": "Status pengaduan",
+   "page": "Beranda",
+   "sort": 50,
+   "id": "Status pengaduan",
+   "en": "Report status",
+   "nij": "Status pengaduan"
+  },
+  {
+   "key": "Lapor",
+   "page": "Beranda",
+   "sort": 51,
+   "id": "Lapor",
+   "en": "Report",
+   "nij": "Lapor"
+  },
+  {
+   "key": "Pengaduan masyarakat",
+   "page": "Beranda",
+   "sort": 52,
+   "id": "Pengaduan masyarakat",
+   "en": "Public complaints",
+   "nij": "Pengaduan warga"
+  },
+  {
+   "key": "Temukan",
+   "page": "Beranda",
+   "sort": 53,
+   "id": "Temukan",
+   "en": "Find",
+   "nij": "Gau"
+  },
+  {
+   "key": "Bhabinkamtibmas desa",
+   "page": "Beranda",
+   "sort": 54,
+   "id": "Bhabinkamtibmas desa",
+   "en": "Village police officer",
+   "nij": "Bhabinkamtibmas lewu"
+  },
+  {
+   "key": "Layanan kepolisian",
+   "page": "Beranda",
+   "sort": 55,
+   "id": "Layanan kepolisian",
+   "en": "Police services",
+   "nij": "Pelayanan kepolisian"
+  },
+  {
+   "key": "Semua layanan →",
+   "page": "Beranda",
+   "sort": 56,
+   "id": "Semua layanan →",
+   "en": "All services →",
+   "nij": "Uras pelayanan →"
+  },
+  {
+   "key": "Layanan lain",
+   "page": "Beranda",
+   "sort": 57,
+   "id": "Layanan lain",
+   "en": "Other services",
+   "nij": "Pelayanan beken"
+  },
+  {
+   "key": "Laporan polisi",
+   "page": "Beranda",
+   "sort": 58,
+   "id": "Laporan polisi",
+   "en": "Police report",
+   "nij": "Laporan polisi"
+  },
+  {
+   "key": "IMBAUAN · WASPADA KARHUTLA",
+   "page": "Beranda",
+   "sort": 59,
+   "id": "IMBAUAN · WASPADA KARHUTLA",
+   "en": "ADVISORY · FOREST AND LAND FIRE ALERT",
+   "nij": "PESAN · AWAS KARHUTLA"
+  },
+  {
+   "key": "Buka lahan tanpa bakar",
+   "page": "Beranda",
+   "sort": 60,
+   "id": "Buka lahan tanpa bakar",
+   "en": "Clear land without burning",
+   "nij": "Buka petak dia hapan manunu"
+  },
+  {
+   "key": "Musim kemarau rawan kebakaran hutan dan lahan. Jangan membersihkan lahan dengan cara membakar, dan segera laporkan titik api ke 110 atau Bhabinkamtibmas desa Anda.",
+   "page": "Beranda",
+   "sort": 61,
+   "id": "Musim kemarau rawan kebakaran hutan dan lahan. Jangan membersihkan lahan dengan cara membakar, dan segera laporkan titik api ke 110 atau Bhabinkamtibmas desa Anda.",
+   "en": "The dry season brings a high risk of forest and land fires. Do not clear land by burning, and report any hotspot right away to 110 or your village officer.",
+   "nij": "Musim pandang rawan apui intu hutan tuntang petak. Ela mambarasih petak hapan manunu, tuntang capat laporan titik apui akan 110 atawa Bhabinkamtibmas lewu keton."
+  },
+  {
+   "key": "Baca imbauan →",
+   "page": "Beranda",
+   "sort": 62,
+   "id": "Baca imbauan →",
+   "en": "Read advisory →",
+   "nij": "Baca pesan →"
+  },
+  {
+   "key": "Iptu Aldrin Oktavianto Renaldy, Kapolsek Kapuas Tengah",
+   "page": "Beranda",
+   "sort": 63,
+   "id": "Iptu Aldrin Oktavianto Renaldy, Kapolsek Kapuas Tengah",
+   "en": "",
+   "nij": ""
+  },
+  {
+   "key": "Iptu Aldrin Oktavianto Renaldy, S.Tr.K., S.I.K., M.H.",
+   "page": "Beranda",
+   "sort": 64,
+   "id": "Iptu Aldrin Oktavianto Renaldy, S.Tr.K., S.I.K., M.H.",
+   "en": "",
+   "nij": ""
+  },
+  {
+   "key": "Kapolsek Kapuas Tengah",
+   "page": "Beranda",
+   "sort": 65,
+   "id": "Kapolsek Kapuas Tengah",
+   "en": "Chief of Kapuas Tengah Police Sector",
+   "nij": "Kapolsek Kapuas Tengah"
+  },
+  {
+   "key": "Sambutan Kapolsek",
+   "page": "Beranda",
+   "sort": 66,
+   "id": "Sambutan Kapolsek",
+   "en": "Message from the Chief",
+   "nij": "Sambutan Kapolsek"
+  },
+  {
+   "key": "Hadir lebih dekat untuk masyarakat Kapuas Tengah",
+   "page": "Beranda",
+   "sort": 67,
+   "id": "Hadir lebih dekat untuk masyarakat Kapuas Tengah",
+   "en": "Closer to the people of Kapuas Tengah",
+   "nij": "Aton labih tukep akan warga Kapuas Tengah"
+  },
+  {
+   "key": "[Sambutan singkat Kapolsek, dua sampai tiga kalimat: komitmen pelayanan yang presisi dan humanis, keterbukaan, serta ajakan menjaga kamtibmas bersama.]",
+   "page": "Beranda",
+   "sort": 68,
+   "id": "[Sambutan singkat Kapolsek, dua sampai tiga kalimat: komitmen pelayanan yang presisi dan humanis, keterbukaan, serta ajakan menjaga kamtibmas bersama.]",
+   "en": "",
+   "nij": ""
+  },
+  {
+   "key": "Profil Polsek",
+   "page": "Beranda",
+   "sort": 69,
+   "id": "Profil Polsek",
+   "en": "Polsek profile",
+   "nij": "Profil Polsek"
+  },
+  {
+   "key": "Struktur organisasi",
+   "page": "Beranda",
+   "sort": 70,
+   "id": "Struktur organisasi",
+   "en": "Organization",
+   "nij": "Struktur organisasi"
+  },
+  {
+   "key": "Tugas dan fungsi",
+   "page": "Beranda",
+   "sort": 71,
+   "id": "Tugas dan fungsi",
+   "en": "Duties and functions",
+   "nij": "Tugas tuntang fungsi"
+  },
+  {
+   "key": "Wilayah hukum",
+   "page": "Beranda",
+   "sort": 72,
+   "id": "Wilayah hukum",
+   "en": "Jurisdiction",
+   "nij": "Wilayah hukum"
+  },
+  {
+   "key": "Berita dan kegiatan",
+   "page": "Beranda",
+   "sort": 73,
+   "id": "Berita dan kegiatan",
+   "en": "News and activities",
+   "nij": "Habar tuntang kagiatan"
+  },
+  {
+   "key": "Kabar terbaru dari Polsek Kapuas Tengah",
+   "page": "Beranda",
+   "sort": 74,
+   "id": "Kabar terbaru dari Polsek Kapuas Tengah",
+   "en": "Latest from Kapuas Tengah Police Sector",
+   "nij": "Habar taheta bara Polsek Kapuas Tengah"
+  },
+  {
+   "key": "Semua berita →",
+   "page": "Beranda",
+   "sort": 75,
+   "id": "Semua berita →",
+   "en": "All news →",
+   "nij": "Uras habar →"
+  },
+  {
+   "key": "Instagram",
+   "page": "Semua halaman",
+   "sort": 76,
+   "id": "Instagram",
+   "en": "",
+   "nij": ""
+  },
+  {
+   "key": "Ikuti kegiatan kami setiap hari",
+   "page": "Beranda",
+   "sort": 77,
+   "id": "Ikuti kegiatan kami setiap hari",
+   "en": "Follow our activities every day",
+   "nij": "Ikuti kagiatan ikei genep andau"
+  },
+  {
+   "key": "Kegiatan harian, imbauan kamtibmas, dan informasi layanan terbaru dari Polsek Kapuas Tengah.",
+   "page": "Beranda",
+   "sort": 78,
+   "id": "Kegiatan harian, imbauan kamtibmas, dan informasi layanan terbaru dari Polsek Kapuas Tengah.",
+   "en": "Daily activities, safety advisories and the latest service updates from Kapuas Tengah Police Sector.",
+   "nij": "Kagiatan genep andau, pesan kamtibmas, tuntang informasi pelayanan taheta bara Polsek Kapuas Tengah."
+  },
+  {
+   "key": "Kunjungi Instagram ↗",
+   "page": "Beranda",
+   "sort": 80,
+   "id": "Kunjungi Instagram ↗",
+   "en": "Visit Instagram ↗",
+   "nij": "Kunjungi Instagram ↗"
+  },
+  {
+   "key": "REELS",
+   "page": "Beranda",
+   "sort": 81,
+   "id": "REELS",
+   "en": "",
+   "nij": ""
+  },
+  {
+   "key": "Tonton video kegiatan 1",
+   "page": "Beranda",
+   "sort": 82,
+   "id": "Tonton video kegiatan 1",
+   "en": "Watch activity video 1",
+   "nij": "Ite video kagiatan 1"
+  },
+  {
+   "key": "Tonton video kegiatan 2",
+   "page": "Beranda",
+   "sort": 83,
+   "id": "Tonton video kegiatan 2",
+   "en": "Watch activity video 2",
+   "nij": "Ite video kagiatan 2"
+  },
+  {
+   "key": "Tonton video kegiatan 3",
+   "page": "Beranda",
+   "sort": 84,
+   "id": "Tonton video kegiatan 3",
+   "en": "Watch activity video 3",
+   "nij": "Ite video kagiatan 3"
+  },
+  {
+   "key": "Video Instagram",
+   "page": "Beranda",
+   "sort": 85,
+   "id": "Video Instagram",
+   "en": "Instagram video",
+   "nij": "Video Instagram"
+  },
+  {
+   "key": "Buka di Instagram ↗",
+   "page": "Beranda",
+   "sort": 86,
+   "id": "Buka di Instagram ↗",
+   "en": "Open in Instagram ↗",
+   "nij": "Buka intu Instagram ↗"
+  },
+  {
+   "key": "Tutup video",
+   "page": "Beranda",
+   "sort": 87,
+   "id": "Tutup video",
+   "en": "Close video",
+   "nij": "Tutup video"
+  },
+  {
+   "key": "Reels Instagram Polsek Kapuas Tengah",
+   "page": "Beranda",
+   "sort": 88,
+   "id": "Reels Instagram Polsek Kapuas Tengah",
+   "en": "Kapuas Tengah Police Sector Instagram Reels",
+   "nij": "Reels Instagram Polsek Kapuas Tengah"
+  },
+  {
+   "key": "Sampaikan laporan dan aspirasi Anda",
+   "page": "Beranda",
+   "sort": 89,
+   "id": "Sampaikan laporan dan aspirasi Anda",
+   "en": "Send us your reports and concerns",
+   "nij": "Sampaian laporan tuntang aspirasi keton"
+  },
+  {
+   "key": "Identitas boleh dikosongkan. Cantumkan nomor HP jika ingin memantau status pengaduan dengan nomor tiket.",
+   "page": "Beranda",
+   "sort": 90,
+   "id": "Identitas boleh dikosongkan. Cantumkan nomor HP jika ingin memantau status pengaduan dengan nomor tiket.",
+   "en": "You may leave your identity blank. Include a phone number if you want to track your report with a ticket number.",
+   "nij": "Identitas tau dia isi. Tulis nomor HP amun keton handak mamantau status pengaduan hapan nomor tiket."
+  },
+  {
+   "key": "Isi formulir pengaduan",
+   "page": "Beranda",
+   "sort": 91,
+   "id": "Isi formulir pengaduan",
+   "en": "Fill in the report form",
+   "nij": "Isi formulir pengaduan"
+  },
+  {
+   "key": "Terima nomor tiket",
+   "page": "Beranda",
+   "sort": 92,
+   "id": "Terima nomor tiket",
+   "en": "Get a ticket number",
+   "nij": "Tarima nomor tiket"
+  },
+  {
+   "key": "Pantau status penanganan",
+   "page": "Beranda",
+   "sort": 93,
+   "id": "Pantau status penanganan",
+   "en": "Track how it is handled",
+   "nij": "Pantau status penanganan"
+  },
+  {
+   "key": "Buat pengaduan",
+   "page": "Beranda",
+   "sort": 94,
+   "id": "Buat pengaduan",
+   "en": "Make a report",
+   "nij": "Gawi pengaduan"
+  },
+  {
+   "key": "Formulir ini bukan untuk keadaan darurat. Untuk kejadian yang sedang berlangsung, hubungi 110.",
+   "page": "Beranda",
+   "sort": 95,
+   "id": "Formulir ini bukan untuk keadaan darurat. Untuk kejadian yang sedang berlangsung, hubungi 110.",
+   "en": "This form is not for emergencies. For anything happening right now, call 110.",
+   "nij": "Formulir tuh dia akan kahakuyan. Akan kajadian je hindai tuntang, hubungi 110."
+  },
+  {
+   "key": "Cek status pengaduan",
+   "page": "Beranda",
+   "sort": 96,
+   "id": "Cek status pengaduan",
+   "en": "Check report status",
+   "nij": "Cek status pengaduan"
+  },
+  {
+   "key": "Nomor tiket",
+   "page": "Beranda",
+   "sort": 97,
+   "id": "Nomor tiket",
+   "en": "Ticket number",
+   "nij": "Nomor tiket"
+  },
+  {
+   "key": "Nomor HP yang didaftarkan",
+   "page": "Beranda",
+   "sort": 99,
+   "id": "Nomor HP yang didaftarkan",
+   "en": "Registered phone number",
+   "nij": "Nomor HP je inyurat"
+  },
+  {
+   "key": "Cek status",
+   "page": "Beranda",
+   "sort": 101,
+   "id": "Cek status",
+   "en": "Check status",
+   "nij": "Cek status"
+  },
+  {
+   "key": "Peta lokasi Mako Polsek Kapuas Tengah",
+   "page": "Beranda",
+   "sort": 102,
+   "id": "Peta lokasi Mako Polsek Kapuas Tengah",
+   "en": "Map of the Kapuas Tengah Police Sector station",
+   "nij": "Peta lokasi Mako Polsek Kapuas Tengah"
+  },
+  {
+   "key": "Mako Polsek Kapuas Tengah",
+   "page": "Beranda",
+   "sort": 103,
+   "id": "Mako Polsek Kapuas Tengah",
+   "en": "Kapuas Tengah Police Sector station",
+   "nij": "Mako Polsek Kapuas Tengah"
+  },
+  {
+   "key": "Petunjuk arah ↗",
+   "page": "Beranda",
+   "sort": 105,
+   "id": "Petunjuk arah ↗",
+   "en": "Directions ↗",
+   "nij": "Petunjuk jalan ↗"
+  },
+  {
+   "key": "Peta wilayah hukum",
+   "page": "Beranda",
+   "sort": 106,
+   "id": "Peta wilayah hukum",
+   "en": "Jurisdiction map",
+   "nij": "Peta wilayah hukum"
+  },
+  {
+   "key": "Kecamatan Kapuas Tengah",
+   "page": "Beranda",
+   "sort": 107,
+   "id": "Kecamatan Kapuas Tengah",
+   "en": "Kapuas Tengah District",
+   "nij": "Kecamatan Kapuas Tengah"
+  },
+  {
+   "key": "Luas wilayah",
+   "page": "Beranda",
+   "sort": 108,
+   "id": "Luas wilayah",
+   "en": "Area",
+   "nij": "Luas wilayah"
+  },
+  {
+   "key": "± 1.962 km²",
+   "page": "Beranda",
+   "sort": 109,
+   "id": "± 1.962 km²",
+   "en": "",
+   "nij": ""
+  },
+  {
+   "key": "Ibu kota",
+   "page": "Beranda",
+   "sort": 110,
+   "id": "Ibu kota",
+   "en": "Capital",
+   "nij": "Ibu kota"
+  },
+  {
+   "key": "Pujon",
+   "page": "Beranda",
+   "sort": 111,
+   "id": "Pujon",
+   "en": "",
+   "nij": ""
+  },
+  {
+   "key": "Desa",
+   "page": "Beranda",
+   "sort": 112,
+   "id": "Desa",
+   "en": "Villages",
+   "nij": "Lewu"
+  },
+  {
+   "key": "Desa dan Bhabinkamtibmas",
+   "page": "Beranda",
+   "sort": 113,
+   "id": "Desa dan Bhabinkamtibmas",
+   "en": "Villages and village officers",
+   "nij": "Lewu tuntang Bhabinkamtibmas"
+  },
+  {
+   "key": "Bhabinkamtibmas yang tercatat dalam pemberitaan: Bripka Hansen S.B. dan Aipda Fordiansyah. Penugasan per desa menunggu data resmi Polsek. Desa persiapan Pujon Sebrang dibentuk pada 2025.",
+   "page": "Beranda",
+   "sort": 114,
+   "id": "Bhabinkamtibmas yang tercatat dalam pemberitaan: Bripka Hansen S.B. dan Aipda Fordiansyah. Penugasan per desa menunggu data resmi Polsek. Desa persiapan Pujon Sebrang dibentuk pada 2025.",
+   "en": "Village officers named in news reports: Bripka Hansen S.B. and Aipda Fordiansyah. Assignments per village await official Polsek data. The preparatory village of Pujon Sebrang was formed in 2025.",
+   "nij": "Bhabinkamtibmas je tarsurat huang habar: Bripka Hansen S.B. tuntang Aipda Fordiansyah. Tugas genep lewu manunggu data resmi Polsek. Lewu persiapan Pujon Sebrang inyewut nampara 2025."
+  },
+  {
+   "key": "Kontak resmi",
+   "page": "Beranda",
+   "sort": 115,
+   "id": "Kontak resmi",
+   "en": "Official contacts",
+   "nij": "Kontak resmi"
+  },
+  {
+   "key": "Gratis, 24 jam",
+   "page": "Beranda",
+   "sort": 116,
+   "id": "Gratis, 24 jam",
+   "en": "Free, 24 hours",
+   "nij": "Gratis, 24 jam"
+  },
+  {
+   "key": "Alamat Mako",
+   "page": "Beranda",
+   "sort": 117,
+   "id": "Alamat Mako",
+   "en": "Station address",
+   "nij": "Alamat Mako"
+  },
+  {
+   "key": "Buka petunjuk arah ↗",
+   "page": "Beranda",
+   "sort": 118,
+   "id": "Buka petunjuk arah ↗",
+   "en": "Open directions ↗",
+   "nij": "Buka petunjuk jalan ↗"
+  },
+  {
+   "key": "Jam layanan",
+   "page": "Beranda",
+   "sort": 119,
+   "id": "Jam layanan",
+   "en": "Service hours",
+   "nij": "Jam pelayanan"
+  },
+  {
+   "key": "SPKT: setiap hari, 24 jam",
+   "page": "Beranda",
+   "sort": 120,
+   "id": "SPKT: setiap hari, 24 jam",
+   "en": "SPKT: every day, 24 hours",
+   "nij": "SPKT: genep andau, 24 jam"
+  },
+  {
+   "key": "Layanan administrasi: Senin–Jumat, 08.00–15.00 WIB",
+   "page": "Beranda",
+   "sort": 121,
+   "id": "Layanan administrasi: Senin–Jumat, 08.00–15.00 WIB",
+   "en": "Administrative services: Monday–Friday, 08.00–15.00 WIB",
+   "nij": "Pelayanan administrasi: Senin–Jumat, 08.00–15.00 WIB"
+  },
+  {
+   "key": "Informasi publik",
+   "page": "Beranda",
+   "sort": 122,
+   "id": "Informasi publik",
+   "en": "Public information",
+   "nij": "Informasi publik"
+  },
+  {
+   "key": "Bantu kami menemukan mereka",
+   "page": "Beranda",
+   "sort": 123,
+   "id": "Bantu kami menemukan mereka",
+   "en": "Help us find them",
+   "nij": "Tulung ikei manggau ewen"
+  },
+  {
+   "key": "POLRI",
+   "page": "Beranda",
+   "sort": 124,
+   "id": "POLRI",
+   "en": "",
+   "nij": ""
+  },
+  {
+   "key": "DAFTAR",
+   "page": "Beranda",
+   "sort": 125,
+   "id": "DAFTAR",
+   "en": "WANTED",
+   "nij": "DAFTAR"
+  },
+  {
+   "key": "PENCARIAN ORANG",
+   "page": "Beranda",
+   "sort": 126,
+   "id": "PENCARIAN ORANG",
+   "en": "PERSONS",
+   "nij": "PENCARIAN OLOH"
+  },
+  {
+   "key": "Lihat daftar DPO",
+   "page": "Beranda",
+   "sort": 127,
+   "id": "Lihat daftar DPO",
+   "en": "See the wanted list",
+   "nij": "Ite daftar DPO"
+  },
+  {
+   "key": "Daftar orang yang dicari polisi di wilayah hukum Polsek Kapuas Tengah.",
+   "page": "Beranda",
+   "sort": 128,
+   "id": "Daftar orang yang dicari polisi di wilayah hukum Polsek Kapuas Tengah.",
+   "en": "People sought by police in the Kapuas Tengah Police Sector jurisdiction.",
+   "nij": "Daftar oloh je igau polisi intu wilayah hukum Polsek Kapuas Tengah."
+  },
+  {
+   "key": "↳ Lihat daftar",
+   "page": "Beranda",
+   "sort": 129,
+   "id": "↳ Lihat daftar",
+   "en": "↳ See the list",
+   "nij": "↳ Ite daftar"
+  },
+  {
+   "key": "ORANG",
+   "page": "Beranda",
+   "sort": 130,
+   "id": "ORANG",
+   "en": "MISSING",
+   "nij": "OLOH"
+  },
+  {
+   "key": "HILANG",
+   "page": "Beranda",
+   "sort": 131,
+   "id": "HILANG",
+   "en": "PERSONS",
+   "nij": "NIHAU"
+  },
+  {
+   "key": "Lihat orang hilang",
+   "page": "Beranda",
+   "sort": 132,
+   "id": "Lihat orang hilang",
+   "en": "See missing persons",
+   "nij": "Ite oloh nihau"
+  },
+  {
+   "key": "Informasi warga yang dilaporkan hilang. Bantu kami mempertemukan mereka dengan keluarga.",
+   "page": "Beranda",
+   "sort": 133,
+   "id": "Informasi warga yang dilaporkan hilang. Bantu kami mempertemukan mereka dengan keluarga.",
+   "en": "Residents reported missing. Help us reunite them with their families.",
+   "nij": "Informasi warga je ilaporan nihau. Tulung ikei mampatemu ewen dengan kula."
+  },
+  {
+   "key": "Jika Anda melihat orang dalam daftar ini, jangan bertindak sendiri. Hubungi 110 atau Polsek Kapuas Tengah.",
+   "page": "Beranda",
+   "sort": 134,
+   "id": "Jika Anda melihat orang dalam daftar ini, jangan bertindak sendiri. Hubungi 110 atau Polsek Kapuas Tengah.",
+   "en": "If you see someone on this list, do not act alone. Call 110 or the Kapuas Tengah Police Sector.",
+   "nij": "Amun keton mite oloh huang daftar tuh, ela bagawi kabuat. Hubungi 110 atawa Polsek Kapuas Tengah."
+  },
+  {
+   "key": "Lambang Polda Kalimantan Tengah",
+   "page": "Semua halaman",
+   "sort": 135,
+   "id": "Lambang Polda Kalimantan Tengah",
+   "en": "Central Kalimantan Regional Police emblem",
+   "nij": "Lambang Polda Kalimantan Tengah"
+  },
+  {
+   "key": "Lambang Polres Kapuas",
+   "page": "Semua halaman",
+   "sort": 136,
+   "id": "Lambang Polres Kapuas",
+   "en": "Kapuas Resort Police emblem",
+   "nij": "Lambang Polres Kapuas"
+  },
+  {
+   "key": "Facebook",
+   "page": "Semua halaman",
+   "sort": 137,
+   "id": "Facebook",
+   "en": "",
+   "nij": ""
+  },
+  {
+   "key": "RASTRA SEWAKOTTAMA",
+   "page": "Semua halaman",
+   "sort": 138,
+   "id": "RASTRA SEWAKOTTAMA",
+   "en": "",
+   "nij": ""
+  },
+  {
+   "key": "Tautan footer",
+   "page": "Semua halaman",
+   "sort": 139,
+   "id": "Tautan footer",
+   "en": "Footer links",
+   "nij": "Tautan footer"
+  },
+  {
+   "key": "© 2026 Polsek Kapuas Tengah, Polres Kapuas",
+   "page": "Semua halaman",
+   "sort": 140,
+   "id": "© 2026 Polsek Kapuas Tengah, Polres Kapuas",
+   "en": "© 2026 Kapuas Tengah Police Sector, Kapuas Resort Police",
+   "nij": "© 2026 Polsek Kapuas Tengah, Polres Kapuas"
+  },
+  {
+   "key": "Darurat: 110 · WhatsApp: 0853 1551 5282",
+   "page": "Semua halaman",
+   "sort": 141,
+   "id": "Darurat: 110 · WhatsApp: 0853 1551 5282",
+   "en": "Emergency: 110 · WhatsApp: 0853 1551 5282",
+   "nij": "Kahakuyan: 110 · WhatsApp: 0853 1551 5282"
+  },
+  {
+   "key": "Formulir",
+   "page": "Semua halaman",
+   "sort": 142,
+   "id": "Formulir",
+   "en": "Form",
+   "nij": "Formulir"
+  },
+  {
+   "key": "FORMULIR",
+   "page": "Semua halaman",
+   "sort": 143,
+   "id": "FORMULIR",
+   "en": "FORM",
+   "nij": "FORMULIR"
+  },
+  {
+   "key": "Tutup",
+   "page": "Semua halaman",
+   "sort": 144,
+   "id": "Tutup",
+   "en": "Close",
+   "nij": "Tutup"
+  },
+  {
+   "key": "Pesan jadwal datang ke Mako Polsek agar tidak menunggu lama. Anda akan menerima nomor tiket.",
+   "page": "Semua halaman",
+   "sort": 145,
+   "id": "Pesan jadwal datang ke Mako Polsek agar tidak menunggu lama. Anda akan menerima nomor tiket.",
+   "en": "Book a time to come to the Polsek station so you won't wait long. You will receive a ticket number.",
+   "nij": "Pesan jadwal dumah akan Mako Polsek mangat dia manunggu tahi. Keton tarima nomor tiket."
+  },
+  {
+   "key": "Nama lengkap",
+   "page": "Semua halaman",
+   "sort": 146,
+   "id": "Nama lengkap",
+   "en": "Full name",
+   "nij": "Aran lengkap"
+  },
+  {
+   "key": "Nomor HP (WhatsApp)",
+   "page": "Semua halaman",
+   "sort": 147,
+   "id": "Nomor HP (WhatsApp)",
+   "en": "Phone number (WhatsApp)",
+   "nij": "Nomor HP (WhatsApp)"
+  },
+  {
+   "key": "Tanggal kunjungan",
+   "page": "Semua halaman",
+   "sort": 148,
+   "id": "Tanggal kunjungan",
+   "en": "Visit date",
+   "nij": "Tanggal kunjungan"
+  },
+  {
+   "key": "Jam",
+   "page": "Semua halaman",
+   "sort": 149,
+   "id": "Jam",
+   "en": "Time",
+   "nij": "Jam"
+  },
+  {
+   "key": "Catatan (opsional)",
+   "page": "Semua halaman",
+   "sort": 156,
+   "id": "Catatan (opsional)",
+   "en": "Notes (optional)",
+   "nij": "Catatan (tau dia isi)"
+  },
+  {
+   "key": "Sampaikan laporan, aspirasi, atau pertanyaan. Identitas boleh dikosongkan, tetapi cantumkan nomor HP jika ingin dihubungi kembali. Untuk keadaan darurat, hubungi 110.",
+   "page": "Semua halaman",
+   "sort": 157,
+   "id": "Sampaikan laporan, aspirasi, atau pertanyaan. Identitas boleh dikosongkan, tetapi cantumkan nomor HP jika ingin dihubungi kembali. Untuk keadaan darurat, hubungi 110.",
+   "en": "Send a report, concern or question. You may leave your identity blank, but include a phone number if you want us to contact you. In an emergency, call 110.",
+   "nij": "Sampaian laporan, aspirasi, atawa pisek. Identitas tau dia isi, tapi tulis nomor HP amun handak ihubungi tinai. Amun aton kahakuyan, hubungi 110."
+  },
+  {
+   "key": "Kategori",
+   "page": "Semua halaman",
+   "sort": 158,
+   "id": "Kategori",
+   "en": "Category",
+   "nij": "Kategori"
+  },
+  {
+   "key": "Pilih…",
+   "page": "Semua halaman",
+   "sort": 159,
+   "id": "Pilih…",
+   "en": "Choose…",
+   "nij": "Pilih…"
+  },
+  {
+   "key": "Pertanyaan layanan",
+   "page": "Semua halaman",
+   "sort": 160,
+   "id": "Pertanyaan layanan",
+   "en": "Question about services",
+   "nij": "Pisek pelayanan"
+  },
+  {
+   "key": "Tindak pidana (pencurian, penipuan, penganiayaan)",
+   "page": "Semua halaman",
+   "sort": 161,
+   "id": "Tindak pidana (pencurian, penipuan, penganiayaan)",
+   "en": "Crime (theft, fraud, assault)",
+   "nij": "Tindak pidana (mangakal, mangkeme, mamukul)"
+  },
+  {
+   "key": "Kekerasan terhadap perempuan atau anak",
+   "page": "Semua halaman",
+   "sort": 162,
+   "id": "Kekerasan terhadap perempuan atau anak",
+   "en": "Violence against women or children",
+   "nij": "Kekerasan akan bawi atawa anak"
+  },
+  {
+   "key": "Gangguan kamtibmas atau konflik warga",
+   "page": "Semua halaman",
+   "sort": 163,
+   "id": "Gangguan kamtibmas atau konflik warga",
+   "en": "Public order disturbance or community conflict",
+   "nij": "Gangguan kamtibmas atawa konflik warga"
+  },
+  {
+   "key": "Narkoba",
+   "page": "Semua halaman",
+   "sort": 164,
+   "id": "Narkoba",
+   "en": "Drugs",
+   "nij": "Narkoba"
+  },
+  {
+   "key": "Kebakaran hutan dan lahan",
+   "page": "Semua halaman",
+   "sort": 165,
+   "id": "Kebakaran hutan dan lahan",
+   "en": "Forest and land fire",
+   "nij": "Apui intu hutan tuntang petak"
+  },
+  {
+   "key": "Orang hilang",
+   "page": "Semua halaman",
+   "sort": 166,
+   "id": "Orang hilang",
+   "en": "Missing person",
+   "nij": "Oloh nihau"
+  },
+  {
+   "key": "Pelayanan atau perilaku petugas",
+   "page": "Semua halaman",
+   "sort": 167,
+   "id": "Pelayanan atau perilaku petugas",
+   "en": "Service or officer conduct",
+   "nij": "Pelayanan atawa perilaku petugas"
+  },
+  {
+   "key": "Lainnya",
+   "page": "Semua halaman",
+   "sort": 168,
+   "id": "Lainnya",
+   "en": "Other",
+   "nij": "Beken"
+  },
+  {
+   "key": "Ceritakan apa yang terjadi atau yang ingin ditanyakan",
+   "page": "Semua halaman",
+   "sort": 169,
+   "id": "Ceritakan apa yang terjadi atau yang ingin ditanyakan",
+   "en": "Tell us what happened or what you want to ask",
+   "nij": "Kesah narai je kajadian atawa je handak isek"
+  },
+  {
+   "key": "Apa, kapan, di mana, siapa yang terlibat",
+   "page": "Semua halaman",
+   "sort": 170,
+   "id": "Apa, kapan, di mana, siapa yang terlibat",
+   "en": "What, when, where, who was involved",
+   "nij": "Narai, kareh, intu kueh, eweh je umba"
+  },
+  {
+   "key": "Desa (opsional)",
+   "page": "Semua halaman",
+   "sort": 171,
+   "id": "Desa (opsional)",
+   "en": "Village (optional)",
+   "nij": "Lewu (tau dia isi)"
+  },
+  {
+   "key": "Nama (opsional)",
+   "page": "Semua halaman",
+   "sort": 172,
+   "id": "Nama (opsional)",
+   "en": "Name (optional)",
+   "nij": "Aran (tau dia isi)"
+  },
+  {
+   "key": "Nomor HP (opsional)",
+   "page": "Semua halaman",
+   "sort": 173,
+   "id": "Nomor HP (opsional)",
+   "en": "Phone number (optional)",
+   "nij": "Nomor HP (tau dia isi)"
+  },
+  {
+   "key": "Foto atau video pendukung (opsional, maks. 5 berkas, 50 MB per berkas)",
+   "page": "Semua halaman",
+   "sort": 174,
+   "id": "Foto atau video pendukung (opsional, maks. 5 berkas, 50 MB per berkas)",
+   "en": "Supporting photo or video (optional, up to 5 files, 50 MB each)",
+   "nij": "Foto atawa video pendukung (tau dia isi, maks. 5 berkas, 50 MB genep berkas)"
+  },
+  {
+   "key": "Dapatkan nomor tiket",
+   "page": "Semua halaman",
+   "sort": 175,
+   "id": "Dapatkan nomor tiket",
+   "en": "Get a ticket number",
+   "nij": "Dapatkan nomor tiket"
+  },
+  {
+   "key": "NOMOR TIKET ANDA",
+   "page": "Semua halaman",
+   "sort": 176,
+   "id": "NOMOR TIKET ANDA",
+   "en": "YOUR TICKET NUMBER",
+   "nij": "NOMOR TIKET KETON"
+  },
+  {
+   "key": "Data Anda sudah tercatat di sistem Polsek dengan status",
+   "page": "Semua halaman",
+   "sort": 177,
+   "id": "Data Anda sudah tercatat di sistem Polsek dengan status",
+   "en": "Your details are recorded in the Polsek system with the status",
+   "nij": "Data keton jari tarsurat huang sistem Polsek dengan status"
+  },
+  {
+   "key": "diterima",
+   "page": "Semua halaman",
+   "sort": 178,
+   "id": "diterima",
+   "en": "received",
+   "nij": "itarima"
+  },
+  {
+   "key": ". Simpan nomor tiket ini untuk cek status. Anda juga bisa mengabari petugas lewat WhatsApp.",
+   "page": "Semua halaman",
+   "sort": 179,
+   "id": ". Simpan nomor tiket ini untuk cek status. Anda juga bisa mengabari petugas lewat WhatsApp.",
+   "en": ". Keep this ticket number to check the status. You can also let an officer know via WhatsApp.",
+   "nij": ". Simpan nomor tiket tuh akan cek status. Keton kea tau mangabari petugas hapan WhatsApp."
+  },
+  {
+   "key": "Kabari lewat WhatsApp (opsional)",
+   "page": "Semua halaman",
+   "sort": 180,
+   "id": "Kabari lewat WhatsApp (opsional)",
+   "en": "Notify via WhatsApp (optional)",
+   "nij": "Kabari hapan WhatsApp (tau dia)"
+  },
+  {
+   "key": "Profil — Polsek Kapuas Tengah",
+   "page": "Profil",
+   "sort": 181,
+   "id": "Profil — Polsek Kapuas Tengah",
+   "en": "Profile — Kapuas Tengah Police Sector",
+   "nij": "Profil — Polsek Kapuas Tengah"
+  },
+  {
+   "key": "/ Profil",
+   "page": "Profil",
+   "sort": 182,
+   "id": "/ Profil",
+   "en": "/ Profile",
+   "nij": "/ Profil"
+  },
+  {
+   "key": "Melindungi, mengayomi, dan melayani masyarakat Kapuas Tengah",
+   "page": "Profil",
+   "sort": 183,
+   "id": "Melindungi, mengayomi, dan melayani masyarakat Kapuas Tengah",
+   "en": "Protecting, safeguarding and serving the people of Kapuas Tengah",
+   "nij": "Malindungi, mangayomi, tuntang malayani warga Kapuas Tengah"
+  },
+  {
+   "key": "Kepolisian Sektor Kapuas Tengah adalah unsur pelaksana Polres Kapuas, Polda Kalimantan Tengah, yang bertanggung jawab atas keamanan dan ketertiban di Kecamatan Kapuas Tengah, dengan Mako di Desa Pujon.",
+   "page": "Profil",
+   "sort": 184,
+   "id": "Kepolisian Sektor Kapuas Tengah adalah unsur pelaksana Polres Kapuas, Polda Kalimantan Tengah, yang bertanggung jawab atas keamanan dan ketertiban di Kecamatan Kapuas Tengah, dengan Mako di Desa Pujon.",
+   "en": "Kapuas Tengah Police Sector is an operating unit of Polres Kapuas, Central Kalimantan Regional Police, responsible for safety and order in Kapuas Tengah District, with its station in Pujon village.",
+   "nij": "Kepolisian Sektor Kapuas Tengah iete unsur pelaksana Polres Kapuas, Polda Kalimantan Tengah, je batanggung jawab akan kaamanan tuntang katertiban intu Kecamatan Kapuas Tengah, dengan Mako intu Lewu Pujon."
+  },
+  {
+   "key": "Desa binaan",
+   "page": "Profil",
+   "sort": 185,
+   "id": "Desa binaan",
+   "en": "Villages served",
+   "nij": "Lewu binaan"
+  },
+  {
+   "key": "Luas wilayah hukum",
+   "page": "Profil",
+   "sort": 186,
+   "id": "Luas wilayah hukum",
+   "en": "Jurisdiction area",
+   "nij": "Luas wilayah hukum"
+  },
+  {
+   "key": "Layanan SPKT",
+   "page": "Profil",
+   "sort": 187,
+   "id": "Layanan SPKT",
+   "en": "SPKT service",
+   "nij": "Pelayanan SPKT"
+  },
+  {
+   "key": "Call Center Polri, gratis",
+   "page": "Profil",
+   "sort": 188,
+   "id": "Call Center Polri, gratis",
+   "en": "Polri Call Center, free",
+   "nij": "Call Center Polri, gratis"
+  },
+  {
+   "key": "Tugas pokok",
+   "page": "Profil",
+   "sort": 189,
+   "id": "Tugas pokok",
+   "en": "Core duties",
+   "nij": "Tugas pokok"
+  },
+  {
+   "key": "Tiga tugas pokok Polri",
+   "page": "Profil",
+   "sort": 190,
+   "id": "Tiga tugas pokok Polri",
+   "en": "The three core duties of Polri",
+   "nij": "Telu tugas pokok Polri"
+  },
+  {
+   "key": "Memelihara keamanan dan ketertiban masyarakat",
+   "page": "Profil",
+   "sort": 191,
+   "id": "Memelihara keamanan dan ketertiban masyarakat",
+   "en": "Maintaining public safety and order",
+   "nij": "Mahaga kaamanan tuntang katertiban warga"
+  },
+  {
+   "key": "Menegakkan hukum",
+   "page": "Profil",
+   "sort": 192,
+   "id": "Menegakkan hukum",
+   "en": "Enforcing the law",
+   "nij": "Manegakkan hukum"
+  },
+  {
+   "key": "Memberikan perlindungan, pengayoman, dan pelayanan kepada masyarakat",
+   "page": "Profil",
+   "sort": 193,
+   "id": "Memberikan perlindungan, pengayoman, dan pelayanan kepada masyarakat",
+   "en": "Providing protection, guidance and service to the public",
+   "nij": "Manenga perlindungan, pengayoman, tuntang pelayanan akan warga"
+  },
+  {
+   "key": "Berdasarkan Pasal 13 Undang-Undang Nomor 2 Tahun 2002 tentang Kepolisian Negara Republik Indonesia.",
+   "page": "Profil",
+   "sort": 194,
+   "id": "Berdasarkan Pasal 13 Undang-Undang Nomor 2 Tahun 2002 tentang Kepolisian Negara Republik Indonesia.",
+   "en": "Under Article 13 of Law No. 2 of 2002 on the Indonesian National Police.",
+   "nij": "Manurut Pasal 13 Undang-Undang Nomor 2 Nyelu 2002 tentang Kepolisian Negara Republik Indonesia."
+  },
+  {
+   "key": "Pimpinan dan personel",
+   "page": "Profil",
+   "sort": 195,
+   "id": "Pimpinan dan personel",
+   "en": "Leadership and personnel",
+   "nij": "Pimpinan tuntang personel"
+  },
+  {
+   "key": "Wakil pimpinan",
+   "page": "Profil",
+   "sort": 196,
+   "id": "Wakil pimpinan",
+   "en": "Deputy",
+   "nij": "Wakil pimpinan"
+  },
+  {
+   "key": "Kepala unit dan seksi",
+   "page": "Profil",
+   "sort": 197,
+   "id": "Kepala unit dan seksi",
+   "en": "Unit and section heads",
+   "nij": "Kepala unit tuntang seksi"
+  },
+  {
+   "key": "Susunan jabatan mengikuti pola organisasi Polsek. Nama personel selain Kapolsek, Wakapolsek, dan dua Bhabinkamtibmas menunggu data resmi Polsek.",
+   "page": "Profil",
+   "sort": 198,
+   "id": "Susunan jabatan mengikuti pola organisasi Polsek. Nama personel selain Kapolsek, Wakapolsek, dan dua Bhabinkamtibmas menunggu data resmi Polsek.",
+   "en": "Positions follow the standard Polsek structure. Names other than the Chief, Deputy Chief and two village officers await official Polsek data.",
+   "nij": "Susunan jabatan manurut pola organisasi Polsek. Aran personel salain Kapolsek, Wakapolsek, tuntang due Bhabinkamtibmas manunggu data resmi Polsek."
+  },
+  {
+   "key": "Booking kunjungan, kirim pengaduan, atau hubungi kami langsung.",
+   "page": "Profil",
+   "sort": 199,
+   "id": "Booking kunjungan, kirim pengaduan, atau hubungi kami langsung.",
+   "en": "Book a visit, send a report, or contact us directly.",
+   "nij": "Booking kunjungan, kirim pengaduan, atawa hubungi ikei langsung."
+  },
+  {
+   "key": "Booking kunjungan",
+   "page": "Profil",
+   "sort": 200,
+   "id": "Booking kunjungan",
+   "en": "Book a visit",
+   "nij": "Booking kunjungan"
+  },
+  {
+   "key": "Layanan — Polsek Kapuas Tengah",
+   "page": "Layanan",
+   "sort": 201,
+   "id": "Layanan — Polsek Kapuas Tengah",
+   "en": "Services — Kapuas Tengah Police Sector",
+   "nij": "Pelayanan — Polsek Kapuas Tengah"
+  },
+  {
+   "key": "/ Layanan",
+   "page": "Layanan",
+   "sort": 202,
+   "id": "/ Layanan",
+   "en": "/ Services",
+   "nij": "/ Pelayanan"
+  },
+  {
+   "key": "Urus keperluan Anda tanpa bolak-balik",
+   "page": "Layanan",
+   "sort": 203,
+   "id": "Urus keperluan Anda tanpa bolak-balik",
+   "en": "Get things done without repeat trips",
+   "nij": "Urus keperluan keton dia bolak-balik"
+  },
+  {
+   "key": "Pilih layanan, siapkan berkas dari rumah, lalu booking jam kunjungan ke Mako Polsek.",
+   "page": "Layanan",
+   "sort": 204,
+   "id": "Pilih layanan, siapkan berkas dari rumah, lalu booking jam kunjungan ke Mako Polsek.",
+   "en": "Choose a service, prepare your documents at home, then book a time to visit the Polsek station.",
+   "nij": "Pilih pelayanan, siapkan berkas bara huma, limbah te booking jam kunjungan akan Mako Polsek."
+  },
+  {
+   "key": "Langkah berikutnya",
+   "page": "Layanan",
+   "sort": 205,
+   "id": "Langkah berikutnya",
+   "en": "Next steps",
+   "nij": "Langkah limbah"
+  },
+  {
+   "key": "Pilih hari dan jam datang ke Polsek, dapatkan nomor tiket",
+   "page": "Layanan",
+   "sort": 206,
+   "id": "Pilih hari dan jam datang ke Polsek, dapatkan nomor tiket",
+   "en": "Choose a day and time to come to the Polsek and get a ticket number",
+   "nij": "Pilih andau tuntang jam dumah akan Polsek, dapatkan nomor tiket"
+  },
+  {
+   "key": "Kirim pertanyaan atau pengaduan",
+   "page": "Layanan",
+   "sort": 207,
+   "id": "Kirim pertanyaan atau pengaduan",
+   "en": "Send a question or report",
+   "nij": "Kirim pisek atawa pengaduan"
+  },
+  {
+   "key": "Isi formulir online, dapatkan nomor tiket",
+   "page": "Layanan",
+   "sort": 208,
+   "id": "Isi formulir online, dapatkan nomor tiket",
+   "en": "Fill in the online form and get a ticket number",
+   "nij": "Isi formulir online, dapatkan nomor tiket"
+  },
+  {
+   "key": "Chat WhatsApp Polsek",
+   "page": "Layanan",
+   "sort": 209,
+   "id": "Chat WhatsApp Polsek",
+   "en": "Chat with the Polsek on WhatsApp",
+   "nij": "Chat WhatsApp Polsek"
+  },
+  {
+   "key": "Untuk pertanyaan cepat",
+   "page": "Layanan",
+   "sort": 210,
+   "id": "Untuk pertanyaan cepat",
+   "en": "For quick questions",
+   "nij": "Akan pisek capat"
+  },
+  {
+   "key": "Berita dan imbauan — Polsek Kapuas Tengah",
+   "page": "Berita dan imbauan",
+   "sort": 211,
+   "id": "Berita dan imbauan — Polsek Kapuas Tengah",
+   "en": "News and advisories — Kapuas Tengah Police Sector",
+   "nij": "Habar tuntang pesan — Polsek Kapuas Tengah"
+  },
+  {
+   "key": "/ Berita dan imbauan",
+   "page": "Berita dan imbauan",
+   "sort": 212,
+   "id": "/ Berita dan imbauan",
+   "en": "/ News and advisories",
+   "nij": "/ Habar tuntang pesan"
+  },
+  {
+   "key": "Kabar dan imbauan dari Polsek Kapuas Tengah",
+   "page": "Berita dan imbauan",
+   "sort": 213,
+   "id": "Kabar dan imbauan dari Polsek Kapuas Tengah",
+   "en": "News and advisories from Kapuas Tengah Police Sector",
+   "nij": "Habar tuntang pesan bara Polsek Kapuas Tengah"
+  },
+  {
+   "key": "Kegiatan kepolisian, informasi kamtibmas, dan imbauan untuk masyarakat Kecamatan Kapuas Tengah.",
+   "page": "Berita dan imbauan",
+   "sort": 214,
+   "id": "Kegiatan kepolisian, informasi kamtibmas, dan imbauan untuk masyarakat Kecamatan Kapuas Tengah.",
+   "en": "Police activities, public safety information and advisories for the people of Kapuas Tengah District.",
+   "nij": "Kagiatan kepolisian, informasi kamtibmas, tuntang pesan akan warga Kecamatan Kapuas Tengah."
+  },
+  {
+   "key": "Terbaru",
+   "page": "Berita dan imbauan",
+   "sort": 215,
+   "id": "Terbaru",
+   "en": "Latest",
+   "nij": "Taheta"
+  },
+  {
+   "key": "Saring kategori",
+   "page": "Berita dan imbauan",
+   "sort": 216,
+   "id": "Saring kategori",
+   "en": "Filter by category",
+   "nij": "Saring kategori"
+  },
+  {
+   "key": "Semua",
+   "page": "Berita dan imbauan",
+   "sort": 217,
+   "id": "Semua",
+   "en": "All",
+   "nij": "Uras"
+  },
+  {
+   "key": "Berita",
+   "page": "Berita dan imbauan",
+   "sort": 218,
+   "id": "Berita",
+   "en": "News",
+   "nij": "Habar"
+  },
+  {
+   "key": "Imbauan",
+   "page": "Berita dan imbauan",
+   "sort": 219,
+   "id": "Imbauan",
+   "en": "Advisory",
+   "nij": "Pesan"
+  },
+  {
+   "key": "Berita kegiatan bersumber dari analisnews.co.id. Kirim informasi kegiatan atau koreksi melalui WhatsApp Polsek.",
+   "page": "Berita dan imbauan",
+   "sort": 220,
+   "id": "Berita kegiatan bersumber dari analisnews.co.id. Kirim informasi kegiatan atau koreksi melalui WhatsApp Polsek.",
+   "en": "Activity news is sourced from analisnews.co.id. Send activity information or corrections via the Polsek WhatsApp.",
+   "nij": "Habar kagiatan bara analisnews.co.id. Kirim informasi kagiatan atawa koreksi hapan WhatsApp Polsek."
+  },
+  {
+   "key": "Pencarian orang — Polsek Kapuas Tengah",
+   "page": "Pencarian orang",
+   "sort": 221,
+   "id": "Pencarian orang — Polsek Kapuas Tengah",
+   "en": "Wanted and missing — Kapuas Tengah Police Sector",
+   "nij": "Manggau oloh — Polsek Kapuas Tengah"
+  },
+  {
+   "key": "/ Pencarian orang",
+   "page": "Pencarian orang",
+   "sort": 222,
+   "id": "/ Pencarian orang",
+   "en": "/ Wanted and missing",
+   "nij": "/ Manggau oloh"
+  },
+  {
+   "key": "Daftar orang yang dicari polisi dan warga yang dilaporkan hilang di wilayah hukum Polsek Kapuas Tengah. Informasi sekecil apa pun dari Anda bisa membantu.",
+   "page": "Pencarian orang",
+   "sort": 223,
+   "id": "Daftar orang yang dicari polisi dan warga yang dilaporkan hilang di wilayah hukum Polsek Kapuas Tengah. Informasi sekecil apa pun dari Anda bisa membantu.",
+   "en": "People wanted by police and residents reported missing in the Kapuas Tengah Police Sector jurisdiction. Any information you have, however small, can help.",
+   "nij": "Daftar oloh je igau polisi tuntang warga je ilaporan nihau intu wilayah hukum Polsek Kapuas Tengah. Informasi kurik kilau kueh bara keton tau manulung."
+  },
+  {
+   "key": "Laporkan orang hilang",
+   "page": "Pencarian orang",
+   "sort": 224,
+   "id": "Laporkan orang hilang",
+   "en": "Report a missing person",
+   "nij": "Laporan oloh nihau"
+  },
+  {
+   "key": "Merah",
+   "page": "Pencarian orang",
+   "sort": 225,
+   "id": "Merah",
+   "en": "Red",
+   "nij": "Bahandang"
+  },
+  {
+   "key": "Daftar Pencarian Orang (DPO)",
+   "page": "Pencarian orang",
+   "sort": 226,
+   "id": "Daftar Pencarian Orang (DPO)",
+   "en": "Wanted Persons List (DPO)",
+   "nij": "Daftar Pencarian Oloh (DPO)"
+  },
+  {
+   "key": "Orang yang telah ditetapkan sebagai tersangka atau diduga kuat terlibat tindak pidana, lalu tidak diketahui keberadaannya atau tidak memenuhi panggilan penyidik secara sah.",
+   "page": "Pencarian orang",
+   "sort": 227,
+   "id": "Orang yang telah ditetapkan sebagai tersangka atau diduga kuat terlibat tindak pidana, lalu tidak diketahui keberadaannya atau tidak memenuhi panggilan penyidik secara sah.",
+   "en": "People named as suspects or strongly suspected of a crime whose whereabouts are unknown or who have not answered a lawful summons from investigators.",
+   "nij": "Oloh je jari itetapkan manjadi tersangka atawa iduga umba tindak pidana, limbah te dia katawan eka ie atawa dia mamenuhi panggilan penyidik secara sah."
+  },
+  {
+   "key": "Siapa yang masuk daftar ini",
+   "page": "Pencarian orang",
+   "sort": 228,
+   "id": "Siapa yang masuk daftar ini",
+   "en": "Who is on this list",
+   "nij": "Eweh je tame daftar tuh"
+  },
+  {
+   "key": "Tersangka yang melarikan diri",
+   "page": "Pencarian orang",
+   "sort": 229,
+   "id": "Tersangka yang melarikan diri",
+   "en": "Suspects who have fled",
+   "nij": "Tersangka je malarikan arep"
+  },
+  {
+   "key": "Tersangka yang tidak memenuhi panggilan resmi",
+   "page": "Pencarian orang",
+   "sort": 230,
+   "id": "Tersangka yang tidak memenuhi panggilan resmi",
+   "en": "Suspects who did not answer an official summons",
+   "nij": "Tersangka je dia mamenuhi panggilan resmi"
+  },
+  {
+   "key": "Terpidana yang belum menjalani putusan",
+   "page": "Pencarian orang",
+   "sort": 231,
+   "id": "Terpidana yang belum menjalani putusan",
+   "en": "Convicts who have not served their sentence",
+   "nij": "Terpidana je hindai manjalani putusan"
+  },
+  {
+   "key": "Jika melihat orang dalam DPO, jangan bertindak sendiri. Catat lokasi dan waktu, lalu hubungi 110 atau Polsek.",
+   "page": "Pencarian orang",
+   "sort": 232,
+   "id": "Jika melihat orang dalam DPO, jangan bertindak sendiri. Catat lokasi dan waktu, lalu hubungi 110 atau Polsek.",
+   "en": "If you see someone on the wanted list, do not act alone. Note the place and time, then call 110 or the Polsek.",
+   "nij": "Amun mite oloh huang DPO, ela bagawi kabuat. Surat lokasi tuntang wayah, limbah te hubungi 110 atawa Polsek."
+  },
+  {
+   "key": "Kuning",
+   "page": "Pencarian orang",
+   "sort": 233,
+   "id": "Kuning",
+   "en": "Yellow",
+   "nij": "Kuning"
+  },
+  {
+   "key": "Warga yang dilaporkan keluarganya tidak diketahui keberadaannya. Tujuannya mempertemukan kembali dengan keluarga, bukan penindakan.",
+   "page": "Pencarian orang",
+   "sort": 234,
+   "id": "Warga yang dilaporkan keluarganya tidak diketahui keberadaannya. Tujuannya mempertemukan kembali dengan keluarga, bukan penindakan.",
+   "en": "Residents whose families have reported their whereabouts unknown. The aim is to reunite them with family, not enforcement.",
+   "nij": "Warga je ilaporan kula dia katawan eka ie. Tujuan ie mampatemu tinai dengan kula, dia penindakan."
+  },
+  {
+   "key": "Kategori yang dapat dilaporkan",
+   "page": "Pencarian orang",
+   "sort": 235,
+   "id": "Kategori yang dapat dilaporkan",
+   "en": "What can be reported",
+   "nij": "Kategori je tau ilaporan"
+  },
+  {
+   "key": "Anak dan remaja yang tidak pulang",
+   "page": "Pencarian orang",
+   "sort": 236,
+   "id": "Anak dan remaja yang tidak pulang",
+   "en": "Children and teenagers who have not come home",
+   "nij": "Anak tuntang tabela je dia buli"
+  },
+  {
+   "key": "Lansia atau orang dengan demensia",
+   "page": "Pencarian orang",
+   "sort": 237,
+   "id": "Lansia atau orang dengan demensia",
+   "en": "Elderly people or people with dementia",
+   "nij": "Oloh bakas atawa oloh je demensia"
+  },
+  {
+   "key": "Orang dengan gangguan kejiwaan",
+   "page": "Pencarian orang",
+   "sort": 238,
+   "id": "Orang dengan gangguan kejiwaan",
+   "en": "People with mental health conditions",
+   "nij": "Oloh je aton gangguan kejiwaan"
+  },
+  {
+   "key": "Korban kecelakaan di sungai, hutan, atau area tambang",
+   "page": "Pencarian orang",
+   "sort": 239,
+   "id": "Korban kecelakaan di sungai, hutan, atau area tambang",
+   "en": "Accident victims in rivers, forests or mining areas",
+   "nij": "Korban kecelakaan intu sungei, hutan, atawa area tambang"
+  },
+  {
+   "key": "Dugaan korban penculikan atau perdagangan orang",
+   "page": "Pencarian orang",
+   "sort": 240,
+   "id": "Dugaan korban penculikan atau perdagangan orang",
+   "en": "Suspected victims of kidnapping or human trafficking",
+   "nij": "Dugaan korban penculikan atawa perdagangan oloh"
+  },
+  {
+   "key": "Untuk anak, lansia, dan orang rentan, segera laporkan. Tidak perlu menunggu 1×24 jam.",
+   "page": "Pencarian orang",
+   "sort": 241,
+   "id": "Untuk anak, lansia, dan orang rentan, segera laporkan. Tidak perlu menunggu 1×24 jam.",
+   "en": "For children, the elderly and vulnerable people, report right away. There is no need to wait 24 hours.",
+   "nij": "Akan anak, oloh bakas, tuntang oloh je rentan, capat laporan. Dia parlu manunggu 1×24 jam."
+  },
+  {
+   "key": "Cara melaporkan orang hilang",
+   "page": "Pencarian orang",
+   "sort": 242,
+   "id": "Cara melaporkan orang hilang",
+   "en": "How to report a missing person",
+   "nij": "Kilen cara malaporan oloh nihau"
+  },
+  {
+   "key": "Daftar saat ini",
+   "page": "Pencarian orang",
+   "sort": 243,
+   "id": "Daftar saat ini",
+   "en": "Current list",
+   "nij": "Daftar wayah tuh"
+  },
+  {
+   "key": "Sumber data",
+   "page": "Pencarian orang",
+   "sort": 244,
+   "id": "Sumber data",
+   "en": "Data source",
+   "nij": "Sumber data"
+  },
+  {
+   "key": "Polsek Kapuas Tengah",
+   "page": "Pencarian orang",
+   "sort": 245,
+   "id": "Polsek Kapuas Tengah",
+   "en": "Kapuas Tengah Police Sector",
+   "nij": "Polsek Kapuas Tengah"
+  },
+  {
+   "key": "Kejati Kalimantan Tengah",
+   "page": "Pencarian orang",
+   "sort": 246,
+   "id": "Kejati Kalimantan Tengah",
+   "en": "Central Kalimantan High Prosecutor's Office",
+   "nij": "Kejati Kalimantan Tengah"
+  },
+  {
+   "key": "Nasional (Pusiknas Polri)",
+   "page": "Pencarian orang",
+   "sort": 247,
+   "id": "Nasional (Pusiknas Polri)",
+   "en": "National (Pusiknas Polri)",
+   "nij": "Nasional (Pusiknas Polri)"
+  },
+  {
+   "key": "Cari nama atau tindak pidana",
+   "page": "Pencarian orang",
+   "sort": 248,
+   "id": "Cari nama atau tindak pidana",
+   "en": "Search name or offence",
+   "nij": "Gau aran atawa tindak pidana"
+  },
+  {
+   "key": "Tampilkan lebih banyak",
+   "page": "Pencarian orang",
+   "sort": 249,
+   "id": "Tampilkan lebih banyak",
+   "en": "Show more",
+   "nij": "Tampilkan labih are"
+  },
+  {
+   "key": "Data Polsek diterbitkan oleh petugas Polsek Kapuas Tengah. Data Kejati dan nasional disalin otomatis setiap minggu dari situs resminya; tiap kartu menautkan ke halaman sumber. Punya informasi? Kirim lewat",
+   "page": "Pencarian orang",
+   "sort": 250,
+   "id": "Data Polsek diterbitkan oleh petugas Polsek Kapuas Tengah. Data Kejati dan nasional disalin otomatis setiap minggu dari situs resminya; tiap kartu menautkan ke halaman sumber. Punya informasi? Kirim lewat",
+   "en": "Polsek entries are published by Kapuas Tengah Police Sector officers. Prosecutor's office and national entries are copied automatically every week from their official sites; each card links to its source page. Have information? Send it via",
+   "nij": "Data Polsek iterbit awi petugas Polsek Kapuas Tengah. Data Kejati tuntang nasional isalin otomatis genep minggu bara situs resmi; genep kartu mantautkan akan halaman sumber. Aton informasi? Kirim hapan"
+  },
+  {
+   "key": "atau formulir pengaduan.",
+   "page": "Pencarian orang",
+   "sort": 251,
+   "id": "atau formulir pengaduan.",
+   "en": "or the report form.",
+   "nij": "atawa formulir pengaduan."
+  },
+  {
+   "key": "Isi nama Anda.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 264,
+   "id": "Isi nama Anda.",
+   "en": "Enter your name.",
+   "nij": "Isi aran keton."
+  },
+  {
+   "key": "Isi nomor HP yang aktif.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 265,
+   "id": "Isi nomor HP yang aktif.",
+   "en": "Enter an active phone number.",
+   "nij": "Isi nomor HP je aktif."
+  },
+  {
+   "key": "Pilih layanan.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 266,
+   "id": "Pilih layanan.",
+   "en": "Choose a service.",
+   "nij": "Pilih pelayanan."
+  },
+  {
+   "key": "Pilih tanggal mulai besok.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 267,
+   "id": "Pilih tanggal mulai besok.",
+   "en": "Choose a date from tomorrow onward.",
+   "nij": "Pilih tanggal nampara jewu."
+  },
+  {
+   "key": "Kunjungan layanan administrasi hanya Senin–Jumat.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 268,
+   "id": "Kunjungan layanan administrasi hanya Senin–Jumat.",
+   "en": "Administrative visits are Monday–Friday only.",
+   "nij": "Kunjungan pelayanan administrasi Senin–Jumat bewei."
+  },
+  {
+   "key": "Semua jam pada tanggal ini sudah penuh. Pilih tanggal lain.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 269,
+   "id": "Semua jam pada tanggal ini sudah penuh. Pilih tanggal lain.",
+   "en": "All times on this date are taken. Choose another date.",
+   "nij": "Uras jam intu tanggal tuh jari penuh. Pilih tanggal beken."
+  },
+  {
+   "key": "Pilih kategori.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 270,
+   "id": "Pilih kategori.",
+   "en": "Choose a category.",
+   "nij": "Pilih kategori."
+  },
+  {
+   "key": "Ceritakan minimal 20 karakter.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 271,
+   "id": "Ceritakan minimal 20 karakter.",
+   "en": "Write at least 20 characters.",
+   "nij": "Kesah paling kurang 20 karakter."
+  },
+  {
+   "key": "Nomor HP tidak valid.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 272,
+   "id": "Nomor HP tidak valid.",
+   "en": "Invalid phone number.",
+   "nij": "Nomor HP dia valid."
+  },
+  {
+   "key": "Maksimal 5 berkas.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 273,
+   "id": "Maksimal 5 berkas.",
+   "en": "Up to 5 files.",
+   "nij": "Paling are 5 berkas."
+  },
+  {
+   "key": "Ukuran tiap berkas maksimal 50 MB.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 274,
+   "id": "Ukuran tiap berkas maksimal 50 MB.",
+   "en": "Each file can be up to 50 MB.",
+   "nij": "Ukuran genep berkas paling are 50 MB."
+  },
+  {
+   "key": "Lampiran hanya boleh foto atau video.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 275,
+   "id": "Lampiran hanya boleh foto atau video.",
+   "en": "Attachments must be photos or videos.",
+   "nij": "Lampiran foto atawa video bewei."
+  },
+  {
+   "key": "Mengunggah lampiran…",
+   "page": "Pesan formulir dan sistem",
+   "sort": 276,
+   "id": "Mengunggah lampiran…",
+   "en": "Uploading attachments…",
+   "nij": "Mangunggah lampiran…"
+  },
+  {
+   "key": "Mengirim…",
+   "page": "Pesan formulir dan sistem",
+   "sort": 277,
+   "id": "Mengirim…",
+   "en": "Sending…",
+   "nij": "Mangirim…"
+  },
+  {
+   "key": "Jam itu baru saja terisi. Pilih jam lain.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 278,
+   "id": "Jam itu baru saja terisi. Pilih jam lain.",
+   "en": "That time was just taken. Choose another time.",
+   "nij": "Jam te ewau inisi. Pilih jam beken."
+  },
+  {
+   "key": "Pilih tanggal mulai besok, paling lambat 60 hari ke depan.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 279,
+   "id": "Pilih tanggal mulai besok, paling lambat 60 hari ke depan.",
+   "en": "Choose a date from tomorrow, up to 60 days ahead.",
+   "nij": "Pilih tanggal nampara jewu, paling tahi 60 andau limbah."
+  },
+  {
+   "key": "Pilih jam yang tersedia.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 280,
+   "id": "Pilih jam yang tersedia.",
+   "en": "Choose an available time.",
+   "nij": "Pilih jam je aton."
+  },
+  {
+   "key": "Gagal terhubung ke server. Coba lagi.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 281,
+   "id": "Gagal terhubung ke server. Coba lagi.",
+   "en": "Could not reach the server. Please try again.",
+   "nij": "Dia tau tahubung akan server. Coba tinai."
+  },
+  {
+   "key": "Masukkan nomor tiket yang valid, contoh PG-261107-ABCDE.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 282,
+   "id": "Masukkan nomor tiket yang valid, contoh PG-261107-ABCDE.",
+   "en": "Enter a valid ticket number, e.g. PG-261107-ABCDE.",
+   "nij": "Isi nomor tiket je valid, contoh PG-261107-ABCDE."
+  },
+  {
+   "key": "Memeriksa…",
+   "page": "Pesan formulir dan sistem",
+   "sort": 283,
+   "id": "Memeriksa…",
+   "en": "Checking…",
+   "nij": "Mamariksa…"
+  },
+  {
+   "key": "Tiket tidak ditemukan. Periksa nomor tiket dan nomor HP yang didaftarkan.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 284,
+   "id": "Tiket tidak ditemukan. Periksa nomor tiket dan nomor HP yang didaftarkan.",
+   "en": "Ticket not found. Check the ticket number and the registered phone number.",
+   "nij": "Tiket dia sundau. Pariksa nomor tiket tuntang nomor HP je inyurat."
+  },
+  {
+   "key": "Belum ada data yang dipublikasikan.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 294,
+   "id": "Belum ada data yang dipublikasikan.",
+   "en": "Nothing published yet.",
+   "nij": "Hindai aton data je ipublikasi."
+  },
+  {
+   "key": "Tidak ada yang cocok dengan pencarian.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 295,
+   "id": "Tidak ada yang cocok dengan pencarian.",
+   "en": "No matches for your search.",
+   "nij": "Dia aton je cocok dengan pencarian."
+  },
+  {
+   "key": "Daftar belum bisa dimuat. Coba muat ulang halaman.",
+   "page": "Pesan formulir dan sistem",
+   "sort": 296,
+   "id": "Daftar belum bisa dimuat. Coba muat ulang halaman.",
+   "en": "The list could not be loaded. Try reloading the page.",
+   "nij": "Daftar hindai tau imuat. Coba muat tinai halaman."
+  },
+  {
+   "key": "BOOKING KUNJUNGAN",
+   "page": "Pesan formulir dan sistem",
+   "sort": 297,
+   "id": "BOOKING KUNJUNGAN",
+   "en": "BOOK A VISIT",
+   "nij": "BOOKING KUNJUNGAN"
+  },
+  {
+   "key": "PENGADUAN DAN PERTANYAAN",
+   "page": "Pesan formulir dan sistem",
+   "sort": 298,
+   "id": "PENGADUAN DAN PERTANYAAN",
+   "en": "REPORTS AND QUESTIONS",
+   "nij": "PENGADUAN TUNTANG PISEK"
+  }
+ ]
+}
