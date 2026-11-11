@@ -1,0 +1,32 @@
+# Started by the console's Publish button (edge function "publish"): rebuild the static pages from the database.
+name: Publish
+on:
+  workflow_dispatch:
+    inputs:
+      by:
+        description: Who pressed Publish
+        required: false
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: publish
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build from console content
+        run: python3 build/fetch.py && python3 build/build.py
+      - name: Commit
+        run: |
+          git config user.name "Konsol Polsek"
+          git config user.email "konsol-polsek@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "Nothing changed"; else git commit -m "Publish dari konsol: ${{ inputs.by }}" && git push; fi
+      - name: Deploy GitHub Pages
+        # pushes made with the workflow token do not start the Pages build on their own
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
+        env:
+          GH_TOKEN: ${{ github.token }}
