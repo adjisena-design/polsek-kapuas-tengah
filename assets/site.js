@@ -250,10 +250,18 @@ const showPeople = rows => {
     const g = rows.filter(r => r.grp === box.dataset.grp); if (!g.length) return;
     if (box.dataset.grp === 'kapolsek') {
       const k = g[0];
-      box.innerHTML = `<img src="${esc(k.photo_url || 'assets/kapolsek.webp')}" alt="${esc(k.name)}" width="520" height="450"><div class="t"><span class="rank">${esc(pick(k, 'jabatan'))}</span><h3 class="display" style="font-size:clamp(22px,2.6vw,30px)">${esc(k.name)}</h3><p style="color:var(--muted)">${esc(pick(k, 'description'))}</p></div>`;
+      box.innerHTML = `<img${k.photo_url && !k.photo_url.startsWith('assets/') ? ' class="framed"' : ''} src="${esc(k.photo_url || 'assets/kapolsek.webp')}" alt="${esc(k.name)}" width="520" height="450"><div class="t"><span class="rank">${esc(pick(k, 'jabatan'))}</span><h3 class="display" style="font-size:clamp(22px,2.6vw,30px)">${esc(k.name)}</h3><p style="color:var(--muted)">${esc(pick(k, 'description'))}</p></div>`;
     } else box.innerHTML = g.map(person).join('');
   });
 };
+// homepage welcome: photo and name follow the Kapolsek entry in Konsol → Personel
+const chief = $('[data-chief]');
+if (chief) sb('/rest/v1/personnel?select=name,photo_url&grp=eq.kapolsek&order=sort.asc&limit=1').then(([k]) => {
+  if (!k) return;
+  const img = $('img', chief);
+  if (k.photo_url) { img.src = k.photo_url; if (!k.photo_url.startsWith('assets/')) $('.photo', chief).classList.add('framed'); }
+  img.alt = k.name; $('[data-chief-name]', chief).textContent = k.name;
+}).catch(() => {});
 if (grpBox.length) sb('/rest/v1/personnel?select=*&order=sort.asc').then(rows => { showPeople(rows); document.addEventListener('langchange', () => showPeople(rows)); }).catch(() => {});
 
 // wanted list: Polsek's own entries plus weekly copies from Kejati Kalteng and Pusiknas Polri, each linked to its source

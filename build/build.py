@@ -48,7 +48,7 @@ def head(title, desc, pre=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Red+Hat+Display:wght@700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=8">{pre}
+<link rel="stylesheet" href="assets/site.css?v=9">{pre}
 </head>
 <body>
 '''
@@ -180,7 +180,7 @@ def svc_html(v, cta=True):
     nxt = f'\n<h3>Langkah berikutnya</h3>\n{ctas(v["name"]["id"] if v.get("bookable") else "")}' if cta else ''
     return f'<div class="svc">{body}{nxt}</div>'
 
-SCRIPT = '<script src="assets/sb.js?v=5" defer></script>\n<script src="assets/i18n.js?v=1" defer></script>\n<script src="assets/site.js?v=8" defer></script>\n</body>\n</html>\n'
+SCRIPT = '<script src="assets/sb.js?v=5" defer></script>\n<script src="assets/i18n.js?v=1" defer></script>\n<script src="assets/site.js?v=9" defer></script>\n</body>\n</html>\n'
 
 def page(fn, title, desc, active, body, pre='', svc_tpl=False):
     tpl = ''.join(f'<template id="svc-{v["slug"]}">{svc_html(v)}</template>\n' for v in SV) if svc_tpl else ''

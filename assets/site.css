@@ -401,3 +401,8 @@ input[type=date]{-webkit-appearance:none;appearance:none;min-width:0;max-width:1
 .doc summary::after{content:"+";color:var(--brown);font-weight:800}
 .doc[open] summary::after{content:"–"}
 .doc ul{margin:0;padding:0 14px 14px 32px;font-size:14px}
+
+/* Kapolsek photo uploaded from the console: a framed portrait, not the cut-out */
+.chief .photo.framed{padding:0;background:#fff}
+.chief .photo.framed img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:top}
+.lead img.framed{object-fit:cover;object-position:top;padding-top:0;aspect-ratio:4/5;height:auto;align-self:stretch}
