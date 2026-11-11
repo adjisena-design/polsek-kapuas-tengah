@@ -217,52 +217,56 @@ const blankImg = '<span class="img blank"><svg width="34" height="34" viewBox="0
 const img = u => u ? `<span class="img"><img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.outerHTML=blankImg"></span>` : blankImg;
 const postLink = p => p.source_url ? ` href="${esc(p.source_url)}"${p.source_url.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}` : '';
 const postSrc = p => !p.source_url ? '' : p.source_url.startsWith('http') ? esc(tf('Baca di {src} ↗', { src: new URL(p.source_url).hostname.replace(/^www\./, '') })) : tr('Baca selengkapnya →');
+// database rows keep Indonesian in their columns and optional EN/NGAJU in i18n
+const pick = (r, k) => (LANG !== 'id' && r.i18n?.[LANG]?.[k]) || r[k] || '';
 const postCard = p => {
   const tag = p.source_url ? 'a' : 'article', im = p.kind === 'imbauan';
-  return `<${tag} class="post${im ? ' imb' : ''}" data-cat="${p.kind}"${postLink(p)}>${img(p.image_url)}<span class="b"><span class="meta"><b>${im ? 'Imbauan' : 'Berita'}</b>${esc(p.date_label)}${p.place ? ' · ' + esc(p.place) : ''}</span><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p>${postSrc(p) ? `<span class="src">${postSrc(p)}</span>` : ''}</span></${tag}>`;
+  return `<${tag} class="post${im ? ' imb' : ''}" data-cat="${p.kind}"${postLink(p)}>${img(p.image_url)}<span class="b"><span class="meta"><b>${im ? 'Imbauan' : 'Berita'}</b>${esc(pick(p, 'date_label'))}${pick(p, 'place') ? ' · ' + esc(pick(p, 'place')) : ''}</span><h3>${esc(pick(p, 'title'))}</h3><p>${esc(pick(p, 'summary'))}</p>${postSrc(p) ? `<span class="src">${postSrc(p)}</span>` : ''}</span></${tag}>`;
 };
 const feeds = $$('[data-feed]');
-if (feeds.length) sb('/rest/v1/posts?select=*&order=published_on.desc,created_at.desc').then(ps => {
+const showPosts = ps => {
   if (!ps.length) return;
   const berita = ps.filter(p => p.kind === 'berita');
   const home = $('[data-feed=home]'); if (home) home.innerHTML = berita.slice(0, 3).map(postCard).join('');
   const feat = $('[data-feed=feature]'), grid = $('[data-feed=posts]');
   if (feat && berita[0]) {
     const p = berita[0];
-    feat.outerHTML = `<a class="feature" data-feed="feature"${postLink(p) || ' href="#"'} style="margin-top:10px">${img(p.image_url)}<span class="b"><span class="meta" style="font-size:13px;color:#6B5D4F">${esc(p.date_label)}${p.place ? ' · ' + esc(p.place) : ''}</span><h2 class="display">${esc(p.title)}</h2><p style="color:var(--muted)">${esc(p.summary)}</p>${postSrc(p) ? `<span class="src" style="font-weight:700;color:var(--brown)">${postSrc(p)}</span>` : ''}</span></a>`;
+    feat.outerHTML = `<a class="feature" data-feed="feature"${postLink(p) || ' href="#"'} style="margin-top:10px">${img(p.image_url)}<span class="b"><span class="meta" style="font-size:13px;color:#6B5D4F">${esc(pick(p, 'date_label'))}${pick(p, 'place') ? ' · ' + esc(pick(p, 'place')) : ''}</span><h2 class="display">${esc(pick(p, 'title'))}</h2><p style="color:var(--muted)">${esc(pick(p, 'summary'))}</p>${postSrc(p) ? `<span class="src" style="font-weight:700;color:var(--brown)">${postSrc(p)}</span>` : ''}</span></a>`;
   }
   if (grid) {
     grid.innerHTML = ps.filter(p => p !== berita[0]).map(postCard).join('');
     const n = { all: ps.length, berita: berita.length, imbauan: ps.length - berita.length };
     $$('.tabs button').forEach(b => { const s = $('sup', b); if (s) s.textContent = n[b.dataset.f]; });
   }
-}).catch(() => {});
+};
+if (feeds.length) sb('/rest/v1/posts?select=*&order=published_on.desc,created_at.desc').then(ps => { showPosts(ps); document.addEventListener('langchange', () => showPosts(ps)); }).catch(() => {});
 
 const grpBox = $$('[data-grp]');
-if (grpBox.length) sb('/rest/v1/personnel?select=*&order=sort.asc').then(rows => {
+const showPeople = rows => {
   if (!rows.length) return;
   const user = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>';
-  const person = r => `<article class="person"><div class="ph">${r.photo_url ? `<img src="${esc(r.photo_url)}" alt="${esc(r.name)}" loading="lazy">` : user}</div><div class="t"><small>${esc(r.jabatan)}</small><b>${esc(r.name)}</b><span>${esc(r.description)}</span></div></article>`;
+  const person = r => `<article class="person"><div class="ph">${r.photo_url ? `<img src="${esc(r.photo_url)}" alt="${esc(r.name)}" loading="lazy">` : user}</div><div class="t"><small>${esc(pick(r, 'jabatan'))}</small><b>${esc(r.name)}</b><span>${esc(pick(r, 'description'))}</span></div></article>`;
   grpBox.forEach(box => {
     const g = rows.filter(r => r.grp === box.dataset.grp); if (!g.length) return;
     if (box.dataset.grp === 'kapolsek') {
       const k = g[0];
-      box.innerHTML = `<img src="${esc(k.photo_url || 'assets/kapolsek.webp')}" alt="${esc(k.name)}" width="520" height="450"><div class="t"><span class="rank">${esc(k.jabatan)}</span><h3 class="display" style="font-size:clamp(22px,2.6vw,30px)">${esc(k.name)}</h3><p style="color:var(--muted)">${esc(k.description)}</p></div>`;
+      box.innerHTML = `<img src="${esc(k.photo_url || 'assets/kapolsek.webp')}" alt="${esc(k.name)}" width="520" height="450"><div class="t"><span class="rank">${esc(pick(k, 'jabatan'))}</span><h3 class="display" style="font-size:clamp(22px,2.6vw,30px)">${esc(k.name)}</h3><p style="color:var(--muted)">${esc(pick(k, 'description'))}</p></div>`;
     } else box.innerHTML = g.map(person).join('');
   });
-}).catch(() => {});
+};
+if (grpBox.length) sb('/rest/v1/personnel?select=*&order=sort.asc').then(rows => { showPeople(rows); document.addEventListener('langchange', () => showPeople(rows)); }).catch(() => {});
 
 // wanted list: Polsek's own entries plus weekly copies from Kejati Kalteng and Pusiknas Polri, each linked to its source
 const wd = $('#wanted');
 if (wd) Promise.all([
-  sb('/rest/v1/wanted?select=id,kind,source,name,crime,detail,photo_url,source_url&published=eq.true&order=created_at.desc&limit=5000'),
+  sb('/rest/v1/wanted?select=id,kind,source,name,crime,detail,photo_url,source_url,i18n&published=eq.true&order=created_at.desc&limit=5000'),
   sb('/rest/v1/sync_runs?select=source,at&ok=eq.true&order=at.desc&limit=20'),
 ]).then(([rows, runs]) => {
   const grid = $('.wgrid', wd), more = $('.wmore', wd), note = $('.wnote', wd), q = $('.wsearch', wd), tabs = $$('.wtabs button', wd);
   const SRC = { polsek: 'Polsek Kapuas Tengah', kejati: 'Kejati Kalimantan Tengah', pusiknas: 'Pusiknas Polri' };
   let src = 'polsek', shown = 24;
   const fmt = d => new Date(d).toLocaleDateString(LANG === 'en' ? 'en-GB' : 'id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-  const card = r => `<article class="wcard ${r.kind}">${r.photo_url ? `<img src="${esc(r.photo_url)}" alt="Foto ${esc(r.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<div><span class="wtag">${tf(r.kind === 'dpo' ? 'DPO' : 'Orang hilang')}</span><b>${esc(r.name)}</b>${r.crime ? `<span>${esc(r.crime)}</span>` : ''}${r.detail ? `<small>${esc(r.detail)}</small>` : ''}${r.source_url ? `<a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(tf('Lihat di {src} ↗', { src: tr(SRC[r.source]) }))}</a>` : `<small>${esc(tf('Sumber: {src}', { src: tr(SRC[r.source]) }))}</small>`}</div></article>`;
+  const card = r => `<article class="wcard ${r.kind}">${r.photo_url ? `<img src="${esc(r.photo_url)}" alt="Foto ${esc(r.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<div><span class="wtag">${tf(r.kind === 'dpo' ? 'DPO' : 'Orang hilang')}</span><b>${esc(r.name)}</b>${pick(r, 'crime') ? `<span>${esc(pick(r, 'crime'))}</span>` : ''}${pick(r, 'detail') ? `<small>${esc(pick(r, 'detail'))}</small>` : ''}${r.source_url ? `<a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(tf('Lihat di {src} ↗', { src: tr(SRC[r.source]) }))}</a>` : `<small>${esc(tf('Sumber: {src}', { src: tr(SRC[r.source]) }))}</small>`}</div></article>`;
   const draw = () => {
     const t = q.value.trim().toLowerCase();
     const list = rows.filter(r => r.source === src && (!t || `${r.name} ${r.crime ?? ''} ${r.detail ?? ''}`.toLowerCase().includes(t)));

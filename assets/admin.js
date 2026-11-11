@@ -3,6 +3,7 @@
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const view = $('#view'), dr = $('#drawer'), drBody = $('#dr-body'), drFoot = $('#dr-foot');
 let token = sessionStorage.getItem('pkt-token'), me = null, D = {};
+const LISTS = {};
 
 const toast = m => { const t = $('#toast'); (dr.open ? dr : document.body).append(t); t.textContent = m; t.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('on'), 3500); };
 const call = (name, args = {}) => rpc(name, { p_token: token, ...args }).catch(e => { if (/Sesi berakhir/.test(e.message)) signOut('Sesi berakhir. Silakan masuk lagi.'); throw e; });
@@ -26,6 +27,7 @@ const PAGES = [
   ['UTAMA'], ['dasbor', 'Dasbor', IC.home],
   ['LAYANAN'], ['booking', 'Booking', IC.cal, 'bookings_new'], ['pengaduan', 'Pengaduan', IC.inbox, 'reports_new'],
   ['KONTEN SITUS'], ['berita', 'Berita dan imbauan', IC.news], ['pencarian', 'Pencarian orang', IC.search], ['personel', 'Personel', IC.users],
+  ['SITUS'], ['publikasi', 'Publikasi', IC.home, 'unpublished'], ['pengaturan', 'Pengaturan', IC.key], ['hero', 'Hero Beranda', IC.img], ['layanan', 'Layanan', IC.news], ['teks', 'Teks situs', IC.log], ['desa', 'Desa', IC.users],
   ['SISTEM', true], ['log', 'Log', IC.log, null, true], ['akses', 'Kode akses', IC.key, null, true],
 ];
 
@@ -74,6 +76,7 @@ function menu() {
     const n = dot && D[dot];
     return `<a href="#/${id}"${id === page ? ' aria-current="page"' : ''}>${I(icon)}<span>${label}</span>${n ? `<span class="dot" aria-label="${n} baru">${n}</span>` : ''}</a>`;
   }).join('');
+  const pb = $('#pubbar'); pb.hidden = !D.unpublished || page === 'publikasi'; pb.textContent = `${D.unpublished} perubahan belum dipublikasikan · Publikasikan`;
 }
 $('#menu-btn').onclick = () => { const o = $('#side').classList.toggle('open'); $('#menu-btn').setAttribute('aria-expanded', o); };
 $('#menu').addEventListener('click', e => { if (e.target.closest('a')) $('#side').classList.remove('open'); });
@@ -134,79 +137,212 @@ function listing({ rows, item, match, filter, empty = 'Belum ada data.', open })
 const thumb = (u, round) => u ? `<img class="th${round ? ' round' : ''}" src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">` : `<span class="th ph${round ? ' round' : ''}">${I(round ? IC.user : IC.img, 24)}</span>`;
 const tabsHtml = (opts, cur) => `<div class="tabs" role="group">${opts.map(([v, l, n]) => `<button type="button" data-f="${v}" aria-pressed="${v === cur}">${l}${n != null ? `<sup>${n}</sup>` : ''}</button>`).join('')}</div>`;
 
-// ---------- edit forms (posts, wanted, personnel) ----------
+// ---------- edit forms ----------
+// field spec: {k, l(label), t(type), o(options), req, hint, tr(translatable), aspect:[w,h] for photos}
+// translatable fields: hero/services keep {id,en,nij} objects; posts/wanted/personnel keep Indonesian in the column and EN/NGAJU in i18n
+const LANGS = [['id', 'ID'], ['en', 'EN'], ['nij', 'NGAJU']];
+const HREFS = { 'layanan.html': 'Halaman Layanan', '#booking': 'Buka formulir booking', '#kontak': 'Bagian Kontak', '#wilayah': 'Peta wilayah dan desa', 'pencarian-orang.html': 'Halaman Pencarian orang', 'berita.html': 'Halaman Berita', 'profil.html': 'Halaman Profil' };
+const ICONS = { search: 'Kaca pembesar', flag: 'Bendera / acara', chat: 'Balon pesan', shield: 'Perisai', doc: 'Dokumen', calendar: 'Kalender', users: 'Orang' };
 const FORMS = {
-  posts: { kicker: ['TAMBAH BERITA', 'UBAH BERITA'], title: 'title', f: [
-    ['kind', 'Jenis', 'select', { berita: 'Berita kegiatan', imbauan: 'Imbauan kamtibmas' }],
-    ['title', 'Judul', 'textarea-s', null, true, 'Tulis seperti judul berita, kalimat biasa (huruf besar hanya di awal dan nama).'],
-    ['summary', 'Ringkasan', 'textarea', null, false, 'Satu atau dua kalimat yang tampil di kartu berita.'],
-    ['two', [['date_label', 'Tanggal tampil', 'text', null, false, 'Contoh: 5 November 2026 atau Musim kemarau 2026'], ['published_on', 'Tanggal terbit', 'date', null, true, 'Menentukan urutan; terbaru di atas.']]],
-    ['place', 'Lokasi', 'text', null, false, 'Contoh: Desa Pujon'],
-    ['image_url', 'Foto utama', 'image'],
-    ['source_url', 'Tautan berita lengkap', 'text', null, false, 'Opsional, misalnya artikel di analisnews.co.id. Kosongkan untuk imbauan.'],
-    ['published', 'Tampilkan di situs', 'toggle', null, false, 'Mati = disimpan sebagai draf, tidak tampil di situs.'],
+  posts: { kicker: ['TAMBAH BERITA', 'UBAH BERITA'], title: 'title', mode: 'col', f: [
+    { k: 'kind', l: 'Jenis', t: 'select', o: { berita: 'Berita kegiatan', imbauan: 'Imbauan kamtibmas' } },
+    { k: 'title', l: 'Judul', t: 'textarea-s', req: 1, tr: 1, hint: 'Kalimat biasa: huruf besar hanya di awal dan pada nama.' },
+    { k: 'summary', l: 'Ringkasan', t: 'textarea', tr: 1, hint: 'Satu atau dua kalimat yang tampil di kartu berita.' },
+    [{ k: 'date_label', l: 'Tanggal tampil', t: 'text', tr: 1, hint: 'Contoh: 5 November 2026' }, { k: 'published_on', l: 'Tanggal terbit', t: 'date', req: 1, hint: 'Menentukan urutan; terbaru di atas.' }],
+    { k: 'place', l: 'Lokasi', t: 'text', tr: 1, hint: 'Contoh: Desa Pujon' },
+    { k: 'image_url', l: 'Foto utama', t: 'image', aspect: [1200, 900] },
+    { k: 'source_url', l: 'Tautan berita lengkap', t: 'text', hint: 'Opsional, misalnya artikel di analisnews.co.id.' },
+    { k: 'published', l: 'Tampilkan di situs', t: 'toggle', hint: 'Mati = disimpan sebagai draf, tidak tampil di situs.' },
   ] },
-  wanted: { kicker: ['TERBITKAN PENCARIAN', 'UBAH PENCARIAN'], title: 'name', f: [
-    ['kind', 'Jenis', 'select', { dpo: 'DPO (Daftar Pencarian Orang)', hilang: 'Orang hilang' }],
-    ['name', 'Nama lengkap', 'text', null, true],
-    ['crime', 'Tindak pidana / keterangan singkat', 'text', null, false, 'DPO: pasal atau jenis tindak pidana. Orang hilang: misalnya "Hilang sejak 3 November 2026".'],
-    ['detail', 'Ciri-ciri dan keterangan', 'textarea', null, false, 'Ciri fisik, pakaian terakhir, lokasi terakhir terlihat, nomor yang bisa dihubungi.'],
-    ['photo_url', 'Foto', 'image'],
-    ['published', 'Tampilkan di situs', 'toggle', null, false, 'Matikan bila orang sudah ditemukan atau ditangkap, atau hapus datanya.'],
+  wanted: { kicker: ['TERBITKAN PENCARIAN', 'UBAH PENCARIAN'], title: 'name', mode: 'col', f: [
+    { k: 'kind', l: 'Jenis', t: 'select', o: { dpo: 'DPO (Daftar Pencarian Orang)', hilang: 'Orang hilang' } },
+    { k: 'name', l: 'Nama lengkap', t: 'text', req: 1 },
+    { k: 'crime', l: 'Tindak pidana / keterangan singkat', t: 'text', tr: 1, hint: 'DPO: jenis tindak pidana. Orang hilang: misalnya "Hilang sejak 3 November 2026".' },
+    { k: 'detail', l: 'Ciri-ciri dan keterangan', t: 'textarea', tr: 1, hint: 'Ciri fisik, pakaian terakhir, lokasi terakhir terlihat, nomor yang bisa dihubungi.' },
+    { k: 'photo_url', l: 'Foto', t: 'image', aspect: [800, 1000] },
+    { k: 'published', l: 'Tampilkan di situs', t: 'toggle', hint: 'Matikan bila orang sudah ditemukan atau ditangkap, atau hapus datanya.' },
   ] },
-  personnel: { kicker: ['TAMBAH PERSONEL', 'UBAH PERSONEL'], title: 'name', f: [
-    ['name', 'Nama lengkap dengan pangkat dan gelar', 'text', null, true],
-    ['two', [['grp', 'Kelompok', 'select', { kapolsek: 'Kapolsek', wakil: 'Wakil pimpinan', unit: 'Kepala unit dan seksi', bhabin: 'Bhabinkamtibmas' }], ['jabatan', 'Jabatan', 'text', null, true, 'Contoh: Kanit Reskrim']]],
-    ['description', 'Keterangan', 'textarea', null, false, 'Tugas singkat, atau desa binaan untuk Bhabinkamtibmas. Untuk Kapolsek: profil singkat.'],
-    ['photo_url', 'Foto', 'image'],
-    ['sort', 'Urutan', 'number', null, false, 'Angka kecil tampil lebih dulu.'],
+  personnel: { kicker: ['TAMBAH PERSONEL', 'UBAH PERSONEL'], title: 'name', mode: 'col', f: [
+    { k: 'name', l: 'Nama lengkap dengan pangkat dan gelar', t: 'text', req: 1 },
+    [{ k: 'grp', l: 'Kelompok', t: 'select', o: { kapolsek: 'Kapolsek', wakil: 'Wakil pimpinan', unit: 'Kepala unit dan seksi', bhabin: 'Bhabinkamtibmas' } }, { k: 'jabatan', l: 'Jabatan', t: 'text', req: 1, tr: 1, hint: 'Contoh: Kanit Reskrim' }],
+    { k: 'description', l: 'Keterangan', t: 'textarea', tr: 1, hint: 'Tugas singkat, atau desa binaan untuk Bhabinkamtibmas. Untuk Kapolsek: profil singkat.' },
+    { k: 'photo_url', l: 'Foto', t: 'image', aspect: [800, 1000], hint: 'Setelah memilih foto, atur posisi dan ukurannya. Bagian kosong diisi putih.' },
+    { k: 'sort', l: 'Urutan', t: 'number', hint: 'Angka kecil tampil lebih dulu.' },
+  ] },
+  hero: { kicker: ['TAMBAH SLIDE', 'UBAH SLIDE'], title: 'title', mode: 'obj', f: [
+    [{ k: 'kind', l: 'Jenis slide', t: 'select', o: { photo: 'Foto dengan teks', dpo: 'Pencarian orang (lampu berkedip)' } }, { k: 'sort', l: 'Urutan', t: 'number', hint: 'Angka kecil tampil lebih dulu.' }],
+    { k: 'active', l: 'Tampilkan di situs', t: 'toggle' },
+    { k: 'image_url', l: 'Foto latar', t: 'image', aspect: [1920, 1280], hint: 'Foto lebar, minimal 1600 piksel. Tidak dipakai untuk slide Pencarian orang.' },
+    { k: 'eyebrow', l: 'Teks kecil di atas judul', t: 'text', tr: 1 },
+    { k: 'title', l: 'Judul', t: 'textarea-s', req: 1, tr: 1 },
+    { k: 'body', l: 'Kalimat penjelas', t: 'textarea-s', tr: 1 },
+    [{ k: 'cta', l: 'Tulisan tombol', t: 'text', tr: 1, hint: 'Kosongkan untuk tanpa tombol.' }, { k: 'href', l: 'Tombol menuju', t: 'select', o: HREFS }],
+    { k: 'alt', l: 'Keterangan foto (untuk pembaca layar)', t: 'text', tr: 1 },
+  ] },
+  services: { kicker: ['TAMBAH LAYANAN', 'UBAH LAYANAN'], title: 'name', mode: 'obj', f: [
+    { k: 'name', l: 'Nama layanan (singkat)', t: 'text', req: 1, tr: 1, hint: 'Tampil di kartu, tab Layanan, dan pilihan formulir booking. Contoh: Izin keramaian' },
+    [{ k: 'active', l: 'Tampilkan di situs', t: 'toggle' }, { k: 'bookable', l: 'Bisa dipilih saat booking', t: 'toggle' }],
+    [{ k: 'icon', l: 'Ikon kartu', t: 'select', o: ICONS }, { k: 'sort', l: 'Urutan', t: 'number' }],
+    { k: 'card', l: 'Ringkasan di kartu Beranda', t: 'textarea-s', tr: 1 },
+    { k: 'cta', l: 'Tulisan tautan kartu', t: 'text', tr: 1, hint: 'Contoh: Lihat panduan →' },
+    { k: 'title', l: 'Judul lengkap', t: 'text', tr: 1, hint: 'Contoh: Surat Izin Keramaian (SIK)' },
+    { k: 'intro', l: 'Penjelasan', t: 'textarea', tr: 1 },
+    { k: 'note', l: 'Catatan di bawah penjelasan', t: 'textarea-s', tr: 1 },
+    { k: 'sections', l: 'Bagian: persyaratan, alur, dan daftar dokumen', t: 'sections' },
+    { k: 'warning', l: 'Peringatan di bawah', t: 'textarea-s', tr: 1 },
+    { k: 'source', l: 'Sumber / catatan kecil', t: 'text', tr: 1 },
   ] },
 };
-const flat = f => f.flatMap(x => x[0] === 'two' ? x[1] : [x]);
-function field([k, label, type, opts, req, hint], v) {
-  const L = `<label for="e-${k}">${label}${req ? ' <span class="req">*</span>' : ''}</label>`, H = hint ? `<p class="hint">${hint}</p>` : '';
-  if (type === 'select') return `<div class="fld">${L}<select id="e-${k}" name="${k}">${Object.entries(opts).map(([a, b]) => `<option value="${a}"${a === v ? ' selected' : ''}>${b}</option>`).join('')}</select>${H}</div>`;
-  if (type === 'textarea' || type === 'textarea-s') return `<div class="fld">${L}<textarea id="e-${k}" name="${k}"${type === 'textarea-s' ? ' style="min-height:90px"' : ''}>${esc(v)}</textarea>${H}</div>`;
-  if (type === 'toggle') return `<div class="fld"><span style="font-weight:700;font-size:14px">${label}</span><label class="toggle"><input type="checkbox" role="switch" name="${k}" aria-label="${label}"${v ? ' checked' : ''}></label>${H}</div>`;
-  if (type === 'image') return `<div class="fld"><span style="font-weight:700;font-size:14px">${label}</span><div class="photo"><div class="box" style="${v ? `background-image:url('${esc(v)}')` : ''}">${v ? '' : 'Belum ada foto'}</div><div class="ctl"><label class="btn" style="align-self:flex-start">${I(IC.img, 18)}Pilih foto<input type="file" name="${k}__file" accept="image/*" hidden></label><input name="${k}" value="${esc(v)}" placeholder="atau tempel tautan foto" style="min-height:46px;border:1px solid var(--line);border-radius:12px;padding:0 14px"><p class="hint">JPG, PNG, atau WebP, maksimal 10 MB.</p></div></div></div>`;
-  return `<div class="fld">${L}<input id="e-${k}" name="${k}" type="${type}" value="${esc(v)}">${H}</div>`;
+const flat = f => f.flat();
+const blankT = () => ({ id: '', en: '', nij: '' });
+let FL = 'id'; // which language the open form shows
+function langBar() {
+  return `<div class="langbar"><span>Bahasa isian</span><div class="tabs" role="group">${LANGS.map(([l, n]) => `<button type="button" data-fl="${l}" aria-pressed="${l === FL}">${n}</button>`).join('')}</div><small>EN dan NGAJU boleh kosong; situs memakai teks Indonesia sebagai gantinya.</small></div>`;
 }
-function edit(entity, r, done) {
-  const F = FORMS[entity], isNew = !r;
-  r = r || { published: true, published_on: today(), kind: entity === 'wanted' ? 'dpo' : 'berita', grp: 'unit', sort: (D.personnel || 0) + 1 };
-  const val = k => r[k] ?? '';
-  drawer(F.kicker[isNew ? 0 : 1], isNew ? 'Tanpa judul' : r[F.title],
-    `<form id="ef" class="dr-form" novalidate style="display:flex;flex-direction:column;gap:18px">${F.f.map(x => x[0] === 'two' ? `<div class="two">${x[1].map(y => field(y, val(y[0]))).join('')}</div>` : field(x, val(x[0]))).join('')}<p class="err-line" id="ef-err"></p></form>`,
-    `<button class="btn primary" type="submit" form="ef">Simpan</button><button class="btn" type="button" data-close>Batal</button><span class="spacer"></span>${isNew ? '' : '<button class="btn danger" type="button" id="ef-del">Hapus</button>'}`);
-  const f = $('#ef');
-  $$('input[type=file]', f).forEach(inp => inp.onchange = () => {
-    const file = inp.files[0]; if (!file) return;
-    const box = inp.closest('.photo').querySelector('.box'); box.textContent = ''; box.style.backgroundImage = `url('${URL.createObjectURL(file)}')`;
+function setFL(root, l) {
+  FL = l;
+  $$('[data-fl]', root).forEach(b => b.setAttribute('aria-pressed', b.dataset.fl === l));
+  $$('[data-lang]', root).forEach(el => el.hidden = el.dataset.lang !== l);
+}
+const lfInput = (name, t, v, l) => {
+  const ph = l === 'id' ? '' : ` placeholder="${l === 'en' ? 'English' : 'Dayak Ngaju'} (kosong = teks Indonesia)"`;
+  const hid = l === FL ? '' : ' hidden';
+  return t.startsWith('textarea') ? `<textarea name="${name}" data-lang="${l}"${ph}${hid}${t === 'textarea-s' ? ' style="min-height:80px"' : ''}>${esc(v)}</textarea>` : `<input name="${name}" data-lang="${l}" value="${esc(v)}"${ph}${hid}>`;
+};
+function field(s, v) {
+  const { k, l, t, o, req, hint, tr } = s;
+  const L = `<label for="e-${k}">${l}${req ? ' <span class="req">*</span>' : ''}${tr ? ' <span class="tri">ID · EN · NGAJU</span>' : ''}</label>`, H = hint ? `<p class="hint">${hint}</p>` : '';
+  if (tr) { v = v || blankT(); return `<div class="fld">${L}${LANGS.map(([g]) => lfInput(`${k}.${g}`, t, v[g] || '', g)).join('')}${H}</div>`; }
+  if (t === 'select') return `<div class="fld">${L}<select id="e-${k}" name="${k}">${Object.entries(o).map(([a, b]) => `<option value="${a}"${a === v ? ' selected' : ''}>${b}</option>`).join('')}${v && !(v in o) ? `<option value="${esc(v)}" selected>${esc(v)}</option>` : ''}</select>${H}</div>`;
+  if (t === 'textarea' || t === 'textarea-s') return `<div class="fld">${L}<textarea id="e-${k}" name="${k}"${t === 'textarea-s' ? ' style="min-height:80px"' : ''}>${esc(v)}</textarea>${H}</div>`;
+  if (t === 'toggle') return `<div class="fld"><span class="flab">${l}</span><label class="toggle"><input type="checkbox" role="switch" name="${k}" aria-label="${l}"${v ? ' checked' : ''}></label>${H}</div>`;
+  if (t === 'image') return `<div class="fld"><span class="flab">${l}</span><div class="photo"><div class="box" style="aspect-ratio:${s.aspect[0]}/${s.aspect[1]};${v ? `background-image:url('${esc(v)}')` : ''}">${v ? '' : 'Belum ada foto'}</div><div class="ctl"><label class="btn" style="align-self:flex-start">${I(IC.img, 18)}Pilih dan atur foto<input type="file" name="${k}__file" accept="image/*" hidden></label>${v ? `<button class="btn ghost" type="button" data-recrop="${k}" style="align-self:flex-start">Atur ulang foto ini</button>` : ''}<input name="${k}" value="${esc(v)}" placeholder="atau tempel tautan foto" style="min-height:42px;border:1px solid var(--line);border-radius:10px;padding:0 14px">${H || '<p class="hint">Setelah memilih, Anda bisa memotong, memperbesar, dan menggeser foto.</p>'}</div></div></div>`;
+  if (t === 'sections') return `<div class="fld"><span class="flab">${l}</span><div id="secs"></div><button class="btn" type="button" id="sec-add" style="align-self:flex-start">+ Tambah bagian</button></div>`;
+  return `<div class="fld">${L}<input id="e-${k}" name="${k}" type="${t}" value="${esc(v)}">${H}</div>`;
+}
+
+// sections editor (services): list / numbered steps / per-document cards; items one per line in each language
+const SECT = { list: 'Daftar berpoin', steps: 'Langkah bernomor', cards: 'Kartu per dokumen' };
+const toLines = items => Object.fromEntries(LANGS.map(([l]) => [l, (items || []).map(i => i[l] || '').join('\n')]));
+const fromLines = t => { const id = t.id.split('\n').map(s => s.trim()); const en = t.en.split('\n'), nij = t.nij.split('\n'); return id.map((x, i) => ({ id: x, en: (en[i] || '').trim(), nij: (nij[i] || '').trim() })).filter(x => x.id); };
+function sectionsEditor(box, list) {
+  const S = list.map(s => ({ type: s.type, title: { ...blankT(), ...s.title }, lines: toLines(s.items), cards: (s.cards || []).map(c => ({ title: { ...blankT(), ...c.title }, lines: toLines(c.items) })) }));
+  const lfs = (path, t, obj) => LANGS.map(([g]) => lfInput(`${path}|${g}`, t, obj[g] || '', g)).join('');
+  const draw = () => {
+    box.innerHTML = S.map((s, i) => `<fieldset class="sec"><div class="sec-h"><select data-p="${i}|type" aria-label="Jenis bagian">${Object.entries(SECT).map(([a, b]) => `<option value="${a}"${a === s.type ? ' selected' : ''}>${b}</option>`).join('')}</select><span class="spacer"></span><button class="link" type="button" data-mv="${i}|-1"${i ? '' : ' disabled'}>Naik</button><button class="link" type="button" data-mv="${i}|1"${i < S.length - 1 ? '' : ' disabled'}>Turun</button><button class="link red" type="button" data-rm="${i}">Hapus bagian</button></div>
+<label>Judul bagian</label>${lfs(`${i}|title`, 'text', s.title)}
+${s.type === 'cards' ? `<div class="cardsed">${s.cards.map((c, j) => `<div class="card-ed"><div class="sec-h"><b>Kartu ${j + 1}</b><span class="spacer"></span><button class="link red" type="button" data-rmc="${i}|${j}">Hapus kartu</button></div><label>Nama dokumen</label>${lfs(`${i}|c${j}|title`, 'text', c.title)}<label>Persyaratan, satu per baris</label>${lfs(`${i}|c${j}|lines`, 'textarea', c.lines)}</div>`).join('')}<button class="btn ghost" type="button" data-addc="${i}" style="align-self:flex-start">+ Tambah kartu</button></div>`
+  : `<label>Isi, satu per baris</label>${lfs(`${i}|lines`, 'textarea', s.lines)}<p class="hint">Baris ke-1 bahasa EN/NGAJU adalah terjemahan baris ke-1 bahasa Indonesia, dan seterusnya.</p>`}</fieldset>`).join('') || '<p class="hint">Belum ada bagian.</p>';
+  };
+  box.addEventListener('input', e => {
+    const p = e.target.name?.split('|') || e.target.dataset.p?.split('|'); if (!p) return;
+    const s = S[+p[0]];
+    if (p[1] === 'type') { s.type = e.target.value; draw(); return; }
+    if (p[1].startsWith('c')) { const c = s.cards[+p[1].slice(1)]; c[p[2]][p[3]] = e.target.value; } else s[p[1]][p[2]] = e.target.value;
   });
-  const t = f.elements[F.title]; t.oninput = () => $('#dr-title').textContent = t.value.trim() || 'Tanpa judul';
+  box.addEventListener('change', e => { if (e.target.dataset.p?.endsWith('|type')) { S[+e.target.dataset.p.split('|')[0]].type = e.target.value; draw(); } });
+  box.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.rm) S.splice(+b.dataset.rm, 1);
+    else if (b.dataset.mv) { const [i, d] = b.dataset.mv.split('|').map(Number); [S[i], S[i + d]] = [S[i + d], S[i]]; }
+    else if (b.dataset.rmc) { const [i, j] = b.dataset.rmc.split('|').map(Number); S[i].cards.splice(j, 1); }
+    else if (b.dataset.addc) S[+b.dataset.addc].cards.push({ title: blankT(), lines: blankT() });
+    else return;
+    draw();
+  });
+  $('#sec-add').onclick = () => { S.push({ type: 'list', title: blankT(), lines: blankT(), cards: [] }); draw(); };
+  draw();
+  return () => S.map(s => ({ type: s.type, title: s.title, items: s.type === 'cards' ? [] : fromLines(s.lines), cards: s.type === 'cards' ? s.cards.map(c => ({ title: c.title, items: fromLines(c.lines) })) : [] }));
+}
+
+// photo cropper: drag to move, slider to zoom (zooming out leaves white space), rotate; returns a JPEG blob
+function cropImage(src, [W, H]) {
+  return new Promise(async resolve => {
+    let img;
+    try { img = await createImageBitmap(src instanceof Blob ? src : await (await fetch(src)).blob()); }
+    catch { toast('Foto tidak bisa dibuka. Pilih file foto lain.'); return resolve(null); }
+    const d = $('#crop'), cv = $('#crop canvas'), cx = cv.getContext('2d'), zoom = $('#crop-zoom');
+    cv.width = W; cv.height = H;
+    let rot = 0, x = 0, y = 0, sc = 1, cover = 1, contain = 1;
+    const dims = () => rot % 2 ? [img.height, img.width] : [img.width, img.height];
+    const fit = () => { const [iw, ih] = dims(); cover = Math.max(W / iw, H / ih); contain = Math.min(W / iw, H / ih); };
+    const lo = () => contain * 0.5, hi = () => cover * 4;
+    const toSlider = () => zoom.value = Math.round(100 * Math.log(sc / lo()) / Math.log(hi() / lo()));
+    const draw = () => { cx.fillStyle = '#fff'; cx.fillRect(0, 0, W, H); cx.save(); cx.translate(W / 2 + x, H / 2 + y); cx.rotate(rot * Math.PI / 2); cx.drawImage(img, -img.width * sc / 2, -img.height * sc / 2, img.width * sc, img.height * sc); cx.restore(); };
+    const set = s => { sc = s; x = y = 0; toSlider(); draw(); };
+    fit(); set(cover);
+    zoom.oninput = () => { sc = lo() * Math.pow(hi() / lo(), zoom.value / 100); draw(); };
+    let drag = null;
+    cv.onpointerdown = e => { drag = [e.clientX, e.clientY, x, y]; cv.setPointerCapture(e.pointerId); };
+    cv.onpointermove = e => { if (!drag) return; const k = W / cv.getBoundingClientRect().width; x = drag[2] + (e.clientX - drag[0]) * k; y = drag[3] + (e.clientY - drag[1]) * k; draw(); };
+    cv.onpointerup = cv.onpointercancel = () => drag = null;
+    cv.onwheel = e => { e.preventDefault(); sc = Math.min(hi(), Math.max(lo(), sc * (e.deltaY < 0 ? 1.06 : 1 / 1.06))); toSlider(); draw(); };
+    $('#crop-cover').onclick = () => set(cover);
+    $('#crop-contain').onclick = () => set(contain);
+    $('#crop-rot').onclick = () => { rot = (rot + 1) % 4; fit(); set(cover); };
+    const done = blob => { d.close(); resolve(blob); };
+    $('#crop-ok').onclick = () => cv.toBlob(done, 'image/jpeg', 0.9);
+    $('#crop-cancel').onclick = () => done(null);
+    d.oncancel = e => { e.preventDefault(); done(null); };
+    d.showModal();
+  });
+}
+
+function edit(entity, r, done) {
+  const F = FORMS[entity], isNew = !r, obj = F.mode === 'obj';
+  r = r || { published: true, active: true, bookable: true, published_on: today(), kind: { wanted: 'dpo', hero: 'photo' }[entity] || 'berita', grp: 'unit', icon: 'doc', href: 'layanan.html', sections: [], sort: (LISTS[entity]?.length || 0) + 1 };
+  const val = s => s.tr ? (obj ? { ...blankT(), ...(r[s.k] || {}) } : { id: r[s.k] ?? '', en: r.i18n?.en?.[s.k] ?? '', nij: r.i18n?.nij?.[s.k] ?? '' }) : (r[s.k] ?? '');
+  const titleOf = () => { const v = val(flat(F.f).find(s => s.k === F.title)); return (v.id ?? v) || 'Tanpa judul'; };
+  const hasTr = flat(F.f).some(s => s.tr);
+  drawer(F.kicker[isNew ? 0 : 1], isNew ? 'Tanpa judul' : titleOf(),
+    `<form id="ef" novalidate style="display:flex;flex-direction:column;gap:16px">${hasTr ? langBar() : ''}${F.f.map(x => Array.isArray(x) ? `<div class="two">${x.map(y => field(y, val(y))).join('')}</div>` : field(x, val(x))).join('')}<p class="err-line" id="ef-err"></p></form>`,
+    `<button class="btn primary" type="submit" form="ef">Simpan</button><button class="btn" type="button" data-close>Batal</button><span class="spacer"></span>${isNew ? '' : '<button class="btn danger" type="button" id="ef-del">Hapus</button>'}`);
+  const f = $('#ef'), crops = {};
+  $$('[data-fl]', f).forEach(b => b.onclick = () => setFL(f, b.dataset.fl));
+  const getSecs = $('#secs') ? sectionsEditor($('#secs'), r.sections || []) : null;
+  const pick = async (s, src) => {
+    const blob = await cropImage(src, s.aspect); if (!blob) return;
+    crops[s.k] = blob;
+    const box = f.elements[s.k + '__file'].closest('.photo').querySelector('.box');
+    box.textContent = ''; box.style.backgroundImage = `url('${URL.createObjectURL(blob)}')`;
+  };
+  flat(F.f).filter(s => s.t === 'image').forEach(s => {
+    const inp = f.elements[s.k + '__file'];
+    inp.onchange = () => { const file = inp.files[0]; inp.value = ''; if (!file) return; if (file.size > 25 * 1024 * 1024) return toast('Foto maksimal 25 MB.'); pick(s, file); };
+    const re = $(`[data-recrop="${s.k}"]`, f); if (re) re.onclick = () => pick(s, f.elements[s.k].value);
+  });
+  const tIn = f.elements[F.title + '.id'] || f.elements[F.title]; tIn.addEventListener('input', () => $('#dr-title').textContent = tIn.value.trim() || 'Tanpa judul');
   if ($('#ef-del')) $('#ef-del').onclick = e => del(e.currentTarget, entity, r.id, done);
   f.onsubmit = async e => {
     e.preventDefault();
     const err = $('#ef-err'), b = $('[form=ef][type=submit]'); err.textContent = '';
     try {
-      const row = { id: r.id || '' };
-      for (const [k, label, type, , req] of flat(F.f)) {
+      const row = { id: r.id || '' }, i18n = { en: { ...(r.i18n?.en || {}) }, nij: { ...(r.i18n?.nij || {}) } };
+      for (const s of flat(F.f)) {
+        const { k, t } = s;
+        if (t === 'sections') { row[k] = getSecs(); continue; }
+        if (s.tr) {
+          const v = Object.fromEntries(LANGS.map(([g]) => [g, f.elements[`${k}.${g}`].value.trim()]));
+          if (s.req && !v.id) { setFL(f, 'id'); throw new Error(`Isi ${s.l.toLowerCase()} (bahasa Indonesia).`); }
+          if (obj) row[k] = v; else { row[k] = v.id; i18n.en[k] = v.en; i18n.nij[k] = v.nij; }
+          continue;
+        }
         const el = f.elements[k];
-        row[k] = type === 'toggle' ? el.checked : el.value.trim();
-        if (req && !row[k]) throw new Error(`Isi ${label.toLowerCase()}.`);
-        const file = type === 'image' && f.elements[k + '__file'].files[0];
-        if (file) {
-          if (file.size > 10 * 1024 * 1024) throw new Error('Foto maksimal 10 MB.');
+        row[k] = t === 'toggle' ? el.checked : t === 'number' ? (el.value === '' ? 0 : +el.value) : el.value.trim();
+        if (s.req && !row[k]) throw new Error(`Isi ${s.l.toLowerCase()}.`);
+        if (t === 'image' && crops[k]) {
           b.disabled = true; b.textContent = 'Mengunggah foto…';
-          const u = await fn({ action: 'upload', name: safeName(file.name) });
-          const put = await fetch(u.signedUrl, { method: 'PUT', body: file, headers: { 'Content-Type': file.type } });
+          const u = await fn({ action: 'upload', name: `${entity}-${Date.now()}.jpg` });
+          const put = await fetch(u.signedUrl, { method: 'PUT', body: crops[k], headers: { 'Content-Type': 'image/jpeg' } });
           if (!put.ok) throw new Error('Unggah foto gagal. Coba lagi.');
           row[k] = u.publicUrl; // shortcut: a replaced photo stays in storage until the row is deleted
         }
       }
+      if (!obj) row.i18n = i18n;
+      if (entity === 'services' && !row.id) row.slug = (row.name.id.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'layanan').slice(0, 30) + '-' + Date.now().toString(36).slice(-3);
       b.disabled = true; b.textContent = 'Menyimpan…';
       await call('admin_save', { p_entity: entity, p_row: row });
-      dr.close(); toast(isNew ? 'Ditambahkan.' : 'Perubahan disimpan.'); done();
+      dr.close(); toast(obj ? 'Tersimpan. Tekan Publikasikan agar tampil di situs.' : isNew ? 'Ditambahkan.' : 'Perubahan disimpan.'); done();
     } catch (x) { err.textContent = x.message; } finally { b.disabled = false; b.textContent = 'Simpan'; }
   };
 }
@@ -276,6 +412,7 @@ const VIEWS = {
       d.bookings_new && ['#/booking', 'Booking belum dibaca', 'Pesanan kunjungan baru', d.bookings_new],
       fail.length && ['#/dasbor', 'Sinkron DPO gagal', fail.map(s => SRC[s.source]).join(', ') + ' — lihat di bawah', fail.length],
       d.placeholders && ['#/personel', 'Data personel belum diisi', 'Masih ada nama atau keterangan [ dalam kurung ]', d.placeholders],
+      d.unpublished && ['#/publikasi', 'Perubahan belum dipublikasikan', 'Teks, layanan, atau pengaturan yang belum tampil di situs', d.unpublished],
     ].filter(Boolean);
     view.innerHTML = `<h1>Halo, ${esc(first)}</h1><p class="sub">Anda masuk sebagai ${ROLE[me.role]}.${boss() ? ' Akses penuh, termasuk Log dan Kode akses.' : ''}</p>
 ${todo.length ? `<section class="card action"><h2>Perlu tindakan</h2><div class="todo">${todo.map(([h, b, s, n]) => `<a href="${h}"><span><b>${b}</b><span>${s}</span></span><strong>${n}</strong></a>`).join('')}</div></section>` : '<section class="card ok"><h2>Semua beres</h2><p class="muted" style="margin:0">Tidak ada yang perlu ditindaklanjuti saat ini.</p></section>'}
@@ -293,6 +430,114 @@ ${todo.length ? `<section class="card action"><h2>Perlu tindakan</h2><div class=
       e.target.disabled = true; $('#sync-m').textContent = 'Sinkron berjalan, sekitar 1 menit. Jangan tutup halaman ini.';
       try { const r = await sb('/functions/v1/dpo-sync', { method: 'POST', body: '{}' }); if (r.skipped) $('#sync-m').textContent = 'Baru saja disinkron. Bisa diulang 1 jam setelah sinkron terakhir.'; else { toast('Sinkron selesai.'); route(); } }
       catch (x) { $('#sync-m').textContent = x.message; } finally { e.target.disabled = false; }
+    };
+  },
+  // ---------- site content (published with the Publish button) ----------
+  async publikasi() {
+    const runs = await call('admin_list', { p_entity: 'publish' }), n = D.unpublished || 0;
+    view.innerHTML = `<div class="head"><h1>Publikasi</h1></div>
+<p class="sub">Perubahan di Pengaturan, Hero, Layanan, Teks situs, dan Desa disimpan sebagai draf. Tekan Publikasikan agar situs dibangun ulang; biasanya tampil dalam 1–2 menit. Berita, Pencarian orang, dan Personel langsung tampil tanpa perlu dipublikasikan.</p>
+<section class="card ${n ? 'action' : 'ok'}"><h2>${n ? `${n} perubahan belum dipublikasikan` : 'Situs sudah sesuai dengan konsol'}</h2>
+<div class="tools" style="margin-top:12px"><button class="btn primary" type="button" id="pub">Publikasikan sekarang</button><a class="btn" href="index.html" target="_blank" rel="noopener">Buka situs ↗</a></div>
+<p class="count" id="pub-st" style="margin-top:12px"></p></section>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Waktu</th><th>Oleh</th><th>Hasil</th></tr></thead><tbody>${runs.map(p => `<tr><td>${dt(p.at)}</td><td>${esc(p.admin_name || '-')}</td><td>${p.ok ? '<span class="pill">Dikirim</span>' : '<span class="pill red">Gagal</span>'} <small>${esc(p.detail || '')}</small></td></tr>`).join('') || '<tr><td colspan="3">Belum pernah.</td></tr>'}</tbody></table></div>`;
+    const st = $('#pub-st');
+    const poll = async (tries = 0) => {
+      try {
+        const s = await sb('/functions/v1/publish', { method: 'POST', body: JSON.stringify({ token, action: 'status' }) });
+        if (!s.status) return;
+        const label = s.status === 'completed' ? (s.conclusion === 'success' ? 'Selesai. Situs sudah diperbarui; muat ulang halaman situs untuk melihatnya.' : `Gagal (${s.conclusion}). Coba publikasikan lagi atau hubungi pengelola.`) : 'Sedang membangun situs…';
+        st.innerHTML = `Terakhir: ${dt(s.at)} · ${label} <a href="${esc(s.url)}" target="_blank" rel="noopener">detail</a>`;
+        if (s.status !== 'completed' && tries < 60) setTimeout(() => cur === 'publikasi' && poll(tries + 1), 5000);
+      } catch (x) { st.textContent = x.message; }
+    };
+    let cur = 'publikasi'; addEventListener('hashchange', () => cur = '', { once: true });
+    poll();
+    $('#pub').onclick = async e => {
+      e.target.disabled = true; st.textContent = 'Mengirim…';
+      try { await sb('/functions/v1/publish', { method: 'POST', body: JSON.stringify({ token, action: 'run' }) }); toast('Publikasi dimulai.'); D.unpublished = 0; menu(); setTimeout(() => poll(), 4000); }
+      catch (x) { st.textContent = x.message; } finally { e.target.disabled = false; }
+    };
+  },
+  async pengaturan() {
+    const s = await call('admin_list', { p_entity: 'settings' });
+    const F = [['wa', 'Nomor WhatsApp untuk tautan', 'Format internasional tanpa + dan spasi, contoh 6285315515282.'], ['wa_display', 'Nomor WhatsApp yang ditampilkan', 'Contoh: 0853 1551 5282'],
+      ['address', 'Alamat Mako', ''], ['maps', 'Tautan petunjuk arah Google Maps', 'Diawali https://'], ['instagram', 'Tautan Instagram', ''], ['instagram_handle', 'Nama akun Instagram', 'Contoh: @polsek.kapuas.tengah'], ['facebook', 'Tautan Facebook', '']];
+    view.innerHTML = `<div class="head"><h1>Pengaturan situs</h1></div><p class="sub">Kontak yang muncul di header, footer, tombol WhatsApp, dan bagian Kontak di semua halaman. Simpan, lalu Publikasikan.</p>
+<form class="card" id="setf" style="display:flex;flex-direction:column;gap:14px">${F.map(([k, l, h]) => `<div class="fld"><label for="s-${k}">${l}</label>${k === 'address' ? `<textarea id="s-${k}" name="${k}" style="min-height:70px">${esc(s[k])}</textarea>` : `<input id="s-${k}" name="${k}" value="${esc(s[k])}">`}${h ? `<p class="hint">${h}</p>` : ''}</div>`).join('')}
+<p class="err-line" id="set-err"></p><div class="tools"><button class="btn primary" type="submit">Simpan pengaturan</button></div></form>`;
+    $('#setf').onsubmit = async e => {
+      e.preventDefault(); const f = e.target, row = Object.fromEntries(F.map(([k]) => [k, f.elements[k].value.trim()]));
+      row.wa = row.wa.replace(/\D/g, '').replace(/^0/, '62');
+      try { await call('admin_save', { p_entity: 'settings', p_row: row }); toast('Tersimpan. Tekan Publikasikan agar tampil di situs.'); route(); } catch (x) { $('#set-err').textContent = x.message; }
+    };
+  },
+  async hero() {
+    const rows = LISTS.hero = await call('admin_list', { p_entity: 'hero' });
+    view.innerHTML = `<div class="head"><h1>Hero Beranda</h1><button class="btn primary" type="button" id="add">+ Tambah slide</button></div><p class="sub">Slide besar di atas Beranda, berganti setiap 6 detik. Urutan kecil tampil lebih dulu. Simpan, lalu Publikasikan.</p>
+<div class="tools"><input class="search" type="search" placeholder="Cari judul…" aria-label="Cari"></div><p class="count"></p><div class="list"></div><button class="btn more" type="button" hidden>Tampilkan lebih banyak</button>`;
+    $('#add').onclick = () => edit('hero', null, route);
+    listing({ rows: () => rows, match: r => `${r.title?.id} ${r.eyebrow?.id}`,
+      item: (r, i) => `<button type="button" class="item" data-i="${i}">${r.kind === 'dpo' ? `<span class="th ph" style="background:#07090F;color:#FF5A5A">${I(IC.search, 24)}</span>` : thumb(r.image_url)}<span class="tx"><b>${esc(r.title?.id || 'Tanpa judul')}</b><span>${r.kind === 'dpo' ? 'Pencarian orang (lampu berkedip)' : esc(r.eyebrow?.id || '')} · urutan ${r.sort}</span></span>${r.active ? '<span class="pill">Tampil</span>' : '<span class="pill off">Disembunyikan</span>'}</button>`,
+      open: r => edit('hero', r, route) });
+  },
+  async layanan() {
+    const rows = LISTS.services = await call('admin_list', { p_entity: 'services' });
+    view.innerHTML = `<div class="head"><h1>Layanan</h1><button class="btn primary" type="button" id="add">+ Tambah layanan</button></div><p class="sub">Kartu layanan di Beranda, halaman Layanan, dan pilihan formulir booking. Ubah persyaratan dan alur di sini. Simpan, lalu Publikasikan.</p>
+<div class="tools"><input class="search" type="search" placeholder="Cari layanan…" aria-label="Cari"></div><p class="count"></p><div class="list"></div><button class="btn more" type="button" hidden>Tampilkan lebih banyak</button>`;
+    $('#add').onclick = () => edit('services', null, route);
+    listing({ rows: () => rows, match: r => `${r.name?.id} ${r.title?.id}`,
+      item: (r, i) => `<button type="button" class="item" data-i="${i}"><span class="th ph round">${I({ search: IC.search, chat: IC.inbox, doc: IC.news, calendar: IC.cal, users: IC.users }[r.icon] || IC.log, 24)}</span><span class="tx"><b>${esc(r.name?.id)}</b><span>${esc(r.title?.id || '')} · ${r.sections.length} bagian · urutan ${r.sort}</span></span>${r.bookable ? '<span class="pill blue">Bisa booking</span>' : ''}${r.active ? '<span class="pill">Tampil</span>' : '<span class="pill off">Disembunyikan</span>'}</button>`,
+      open: r => edit('services', r, route) });
+  },
+  async teks() {
+    const rows = await call('admin_list', { p_entity: 'texts' });
+    const pages = [...new Set(rows.map(r => r.page))];
+    let pg = pages[0], only = false;
+    view.innerHTML = `<div class="head"><h1>Teks situs</h1></div><p class="sub">Semua kalimat di halaman situs. Ubah langsung di kotak; tersimpan otomatis saat Anda pindah kotak. Kolom EN dan NGAJU yang kosong memakai teks Indonesia. Setelah selesai, Publikasikan.</p>
+<div id="tabs"></div><div class="tools"><input class="search" type="search" placeholder="Cari di semua halaman…" aria-label="Cari"><label class="toggle" style="gap:10px;font-weight:600"><input type="checkbox" id="only"> Hanya yang belum diterjemahkan</label></div>
+<p class="count"></p><div class="txts" id="txts"></div>`;
+    const q = $('.search', view), box = $('#txts');
+    const drawTabs = () => $('#tabs').innerHTML = tabsHtml(pages.map(p => [p, p, rows.filter(r => r.page === p).length]), q.value ? '' : pg);
+    const draw = () => {
+      const t = q.value.trim().toLowerCase();
+      const xs = rows.filter(r => (t ? `${r.key} ${r.id} ${r.en} ${r.nij}`.toLowerCase().includes(t) : r.page === pg) && (!only || !r.en || !r.nij));
+      $('.count', view).textContent = `${xs.length} kalimat`;
+      box.innerHTML = xs.map(r => `<div class="txt${r.id !== r.key ? ' changed' : ''}" data-k="${esc(r.key)}">${LANGS.map(([l, n]) => `<label><span>${n}</span><textarea data-l="${l}" rows="${Math.min(6, Math.ceil(((r[l] || r.id).length + 1) / 44))}"${l === 'id' ? '' : ` placeholder="${esc(r.id)}"`}>${esc(r[l])}</textarea></label>`).join('')}<div class="txt-f"><small class="st"></small>${r.id !== r.key ? `<button class="link" type="button" data-reset title="${esc(r.key)}">Kembalikan teks asli</button>` : ''}</div></div>`).join('') || '<div class="empty">Tidak ada.</div>';
+    };
+    const save = async el => {
+      const card = el.closest('.txt'), r = rows.find(x => x.key === card.dataset.k), st = $('.st', card);
+      const row = { key: r.key, id: $('[data-l=id]', card).value, en: $('[data-l=en]', card).value, nij: $('[data-l=nij]', card).value };
+      if (row.id === r.id && row.en === r.en && row.nij === r.nij) return;
+      st.textContent = 'Menyimpan…';
+      try { Object.assign(r, await call('admin_save', { p_entity: 'texts', p_row: row })); st.textContent = 'Tersimpan'; card.classList.toggle('changed', r.id !== r.key); D.unpublished = (D.unpublished || 0) + 1; menu(); }
+      catch (x) { st.textContent = x.message; }
+    };
+    box.addEventListener('change', e => e.target.matches('textarea') && save(e.target));
+    box.addEventListener('click', async e => {
+      const b = e.target.closest('[data-reset]'); if (!b) return;
+      const card = b.closest('.txt'); $('[data-l=id]', card).value = card.dataset.k; await save($('[data-l=id]', card)); draw();
+    });
+    $('#tabs').onclick = e => { const b = e.target.closest('[data-f]'); if (b) { pg = b.dataset.f; q.value = ''; drawTabs(); draw(); } };
+    q.oninput = () => { drawTabs(); draw(); };
+    $('#only').onchange = e => { only = e.target.checked; draw(); };
+    drawTabs(); draw();
+  },
+  async desa() {
+    let rows = await call('admin_list', { p_entity: 'villages' });
+    view.innerHTML = `<div class="head"><h1>Desa dan Bhabinkamtibmas</h1><button class="btn primary" type="button" id="add">+ Tambah desa</button></div><p class="sub">Daftar desa di bagian Peta wilayah Beranda. Jumlah desa dihitung otomatis. Tersimpan saat Anda pindah kotak; lalu Publikasikan.</p>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Urutan</th><th>Desa</th><th>Bhabinkamtibmas</th><th></th></tr></thead><tbody id="vl"></tbody></table></div>`;
+    const draw = () => $('#vl').innerHTML = rows.map(v => `<tr data-id="${v.id}"><td style="width:90px"><input type="number" data-f="sort" value="${v.sort}" style="width:70px" aria-label="Urutan"></td><td><input data-f="name" value="${esc(v.name)}" aria-label="Nama desa"></td><td><input data-f="bhabin" value="${esc(v.bhabin)}" placeholder="Nama dan pangkat" aria-label="Bhabinkamtibmas"></td><td><button class="link red" type="button" data-del>Hapus</button></td></tr>`).join('');
+    draw();
+    $('#vl').addEventListener('change', async e => {
+      const tr = e.target.closest('tr'), v = rows.find(x => x.id === tr.dataset.id), f = e.target.dataset.f;
+      try { Object.assign(v, await call('admin_save', { p_entity: 'villages', p_row: { id: v.id, [f]: f === 'sort' ? +e.target.value : e.target.value.trim() } })); toast('Tersimpan.'); D.unpublished = (D.unpublished || 0) + 1; menu(); if (f === 'sort') { rows.sort((a, b) => a.sort - b.sort); draw(); } }
+      catch (x) { toast(x.message); }
+    });
+    $('#vl').addEventListener('click', e => { const b = e.target.closest('[data-del]'); if (b) { const id = b.closest('tr').dataset.id; del(b, 'villages', id, () => { rows = rows.filter(x => x.id !== id); draw(); }); } });
+    $('#add').onclick = async () => {
+      try { rows.push(await call('admin_save', { p_entity: 'villages', p_row: { name: 'Desa baru', sort: (rows.at(-1)?.sort || 0) + 1 } })); draw(); $('#vl tr:last-child [data-f=name]').select(); }
+      catch (x) { toast(x.message); }
     };
   },
   booking: () => inbox('bookings'),
@@ -337,7 +582,7 @@ ${todo.length ? `<section class="card action"><h2>Perlu tindakan</h2><div class=
     });
   },
   async personel() {
-    const rows = await call('admin_list', { p_entity: 'personnel' });
+    const rows = LISTS.personnel = await call('admin_list', { p_entity: 'personnel' });
     const G = { kapolsek: 'Kapolsek', wakil: 'Wakil pimpinan', unit: 'Kepala unit dan seksi', bhabin: 'Bhabinkamtibmas' };
     view.innerHTML = `<div class="head"><h1>Personel</h1><button class="btn primary" type="button" id="add">+ Tambah personel</button></div>
 <p class="sub">Tampil di halaman Profil, bagian Struktur organisasi. Isian yang masih di dalam [ kurung ] adalah placeholder yang perlu diganti.</p>
