@@ -442,20 +442,25 @@ ${todo.length ? `<section class="card action"><h2>Perlu tindakan</h2><div class=
 <p class="count" id="pub-st" style="margin-top:12px"></p></section>
 <div class="tblwrap"><table class="tbl"><thead><tr><th>Waktu</th><th>Oleh</th><th>Hasil</th></tr></thead><tbody>${runs.map(p => `<tr><td>${dt(p.at)}</td><td>${esc(p.admin_name || '-')}</td><td>${p.ok ? '<span class="pill">Dikirim</span>' : '<span class="pill red">Gagal</span>'} <small>${esc(p.detail || '')}</small></td></tr>`).join('') || '<tr><td colspan="3">Belum pernah.</td></tr>'}</tbody></table></div>`;
     const st = $('#pub-st');
+    let since = 0; // set when Publish is pressed: wait for a run started after that moment
     const poll = async (tries = 0) => {
+      if (location.hash !== '#/publikasi') return;
       try {
         const s = await sb('/functions/v1/publish', { method: 'POST', body: JSON.stringify({ token, action: 'status' }) });
+        const fresh = s.at && new Date(s.at).getTime() >= since - 15000;
+        if (since && !fresh) { st.textContent = 'Menunggu GitHub memulai pembangunan situs…'; if (tries < 60) setTimeout(() => poll(tries + 1), 4000); return; }
         if (!s.status) return;
-        const label = s.status === 'completed' ? (s.conclusion === 'success' ? 'Selesai. Situs sudah diperbarui; muat ulang halaman situs untuk melihatnya.' : `Gagal (${s.conclusion}). Coba publikasikan lagi atau hubungi pengelola.`) : 'Sedang membangun situs…';
+        const doneOk = s.status === 'completed' && s.conclusion === 'success';
+        const label = s.status === 'completed' ? (doneOk ? 'Selesai. Situs sudah diperbarui; muat ulang halaman situs untuk melihatnya.' : `Gagal (${s.conclusion}). Coba publikasikan lagi atau hubungi pengelola.`) : 'Sedang membangun situs… (biasanya 1–2 menit)';
         st.innerHTML = `Terakhir: ${dt(s.at)} · ${label} <a href="${esc(s.url)}" target="_blank" rel="noopener">detail</a>`;
-        if (s.status !== 'completed' && tries < 60) setTimeout(() => cur === 'publikasi' && poll(tries + 1), 5000);
+        if (s.status !== 'completed' && tries < 60) setTimeout(() => poll(tries + 1), 5000);
+        else if (since && doneOk) { since = 0; toast('Situs sudah diperbarui.'); setTimeout(route, 1500); }
       } catch (x) { st.textContent = x.message; }
     };
-    let cur = 'publikasi'; addEventListener('hashchange', () => cur = '', { once: true });
     poll();
     $('#pub').onclick = async e => {
       e.target.disabled = true; st.textContent = 'Mengirim…';
-      try { await sb('/functions/v1/publish', { method: 'POST', body: JSON.stringify({ token, action: 'run' }) }); toast('Publikasi dimulai.'); D.unpublished = 0; menu(); setTimeout(() => poll(), 4000); }
+      try { await sb('/functions/v1/publish', { method: 'POST', body: JSON.stringify({ token, action: 'run' }) }); toast('Publikasi dimulai.'); since = Date.now(); D.unpublished = 0; menu(); setTimeout(() => poll(), 3000); }
       catch (x) { st.textContent = x.message; } finally { e.target.disabled = false; }
     };
   },
