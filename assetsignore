@@ -1,0 +1,11 @@
+worker.js
+wrangler.jsonc
+README.md
+.gitignore
+.assetsignore
+.git
+.github
+.wrangler
+build
+supabase
+node_modules
