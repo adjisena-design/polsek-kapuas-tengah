@@ -300,6 +300,8 @@ profil = f'''<section class="phero"><div class="wrap">
 </article>
 <h3 style="font-size:18px">Wakil pimpinan</h3>
 <div class="people" data-grp="wakil">{person("Wakapolsek", "Iptu Achmad Saepudin", "Wakil Kepala Polsek Kapuas Tengah")}</div>
+<h3 style="font-size:18px">Kapolsubsektor</h3>
+<div class="people" data-grp="kapolsubsektor">{person("Kapolsubsektor", "[Nama dan pangkat]", "[Wilayah subsektor]")}</div>
 <h3 style="font-size:18px">Kepala unit dan seksi</h3>
 <div class="people" data-grp="unit">{"".join(person(r, "[Nama dan pangkat]", d) for r, d in UNITS)}</div>
 <h3 style="font-size:18px">KA SPKT</h3>

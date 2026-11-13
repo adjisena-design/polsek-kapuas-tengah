@@ -164,7 +164,7 @@ const FORMS = {
   ] },
   personnel: { kicker: ['TAMBAH PERSONEL', 'UBAH PERSONEL'], title: 'name', mode: 'col', f: [
     { k: 'name', l: 'Nama lengkap dengan pangkat dan gelar', t: 'text', req: 1 },
-    [{ k: 'grp', l: 'Kelompok', t: 'select', o: { kapolsek: 'Kapolsek', wakil: 'Wakil pimpinan', unit: 'Kepala unit dan seksi', kaspkt: 'KA SPKT', banit: 'Banit', bhabin: 'Bhabinkamtibmas' } }, { k: 'jabatan', l: 'Jabatan', t: 'text', req: 1, tr: 1, hint: 'Contoh: Kanit Reskrim' }],
+    [{ k: 'grp', l: 'Kelompok', t: 'select', o: { kapolsek: 'Kapolsek', wakil: 'Wakil pimpinan', kapolsubsektor: 'Kapolsubsektor', unit: 'Kepala unit dan seksi', kaspkt: 'KA SPKT', banit: 'Banit', bhabin: 'Bhabinkamtibmas' } }, { k: 'jabatan', l: 'Jabatan', t: 'text', req: 1, tr: 1, hint: 'Contoh: Kanit Reskrim' }],
     { k: 'description', l: 'Keterangan', t: 'textarea', tr: 1, hint: 'Tugas singkat, atau desa binaan untuk Bhabinkamtibmas. Untuk Kapolsek: profil singkat.' },
     { k: 'photo_url', l: 'Foto', t: 'image', aspect: [800, 1000], hint: 'Setelah memilih foto, atur posisi dan ukurannya. Bagian kosong diisi putih.' },
     { k: 'sort', l: 'Urutan', t: 'number', hint: 'Angka kecil tampil lebih dulu.' },
@@ -588,7 +588,7 @@ ${todo.length ? `<section class="card action"><h2>Perlu tindakan</h2><div class=
   },
   async personel() {
     const rows = LISTS.personnel = await call('admin_list', { p_entity: 'personnel' });
-    const G = { kapolsek: 'Kapolsek', wakil: 'Wakil pimpinan', unit: 'Kepala unit dan seksi', kaspkt: 'KA SPKT', banit: 'Banit', bhabin: 'Bhabinkamtibmas' };
+    const G = { kapolsek: 'Kapolsek', wakil: 'Wakil pimpinan', kapolsubsektor: 'Kapolsubsektor', unit: 'Kepala unit dan seksi', kaspkt: 'KA SPKT', banit: 'Banit', bhabin: 'Bhabinkamtibmas' };
     view.innerHTML = `<div class="head"><h1>Personel</h1><button class="btn primary" type="button" id="add">+ Tambah personel</button></div>
 <p class="sub">Tampil di halaman Profil, bagian Struktur organisasi. Isian yang masih di dalam [ kurung ] adalah placeholder yang perlu diganti.</p>
 <div class="tools"><input class="search" type="search" placeholder="Cari nama atau jabatan…" aria-label="Cari"></div>

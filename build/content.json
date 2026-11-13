@@ -2176,6 +2176,14 @@
    "id": "Nama personel yang masih di dalam kurung menunggu data resmi Polsek.",
    "en": "Names still in brackets are awaiting official data from the Polsek.",
    "nij": ""
+  },
+  {
+   "key": "Kapolsubsektor",
+   "page": "Profil",
+   "sort": 310,
+   "id": "Kapolsubsektor",
+   "en": "Sub-sector chiefs",
+   "nij": ""
   }
  ],
  "hero": [
