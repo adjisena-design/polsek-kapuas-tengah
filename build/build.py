@@ -66,6 +66,8 @@ def header(active):
 <img src="assets/polsek-kapuas-tengah.webp" alt="Lambang Polsek Kapuas Tengah" width="44" height="50">
 <span class="sep"></span>
 <span><b class="display">POLSEK KAPUAS TENGAH</b><small>Polres Kapuas · Polda Kalimantan Tengah</small></span>
+<span class="sep pbm-sep"></span>
+<img class="pbm" src="assets/pbm-horizontal-gelap.webp" alt="Polisi Bersama Masyarakat. Melindungi, mengayomi dan melayani" width="142" height="50">
 </a>
 <nav class="main" id="nav" aria-label="Menu utama">
 {links}
@@ -103,6 +105,8 @@ FOOTER = f'''<footer>
 <img src="assets/polda-kalteng.webp" alt="Lambang Polda Kalimantan Tengah" loading="lazy">
 <img src="assets/polres-kapuas.webp" alt="Lambang Polres Kapuas" loading="lazy">
 <img src="assets/polsek-kapuas-tengah.webp" alt="Lambang Polsek Kapuas Tengah" loading="lazy">
+<span class="pbm-div" aria-hidden="true"></span>
+<img class="pbm-f" src="assets/pbm-horizontal-gelap.webp" alt="Polisi Bersama Masyarakat. Melindungi, mengayomi dan melayani" loading="lazy">
 </div>
 <b class="display" style="font-size:20px;color:var(--paper);letter-spacing:.02em">POLSEK KAPUAS TENGAH</b>
 <a href="{DIR}" target="_blank" rel="noopener" style="font-size:14px">{ADDR}</a>
@@ -193,6 +197,7 @@ def page(fn, title, desc, active, body, pre='', svc_tpl=False):
 
 # ---------- Beranda: patch the existing main ----------
 m = open(R + 'build/home.html').read()
+SLOGAN = 'polisi bersama masyarakat'
 HERO = sorted([h for h in C['hero'] if h.get('active')], key=lambda h: h['sort'])
 bars = '<div class="bars" aria-hidden="true"><span style="width:140px"></span><span style="width:24px"></span><span style="width:16px"></span><span style="width:10px"></span><span style="width:5px"></span></div>'
 def slide(i, h):
@@ -212,7 +217,8 @@ def slide(i, h):
     tag = 'h1' if i == 0 else 'h2'
     return f'''<div class="slide{on}">
 <img src="{html.escape(h['image_url'] or '')}" alt="{X(h['alt'])}" width="1920" height="1280"{"" if i == 0 else " loading=\"lazy\""}>
-<div class="txt"><span class="eyebrow">{X(h['eyebrow'])}</span>
+<div class="txt"><img class="pbm-hero" src="assets/pbm-horizontal-gelap.webp" alt="Polisi Bersama Masyarakat" width="720" height="254"{"" if i == 0 else " loading=\"lazy\""}>
+{"" if (h['eyebrow'].get('id') or '').strip().lower() == SLOGAN else f'<span class="eyebrow">{X(h["eyebrow"])}</span>'}
 <{tag} class="display">{X(h['title'])}</{tag}>
 {bars}
 <p>{X(h['body'])}</p>
@@ -256,7 +262,7 @@ page('index.html', 'Polsek Kapuas Tengah — Polres Kapuas, Polda Kalimantan Ten
 def person(rank, name, role, img=None):
     ph = f'<img src="{img}" alt="{name}" loading="lazy">' if img else ICO['user']
     return f'<article class="person"><div class="ph">{ph}</div><div class="t"><small>{rank}</small><b>{name}</b><span>{role}</span></div></article>'
-UNITS = [('Ka SPKT', 'Pelayanan laporan dan pengaduan, 24 jam'), ('Kanit Intelkam', 'Intelijen keamanan dan perizinan keramaian'), ('Kanit Reskrim', 'Penyelidikan dan penyidikan tindak pidana'),
+UNITS = [('Kanit Intelkam', 'Intelijen keamanan dan perizinan keramaian'), ('Kanit Reskrim', 'Penyelidikan dan penyidikan tindak pidana'),
          ('Kanit Binmas', 'Pembinaan masyarakat dan Bhabinkamtibmas'), ('Kanit Samapta', 'Patroli, penjagaan, dan pengamanan kegiatan'), ('Kasihumas', 'Hubungan masyarakat dan informasi publik'),
          ('Kasium', 'Urusan umum, administrasi, dan logistik'), ('Kasiwas', 'Pengawasan internal')]
 profil = f'''<section class="phero"><div class="wrap">
@@ -267,6 +273,16 @@ profil = f'''<section class="phero"><div class="wrap">
 </div></section>
 <section style="padding:0 0 56px"><div class="wrap">
 <div class="stats4"><div><b>13</b><span>Desa binaan</span></div><div><b>± 1.962 km²</b><span>Luas wilayah hukum</span></div><div><b>24 jam</b><span>Layanan SPKT</span></div><div><b>110</b><span>Call Center Polri, gratis</span></div></div>
+</div></section>
+<section id="pbm" class="pbm-sec"><div class="wrap pbm-grid">
+<img class="pbm-shield" src="assets/pbm-perisai.webp" alt="Logo Perisai Polisi Bersama Masyarakat" width="560" height="691" loading="lazy">
+<div class="pbm-t">
+<span class="eyebrow">Identitas program</span>
+<h2 class="h2">Polisi Bersama Masyarakat</h2>
+<p>Polisi Bersama Masyarakat adalah pendekatan pengabdian Polri yang menempatkan masyarakat sebagai mitra utama dalam menjaga keamanan dan ketertiban. Kedekatan dengan warga dibangun lewat kehadiran, komunikasi, pelayanan, kerja sama, dan kepercayaan.</p>
+<ul class="pbm-vals"><li>Kepercayaan</li><li>Kebersamaan</li><li>Pengabdian</li><li>Keterbukaan</li><li>Kemitraan</li></ul>
+<img class="pbm-h" src="assets/pbm-horizontal-terang.webp" alt="Logo horizontal Polisi Bersama Masyarakat" width="720" height="249" loading="lazy">
+</div>
 </div></section>
 <section id="tugas" style="background:var(--khaki)"><div class="wrap">
 <span class="eyebrow">Tugas pokok</span>
@@ -286,9 +302,13 @@ profil = f'''<section class="phero"><div class="wrap">
 <div class="people" data-grp="wakil">{person("Wakapolsek", "Iptu Achmad Saepudin", "Wakil Kepala Polsek Kapuas Tengah")}</div>
 <h3 style="font-size:18px">Kepala unit dan seksi</h3>
 <div class="people" data-grp="unit">{"".join(person(r, "[Nama dan pangkat]", d) for r, d in UNITS)}</div>
+<h3 style="font-size:18px">KA SPKT</h3>
+<div class="people" data-grp="kaspkt">{person("KA SPKT", "[Nama dan pangkat]", "Pelayanan laporan dan pengaduan, 24 jam")}</div>
+<h3 style="font-size:18px">Banit</h3>
+<div class="people" data-grp="banit">{person("Banit", "[Nama dan pangkat]", "[Unit]")}</div>
 <h3 style="font-size:18px">Bhabinkamtibmas</h3>
 <div class="people" data-grp="bhabin">{person("Bhabinkamtibmas", "Bripka Hansen S.B.", "[Desa binaan]")}{person("Bhabinkamtibmas", "Aipda Fordiansyah", "[Desa binaan]")}{person("Bhabinkamtibmas", "[Nama dan pangkat]", "[Desa binaan]")}</div>
-<p class="note">Susunan jabatan mengikuti pola organisasi Polsek. Nama personel selain Kapolsek, Wakapolsek, dan dua Bhabinkamtibmas menunggu data resmi Polsek.</p>
+<p class="note">Susunan jabatan mengikuti pola organisasi Polsek. Nama personel yang masih di dalam kurung menunggu data resmi Polsek.</p>
 </div></section>
 <section style="background:var(--ink);color:var(--paper)"><div class="wrap" style="display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between">
 <div style="max-width:620px"><h2 class="h2">Ada yang bisa kami bantu?</h2><p style="color:var(--line)">Booking kunjungan, kirim pengaduan, atau hubungi kami langsung.</p></div>

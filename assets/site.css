@@ -406,3 +406,19 @@ input[type=date]{-webkit-appearance:none;appearance:none;min-width:0;max-width:1
 .chief .photo.framed{padding:0;background:#fff}
 .chief .photo.framed img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:top}
 .lead img.framed{object-fit:cover;object-position:top;padding-top:0;aspect-ratio:4/5;height:auto;align-self:stretch}
+
+/* Polisi Bersama Masyarakat: program logo (artwork from the official guide, never recoloured or cropped) */
+.brand .pbm{height:46px;width:auto}
+footer .logos .pbm-div{width:1px;height:48px;background:rgba(250,248,243,.25)}
+footer .logos img.pbm-f{height:58px}
+.slide .pbm-hero{position:relative;width:min(300px,62vw);height:auto;margin-bottom:-4px;filter:drop-shadow(0 2px 10px rgba(0,0,0,.45))}
+.pbm-sec{padding:56px 0;border-top:1px solid var(--line)}
+.pbm-grid{display:grid;grid-template-columns:minmax(180px,300px) 1fr;gap:48px;align-items:center}
+.pbm-shield{width:100%;height:auto;max-width:300px;justify-self:center}
+.pbm-t{display:flex;flex-direction:column;gap:14px;max-width:680px}
+.pbm-vals{list-style:none;display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:4px 0}
+.pbm-vals li{padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:var(--sand);font-weight:700;font-size:14px}
+.pbm-h{width:min(360px,100%);height:auto;margin-top:6px}
+@media (min-width:1321px){.brand .pbm,.brand .pbm-sep{display:none}}
+@media (max-width:640px){.brand .pbm{display:none}}
+@media (max-width:720px){.pbm-grid{grid-template-columns:1fr;gap:24px}.pbm-shield{max-width:200px}.slide .pbm-hero{width:min(220px,58vw)}}

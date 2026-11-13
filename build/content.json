@@ -2088,6 +2088,94 @@
    "id": "PENGADUAN DAN PERTANYAAN",
    "en": "REPORTS AND QUESTIONS",
    "nij": "PENGADUAN TUNTANG PISEK"
+  },
+  {
+   "key": "KA SPKT",
+   "page": "Profil",
+   "sort": 299,
+   "id": "KA SPKT",
+   "en": "Head of SPKT",
+   "nij": ""
+  },
+  {
+   "key": "Banit",
+   "page": "Profil",
+   "sort": 300,
+   "id": "Banit",
+   "en": "Unit officers",
+   "nij": ""
+  },
+  {
+   "key": "Identitas program",
+   "page": "Profil",
+   "sort": 301,
+   "id": "Identitas program",
+   "en": "Program identity",
+   "nij": ""
+  },
+  {
+   "key": "Polisi Bersama Masyarakat",
+   "page": "Profil",
+   "sort": 302,
+   "id": "Polisi Bersama Masyarakat",
+   "en": "Police Together with the Community",
+   "nij": ""
+  },
+  {
+   "key": "Polisi Bersama Masyarakat adalah pendekatan pengabdian Polri yang menempatkan masyarakat sebagai mitra utama dalam menjaga keamanan dan ketertiban. Kedekatan dengan warga dibangun lewat kehadiran, komunikasi, pelayanan, kerja sama, dan kepercayaan.",
+   "page": "Profil",
+   "sort": 303,
+   "id": "Polisi Bersama Masyarakat adalah pendekatan pengabdian Polri yang menempatkan masyarakat sebagai mitra utama dalam menjaga keamanan dan ketertiban. Kedekatan dengan warga dibangun lewat kehadiran, komunikasi, pelayanan, kerja sama, dan kepercayaan.",
+   "en": "Polisi Bersama Masyarakat is how the Indonesian National Police serves: the community is its main partner in keeping security and order. Closeness with residents is built through presence, communication, service, cooperation and trust.",
+   "nij": ""
+  },
+  {
+   "key": "Kepercayaan",
+   "page": "Profil",
+   "sort": 304,
+   "id": "Kepercayaan",
+   "en": "Trust",
+   "nij": ""
+  },
+  {
+   "key": "Kebersamaan",
+   "page": "Profil",
+   "sort": 305,
+   "id": "Kebersamaan",
+   "en": "Togetherness",
+   "nij": ""
+  },
+  {
+   "key": "Pengabdian",
+   "page": "Profil",
+   "sort": 306,
+   "id": "Pengabdian",
+   "en": "Service",
+   "nij": ""
+  },
+  {
+   "key": "Keterbukaan",
+   "page": "Profil",
+   "sort": 307,
+   "id": "Keterbukaan",
+   "en": "Openness",
+   "nij": ""
+  },
+  {
+   "key": "Kemitraan",
+   "page": "Profil",
+   "sort": 308,
+   "id": "Kemitraan",
+   "en": "Partnership",
+   "nij": ""
+  },
+  {
+   "key": "Nama personel yang masih di dalam kurung menunggu data resmi Polsek.",
+   "page": "Profil",
+   "sort": 309,
+   "id": "Nama personel yang masih di dalam kurung menunggu data resmi Polsek.",
+   "en": "Names still in brackets are awaiting official data from the Polsek.",
+   "nij": ""
   }
  ],
  "hero": [
