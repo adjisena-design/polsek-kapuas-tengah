@@ -308,6 +308,10 @@ profil = f'''<section class="phero"><div class="wrap">
 <div class="people" data-grp="kaspkt">{person("KA SPKT", "[Nama dan pangkat]", "Pelayanan laporan dan pengaduan, 24 jam")}</div>
 <h3 style="font-size:18px">Banit</h3>
 <div class="people" data-grp="banit">{person("Banit", "[Nama dan pangkat]", "[Unit]")}</div>
+<h3 style="font-size:18px">BA Polsek</h3>
+<div class="people" data-grp="bapolsek">{person("BA Polsek", "[Nama dan pangkat]", "[Tugas]")}</div>
+<h3 style="font-size:18px">BA Polsubsektor</h3>
+<div class="people" data-grp="bapolsubsektor">{person("BA Polsubsektor", "[Nama dan pangkat]", "[Wilayah subsektor]")}</div>
 <h3 style="font-size:18px">Bhabinkamtibmas</h3>
 <div class="people" data-grp="bhabin">{person("Bhabinkamtibmas", "Bripka Hansen S.B.", "[Desa binaan]")}{person("Bhabinkamtibmas", "Aipda Fordiansyah", "[Desa binaan]")}{person("Bhabinkamtibmas", "[Nama dan pangkat]", "[Desa binaan]")}</div>
 <p class="note">Susunan jabatan mengikuti pola organisasi Polsek. Nama personel yang masih di dalam kurung menunggu data resmi Polsek.</p>
