@@ -493,7 +493,7 @@
    "key": "[Sambutan singkat Kapolsek, dua sampai tiga kalimat: komitmen pelayanan yang presisi dan humanis, keterbukaan, serta ajakan menjaga kamtibmas bersama.]",
    "page": "Beranda",
    "sort": 68,
-   "id": "[Sambutan singkat Kapolsek, dua sampai tiga kalimat: komitmen pelayanan yang presisi dan humanis, keterbukaan, serta ajakan menjaga kamtibmas bersama.]",
+   "id": "[Sambutan singkat Kapolsek, dua sampai tiga kalimat: komitmen pelayanan yang humanis sebagai polisi bersama masyarakat, keterbukaan, serta ajakan menjaga kamtibmas bersama.]",
    "en": "",
    "nij": ""
   },
@@ -2108,9 +2108,9 @@
     "nij": "Kepolisian Sektor Kapuas Tengah"
    },
    "title": {
-    "en": "Serving with precision, guarding with Isen Mulang.",
-    "id": "Presisi melayani, Isen Mulang menjaga.",
-    "nij": "Presisi melayani, Isen Mulang mahaga."
+    "en": "Police with the community, guarding with Isen Mulang.",
+    "id": "Polisi bersama masyarakat, Isen Mulang menjaga.",
+    "nij": "Polisi hapumpong warga, Isen Mulang mahaga."
    },
    "body": {
     "en": "Information and digital services for the people of Kapuas Tengah District, Kapuas Regency.",
@@ -2123,7 +2123,7 @@
     "nij": "Ite pelayanan"
    },
    "href": "layanan.html",
-   "updated_at": "2026-11-11T08:13:52.601491+00:00"
+   "updated_at": "2026-11-13T06:02:10.828824+00:00"
   },
   {
    "id": "963a0b5f-c3d2-45ed-a222-3acd213db5f2",
@@ -2205,9 +2205,9 @@
     "nij": "Demonstrasi teknologi pengamanan Polri"
    },
    "eyebrow": {
-    "en": "Polri Presisi",
-    "id": "Polri Presisi",
-    "nij": "Polri Presisi"
+    "en": "Police with the community",
+    "id": "Polisi bersama masyarakat",
+    "nij": "Polisi hapumpong warga"
    },
    "title": {
     "en": "Ever more modern service.",
@@ -2225,7 +2225,7 @@
     "nij": "Booking kunjungan"
    },
    "href": "#booking",
-   "updated_at": "2026-11-11T08:13:52.601491+00:00"
+   "updated_at": "2026-11-13T06:02:10.828824+00:00"
   },
   {
    "id": "96909aee-7af4-4ded-9355-97fe7297c98b",
