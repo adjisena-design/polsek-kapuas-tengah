@@ -6,6 +6,8 @@
   "observability": {
     "enabled": true
   },
+  // Needed by `wrangler preview`, which Cloudflare runs for non-main branches (preview builds).
+  "previews": {},
   "assets": {
     "directory": ".",
     "binding": "ASSETS",
