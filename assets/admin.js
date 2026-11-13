@@ -6,7 +6,10 @@ let token = sessionStorage.getItem('pkt-token'), me = null, D = {};
 const LISTS = {};
 
 const toast = m => { const t = $('#toast'); (dr.open ? dr : document.body).append(t); t.textContent = m; t.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('on'), 3500); };
-const call = (name, args = {}) => rpc(name, { p_token: token, ...args }).catch(e => { if (/Sesi berakhir/.test(e.message)) signOut('Sesi berakhir. Silakan masuk lagi.'); throw e; });
+// Konsol revision sent with every request. Raise it together with the database minimum
+// (app.require_fresh_konsol) whenever older copies would save something wrongly.
+const KONSOL_REV = '2';
+const call = (name, args = {}) => sb('/rest/v1/rpc/' + name, { method: 'POST', headers: { 'x-konsol-rev': KONSOL_REV }, body: JSON.stringify({ p_token: token, ...args }) }).catch(e => { if (/Sesi berakhir/.test(e.message)) signOut('Sesi berakhir. Silakan masuk lagi.'); throw e; });
 const fn = body => sb('/functions/v1/admin-files', { method: 'POST', body: JSON.stringify({ token, ...body }) });
 const boss = () => ['owner', 'kapolsek'].includes(me?.role);
 const ROLE = { owner: 'Owner', kapolsek: 'Kapolsek', staff: 'Staf' };
@@ -653,3 +656,32 @@ ${todo.length ? `<section class="card action"><h2>Perlu tindakan</h2><div class=
     };
   },
 };
+
+
+// Update check: if a newer Konsol has been published, tell the user to reload so every phone
+// runs the same version (slow connections and open tabs otherwise keep old code).
+(() => {
+  const mine = (document.querySelector('script[src*="admin.js"]')?.src.match(/[?&]v=(\w+)/) || [])[1];
+  if (!mine) return;
+  let shown = false, last = 0;
+  const check = async () => {
+    if (shown || Date.now() - last < 60000 || !navigator.onLine) return;
+    last = Date.now();
+    try {
+      const html = await (await fetch('/?cek=' + Date.now(), { cache: 'no-store' })).text();
+      const now = (html.match(/assets\/admin\.js\?v=(\w+)/) || [])[1];
+      if (!now || now === mine) return;
+      shown = true;
+      const bar = document.createElement('div');
+      bar.setAttribute('role', 'alert');
+      bar.style.cssText = 'position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:12px;background:#2B2118;color:#FAF8F3;box-shadow:0 8px 24px rgba(0,0,0,.3);font:600 14px/1.4 system-ui,sans-serif';
+      bar.innerHTML = '<span>Versi Konsol terbaru tersedia. Simpan pekerjaan Anda, lalu muat ulang.</span><button type="button" style="flex:none;padding:8px 14px;border:0;border-radius:8px;background:#C9A227;color:#2B2118;font:inherit;cursor:pointer">Muat ulang</button>';
+      bar.querySelector('button').onclick = () => location.reload();
+      document.body.append(bar);
+    } catch { /* offline or slow: try again later */ }
+  };
+  setInterval(check, 180000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) check(); });
+  addEventListener('online', check);
+  addEventListener('focus', check);
+})();
