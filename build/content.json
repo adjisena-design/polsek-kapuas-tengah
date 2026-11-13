@@ -2184,6 +2184,22 @@
    "id": "Kapolsubsektor",
    "en": "Sub-sector chiefs",
    "nij": ""
+  },
+  {
+   "key": "BA Polsek",
+   "page": "Profil",
+   "sort": 311,
+   "id": "BA Polsek",
+   "en": "Polsek NCOs",
+   "nij": ""
+  },
+  {
+   "key": "BA Polsubsektor",
+   "page": "Profil",
+   "sort": 312,
+   "id": "BA Polsubsektor",
+   "en": "Sub-sector NCOs",
+   "nij": ""
   }
  ],
  "hero": [
