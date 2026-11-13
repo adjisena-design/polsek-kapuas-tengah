@@ -8,6 +8,19 @@ const MAIN = 'polsekkapuastengah.id';
 const ADMIN = 'admin.' + MAIN;
 const PUBLIC_PAGES = ['/index', '/profil', '/layanan', '/berita', '/pencarian-orang'];
 
+// Pages must never be served stale: each page names its scripts and styles with a content
+// hash (?v=...), so a fresh page always pulls the current code. Hashed assets can be cached long.
+async function serve(env, request) {
+  const res = await env.ASSETS.fetch(request);
+  const u = new URL(request.url);
+  const type = res.headers.get('content-type') || '';
+  if (res.status !== 200) return res;
+  const out = new Response(res.body, res);
+  if (type.includes('text/html')) out.headers.set('Cache-Control', 'no-cache, must-revalidate');
+  else if (u.searchParams.has('v') && /\.(js|css)$/.test(u.pathname)) out.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+  return out;
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -23,7 +36,7 @@ export default {
       // Konsol opens directly at admin.polsekkapuastengah.id/
       if (url.pathname === '/' || url.pathname === '/index.html') {
         url.pathname = '/admin';
-        return env.ASSETS.fetch(new Request(url, request));
+        return serve(env, new Request(url, request));
       }
       // Public pages opened on admin. go back to the main site
       const page = url.pathname.replace(/\.html$/, '').replace(/\/$/, '');
@@ -31,7 +44,7 @@ export default {
         url.hostname = MAIN;
         return Response.redirect(url.toString(), 301);
       }
-      return env.ASSETS.fetch(request);
+      return serve(env, request);
     }
 
     if (host === MAIN) {
@@ -43,6 +56,6 @@ export default {
       }
     }
 
-    return env.ASSETS.fetch(request);
+    return serve(env, request);
   },
 };

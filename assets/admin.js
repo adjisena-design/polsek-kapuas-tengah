@@ -596,7 +596,7 @@ ${todo.length ? `<section class="card action"><h2>Perlu tindakan</h2><div class=
     $('#add').onclick = () => edit('personnel', null, route);
     listing({
       rows: () => rows, match: r => `${r.jabatan} ${r.name} ${r.description ?? ''}`,
-      item: (r, i) => `<button type="button" class="item" data-i="${i}">${thumb(r.photo_url, true)}<span class="tx"><b>${esc(r.name)}</b><span>${G[r.grp]} · ${esc(r.jabatan)}</span></span>${/^\[/.test(r.name) || /^\[/.test(r.description || '') ? '<span class="pill red">Perlu diisi</span>' : '<span class="pill">Tampil</span>'}</button>`,
+      item: (r, i) => `<button type="button" class="item" data-i="${i}">${thumb(r.photo_url, true)}<span class="tx"><b>${esc(r.name)}</b><span>${esc(G[r.grp] || r.grp || 'Tanpa kelompok')} · ${esc(r.jabatan)}</span></span>${/^\[/.test(r.name) || /^\[/.test(r.description || '') ? '<span class="pill red">Perlu diisi</span>' : '<span class="pill">Tampil</span>'}</button>`,
       open: r => edit('personnel', r, route),
     });
   },
