@@ -81,8 +81,16 @@ function menu() {
   }).join('');
   const pb = $('#pubbar'); pb.hidden = !D.unpublished || page === 'publikasi'; pb.textContent = `${D.unpublished} perubahan belum dipublikasikan · Publikasikan`;
 }
-$('#menu-btn').onclick = () => { const o = $('#side').classList.toggle('open'); $('#menu-btn').setAttribute('aria-expanded', o); };
-$('#menu').addEventListener('click', e => { if (e.target.closest('a')) $('#side').classList.remove('open'); });
+const sideOpen = o => { $('#side').classList.toggle('open', o); $('#menu-btn').setAttribute('aria-expanded', o); $('#side-bg').hidden = !o; };
+$('#menu-btn').onclick = () => sideOpen(!$('#side').classList.contains('open'));
+$('#side-bg').onclick = () => sideOpen(false);
+// phones: the most used pages sit in a bar at the bottom of the screen, the rest stay in the menu
+const BOTTOM = [['dasbor', 'Dasbor', IC.home], ['berita', 'Berita', IC.news], ['booking', 'Booking', IC.cal, 'bookings_new'], ['pengaduan', 'Aduan', IC.inbox, 'reports_new'], ['publikasi', 'Publikasi', '<path d="M12 16V4M7 9l5-5 5 5M4 20h16"/>', 'unpublished']];
+function bottomNav(page) {
+  $('#bnav').innerHTML = BOTTOM.map(([id, l, ic, dot]) => `<a href="#/${id}"${id === page ? ' aria-current="page"' : ''}>${I(ic, 22)}<span>${l}</span>${dot && D[dot] ? `<i>${D[dot]}</i>` : ''}</a>`).join('') + `<button type="button" id="bnav-more">${I('<path d="M4 6h16M4 12h16M4 18h16"/>', 22)}<span>Menu</span></button>`;
+  $('#bnav-more').onclick = () => sideOpen(true);
+}
+$('#menu').addEventListener('click', e => { if (e.target.closest('a')) sideOpen(false); });
 addEventListener('hashchange', route);
 async function route() {
   if (!me) return;
@@ -93,6 +101,8 @@ async function route() {
   try { D = await call('admin_list', { p_entity: 'dashboard' }); } catch { /* menu dots only */ }
   menu();
   try { await VIEWS[go](); } catch (x) { view.innerHTML = `<div class="empty">${esc(x.message)}</div>`; }
+  if (PUB_PAGES.includes(go) && view.querySelector('.head')) { const anchor = view.querySelector('.sub') || view.querySelector('.head'); anchor.insertAdjacentHTML('afterend', publishBox(go)); wirePublish($('.pubbox', view)); }
+  bottomNav(go);
   window.scrollTo(0, 0);
 }
 
@@ -403,6 +413,47 @@ async function inbox(entity) {
   });
 }
 
+
+// ---------- publish box: on the Publikasi page and on top of every content page, so phones never need the menu to publish ----------
+const PUB_NOTE = {
+  berita: 'Berita dan imbauan langsung tampil di situs setelah disimpan. Publikasikan bila ada perubahan teks, hero, atau layanan yang belum tampil.',
+  pencarian: 'Data Pencarian orang langsung tampil di situs setelah disimpan.',
+  personel: 'Data personel langsung tampil di situs setelah disimpan.',
+};
+function publishBox(page = 'publikasi') {
+  const n = D.unpublished || 0, compact = page !== 'publikasi';
+  return `<section class="card pubbox ${n ? 'action' : 'ok'}${compact ? ' compact' : ''}"><h2>${n ? `${n} perubahan belum dipublikasikan` : 'Situs sudah sesuai dengan konsol'}</h2>
+${compact && PUB_NOTE[page] ? `<p class="hint" style="margin:4px 0 0">${PUB_NOTE[page]}</p>` : ''}
+<div class="tools" style="margin-top:12px"><button class="btn primary" type="button" data-pub>Publikasikan sekarang</button>${compact ? '' : '<a class="btn" href="/" target="_blank" rel="noopener">Buka situs ↗</a>'}</div>
+<p class="count" data-pub-st style="margin-top:10px"></p></section>`;
+}
+function wirePublish(box) {
+  if (!box) return;
+  const st = $('[data-pub-st]', box), btn = $('[data-pub]', box);
+  let since = 0; // set when Publish is pressed: wait for a run started after that moment
+  const poll = async (tries = 0) => {
+    if (!box.isConnected) return;
+    try {
+      const s = await sb('/functions/v1/publish', { method: 'POST', body: JSON.stringify({ token, action: 'status' }) });
+      const fresh = s.at && new Date(s.at).getTime() >= since - 15000;
+      if (since && !fresh) { st.textContent = 'Menunggu GitHub memulai pembangunan situs…'; if (tries < 60) setTimeout(() => poll(tries + 1), 4000); return; }
+      if (!s.status) return;
+      const doneOk = s.status === 'completed' && s.conclusion === 'success';
+      const label = s.status === 'completed' ? (doneOk ? 'Selesai. Situs sudah diperbarui; muat ulang halaman situs untuk melihatnya.' : `Gagal (${s.conclusion}). Coba publikasikan lagi atau hubungi pengelola.`) : 'Sedang membangun situs… (biasanya 1–2 menit)';
+      st.innerHTML = `Terakhir: ${dt(s.at)} · ${label} <a href="${esc(s.url)}" target="_blank" rel="noopener">detail</a>`;
+      if (s.status !== 'completed' && tries < 60) setTimeout(() => poll(tries + 1), 5000);
+      else if (since && doneOk) { since = 0; toast('Situs sudah diperbarui.'); setTimeout(route, 1500); }
+    } catch (x) { st.textContent = x.message; }
+  };
+  poll();
+  btn.onclick = async () => {
+    btn.disabled = true; st.textContent = 'Mengirim…';
+    try { await sb('/functions/v1/publish', { method: 'POST', body: JSON.stringify({ token, action: 'run' }) }); toast('Publikasi dimulai.'); since = Date.now(); D.unpublished = 0; menu(); box.classList.replace('action', 'ok'); $('h2', box).textContent = 'Publikasi sedang berjalan'; setTimeout(() => poll(), 3000); }
+    catch (x) { st.textContent = x.message; } finally { btn.disabled = false; }
+  };
+}
+const PUB_PAGES = ['berita', 'pencarian', 'personel', 'pengaturan', 'hero', 'layanan', 'teks', 'desa'];
+
 // ---------- pages ----------
 const VIEWS = {
   async dasbor() {
@@ -440,32 +491,9 @@ ${todo.length ? `<section class="card action"><h2>Perlu tindakan</h2><div class=
     const runs = await call('admin_list', { p_entity: 'publish' }), n = D.unpublished || 0;
     view.innerHTML = `<div class="head"><h1>Publikasi</h1></div>
 <p class="sub">Perubahan di Pengaturan, Hero, Layanan, Teks situs, dan Desa disimpan sebagai draf. Tekan Publikasikan agar situs dibangun ulang; biasanya tampil dalam 1–2 menit. Berita, Pencarian orang, dan Personel langsung tampil tanpa perlu dipublikasikan.</p>
-<section class="card ${n ? 'action' : 'ok'}"><h2>${n ? `${n} perubahan belum dipublikasikan` : 'Situs sudah sesuai dengan konsol'}</h2>
-<div class="tools" style="margin-top:12px"><button class="btn primary" type="button" id="pub">Publikasikan sekarang</button><a class="btn" href="index.html" target="_blank" rel="noopener">Buka situs ↗</a></div>
-<p class="count" id="pub-st" style="margin-top:12px"></p></section>
+${publishBox()}
 <div class="tblwrap"><table class="tbl"><thead><tr><th>Waktu</th><th>Oleh</th><th>Hasil</th></tr></thead><tbody>${runs.map(p => `<tr><td>${dt(p.at)}</td><td>${esc(p.admin_name || '-')}</td><td>${p.ok ? '<span class="pill">Dikirim</span>' : '<span class="pill red">Gagal</span>'} <small>${esc(p.detail || '')}</small></td></tr>`).join('') || '<tr><td colspan="3">Belum pernah.</td></tr>'}</tbody></table></div>`;
-    const st = $('#pub-st');
-    let since = 0; // set when Publish is pressed: wait for a run started after that moment
-    const poll = async (tries = 0) => {
-      if (location.hash !== '#/publikasi') return;
-      try {
-        const s = await sb('/functions/v1/publish', { method: 'POST', body: JSON.stringify({ token, action: 'status' }) });
-        const fresh = s.at && new Date(s.at).getTime() >= since - 15000;
-        if (since && !fresh) { st.textContent = 'Menunggu GitHub memulai pembangunan situs…'; if (tries < 60) setTimeout(() => poll(tries + 1), 4000); return; }
-        if (!s.status) return;
-        const doneOk = s.status === 'completed' && s.conclusion === 'success';
-        const label = s.status === 'completed' ? (doneOk ? 'Selesai. Situs sudah diperbarui; muat ulang halaman situs untuk melihatnya.' : `Gagal (${s.conclusion}). Coba publikasikan lagi atau hubungi pengelola.`) : 'Sedang membangun situs… (biasanya 1–2 menit)';
-        st.innerHTML = `Terakhir: ${dt(s.at)} · ${label} <a href="${esc(s.url)}" target="_blank" rel="noopener">detail</a>`;
-        if (s.status !== 'completed' && tries < 60) setTimeout(() => poll(tries + 1), 5000);
-        else if (since && doneOk) { since = 0; toast('Situs sudah diperbarui.'); setTimeout(route, 1500); }
-      } catch (x) { st.textContent = x.message; }
-    };
-    poll();
-    $('#pub').onclick = async e => {
-      e.target.disabled = true; st.textContent = 'Mengirim…';
-      try { await sb('/functions/v1/publish', { method: 'POST', body: JSON.stringify({ token, action: 'run' }) }); toast('Publikasi dimulai.'); since = Date.now(); D.unpublished = 0; menu(); setTimeout(() => poll(), 3000); }
-      catch (x) { st.textContent = x.message; } finally { e.target.disabled = false; }
-    };
+    wirePublish($('.pubbox', view));
   },
   async pengaturan() {
     const s = await call('admin_list', { p_entity: 'settings' });
