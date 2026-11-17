@@ -126,6 +126,9 @@ async function del(btn, entity, id, after) {
 function drawer(kicker, title, body, foot) {
   $('#dr-kicker').textContent = kicker; $('#dr-title').textContent = title;
   drBody.innerHTML = body; drFoot.innerHTML = foot; drBody.scrollTop = 0;
+  // phones: Safari's bottom bar can cover the footer, so the save button is repeated next to Tutup
+  const sub = $('[type=submit][form]', drFoot), top = $('#dr-save');
+  top.hidden = !sub; if (sub) { top.setAttribute('form', sub.getAttribute('form')); top.textContent = sub.textContent; }
   if (!dr.open) dr.showModal();
 }
 dr.addEventListener('click', e => { if (e.target === dr || e.target.closest('[data-close]')) dr.close(); });
@@ -328,7 +331,7 @@ function edit(entity, r, done) {
   if ($('#ef-del')) $('#ef-del').onclick = e => del(e.currentTarget, entity, r.id, done);
   f.onsubmit = async e => {
     e.preventDefault();
-    const err = $('#ef-err'), b = $('[form=ef][type=submit]'); err.textContent = '';
+    const err = $('#ef-err'), bs = $$('[form=ef][type=submit]'), b = { set disabled(v) { bs.forEach(x => x.disabled = v); }, set textContent(v) { bs.forEach(x => x.textContent = v); } }; err.textContent = '';
     try {
       const row = { id: r.id || '' }, i18n = { en: { ...(r.i18n?.en || {}) }, nij: { ...(r.i18n?.nij || {}) } };
       for (const s of flat(F.f)) {
@@ -356,7 +359,7 @@ function edit(entity, r, done) {
       b.disabled = true; b.textContent = 'Menyimpan…';
       await call('admin_save', { p_entity: entity, p_row: row });
       dr.close(); toast(obj ? 'Tersimpan. Tekan Publikasikan agar tampil di situs.' : isNew ? 'Ditambahkan.' : 'Perubahan disimpan.'); done();
-    } catch (x) { err.textContent = x.message; } finally { b.disabled = false; b.textContent = 'Simpan'; }
+    } catch (x) { err.textContent = x.message; toast(x.message); err.scrollIntoView({ block: 'center', behavior: 'smooth' }); } finally { b.disabled = false; b.textContent = 'Simpan'; }
   };
 }
 
