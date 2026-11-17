@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"><rect width="1600" height="900" fill="#2B2118"/>
+<rect width="1600" height="900" fill="url(#g)"/>
+<defs><radialGradient id="g" cx="0.5" cy="0.42" r="0.7"><stop offset="0" stop-color="#5A4030" stop-opacity=".9"/><stop offset="1" stop-color="#2B2118" stop-opacity="0"/></radialGradient></defs>
+<g fill="#C9A227" opacity=".18"><path d="M0 860h1600v40H0z"/><path d="M1300 830l40-40h60l-40 40zM1400 830l40-40h60l-40 40zM1500 830l40-40h60l-40 40z"/></g>
+<g transform="translate(800 390)"><path d="M-260 170h520" stroke="#8A6A1E" stroke-width="18" stroke-linecap="round"/>
+<g transform="translate(-60 0)"><path d="M0 150C-90 110-110 20-60-50c5 50 30 70 45 70C-30-40 20-110 10-180c80 60 120 160 80 260-12 30-40 60-90 70z" fill="#E07A1F"/><path d="M0 150c-40-20-50-70-20-110 10 30 30 40 40 40 0-30 20-60 30-80 30 50 40 120-50 150z" fill="#F2C14E"/></g>
+<g transform="translate(-60 -10)"><circle r="210" fill="none" stroke="#C62828" stroke-width="34"/><path d="M-148 148L148-148" stroke="#C62828" stroke-width="34" stroke-linecap="round"/></g>
+<g transform="translate(220 150)"><path d="M0 20V-90" stroke="#5FA35A" stroke-width="16" stroke-linecap="round"/><path d="M0-50C-60-60-80-110-70-150c50 0 75 40 70 100z" fill="#5FA35A"/><path d="M0-80c50-10 80-50 80-100-50 0-85 40-80 100z" fill="#7BC074"/></g></g>
+<text x="800" y="700" text-anchor="middle" font-family="Plus Jakarta Sans, Arial, sans-serif" font-weight="800" font-size="64" letter-spacing="4" fill="#F3EDE1">BUKA LAHAN TANPA BAKAR</text>
+<text x="800" y="770" text-anchor="middle" font-family="Plus Jakarta Sans, Arial, sans-serif" font-weight="600" font-size="34" letter-spacing="3" fill="#C9A227">LAPORKAN TITIK API KE 110</text>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"><rect width="1600" height="900" fill="#2B2118"/>
+<rect width="1600" height="900" fill="url(#g)"/>
+<defs><radialGradient id="g" cx="0.5" cy="0.42" r="0.7"><stop offset="0" stop-color="#5A4030" stop-opacity=".9"/><stop offset="1" stop-color="#2B2118" stop-opacity="0"/></radialGradient></defs>
+<g fill="#C9A227" opacity=".18"><path d="M0 860h1600v40H0z"/><path d="M1300 830l40-40h60l-40 40zM1400 830l40-40h60l-40 40zM1500 830l40-40h60l-40 40z"/></g>
+<g transform="translate(800 390)"><rect x="-120" y="-200" width="240" height="400" rx="34" fill="#F3EDE1"/><rect x="-100" y="-160" width="200" height="300" rx="8" fill="#2B2118"/>
+<g fill="#E8DFCC" opacity=".55"><rect x="-80" y="-135" width="160" height="22" rx="6"/><rect x="-80" y="-100" width="120" height="16" rx="6"/><rect x="-80" y="-70" width="140" height="16" rx="6"/><rect x="-80" y="-40" width="100" height="16" rx="6"/></g>
+<circle cx="0" cy="168" r="12" fill="#2B2118"/>
+<g transform="translate(110 60)"><circle r="95" fill="#2B2118" stroke="#C9A227" stroke-width="22"/><path d="M-40 0l28 30 52-58" fill="none" stroke="#C9A227" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/><path d="M66 66l78 78" stroke="#C9A227" stroke-width="34" stroke-linecap="round"/></g>
+<g transform="translate(-250 -120)"><rect x="-75" y="-34" width="150" height="68" rx="12" fill="#C62828"/><text y="16" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="44" fill="#fff">HOAKS</text></g></g>
+<text x="800" y="700" text-anchor="middle" font-family="Plus Jakarta Sans, Arial, sans-serif" font-weight="800" font-size="64" letter-spacing="4" fill="#F3EDE1">SARING SEBELUM SHARING</text>
+<text x="800" y="770" text-anchor="middle" font-family="Plus Jakarta Sans, Arial, sans-serif" font-weight="600" font-size="34" letter-spacing="3" fill="#C9A227">CEK FAKTA SEBELUM MEMBAGIKAN</text>
+</svg>

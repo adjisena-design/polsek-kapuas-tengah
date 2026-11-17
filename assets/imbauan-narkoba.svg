@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"><rect width="1600" height="900" fill="#2B2118"/>
+<rect width="1600" height="900" fill="url(#g)"/>
+<defs><radialGradient id="g" cx="0.5" cy="0.42" r="0.7"><stop offset="0" stop-color="#5A4030" stop-opacity=".9"/><stop offset="1" stop-color="#2B2118" stop-opacity="0"/></radialGradient></defs>
+<g fill="#C9A227" opacity=".18"><path d="M0 860h1600v40H0z"/><path d="M1300 830l40-40h60l-40 40zM1400 830l40-40h60l-40 40zM1500 830l40-40h60l-40 40z"/></g>
+<g transform="translate(800 390)"><g transform="rotate(-35)"><rect x="-150" y="-60" width="300" height="120" rx="60" fill="#F3EDE1"/><path d="M0-60h90a60 60 0 0 1 0 120H0z" fill="#C9A227"/><path d="M0-60V60" stroke="#2B2118" stroke-width="8"/></g>
+<g fill="#E8DFCC" opacity=".9"><circle cx="-120" cy="110" r="26"/><circle cx="-60" cy="140" r="18"/><circle cx="110" cy="-130" r="20"/></g><circle r="210" fill="none" stroke="#C62828" stroke-width="34"/><path d="M-148 148L148-148" stroke="#C62828" stroke-width="34" stroke-linecap="round"/></g>
+<text x="800" y="700" text-anchor="middle" font-family="Plus Jakarta Sans, Arial, sans-serif" font-weight="800" font-size="64" letter-spacing="4" fill="#F3EDE1">NO NARKOBA, YES PRESTASI</text>
+<text x="800" y="770" text-anchor="middle" font-family="Plus Jakarta Sans, Arial, sans-serif" font-weight="600" font-size="34" letter-spacing="3" fill="#C9A227">POLSEK KAPUAS TENGAH</text>
+</svg>
