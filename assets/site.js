@@ -219,9 +219,18 @@ const postLink = p => p.source_url ? ` href="${esc(p.source_url)}"${p.source_url
 const postSrc = p => !p.source_url ? '' : p.source_url.startsWith('http') ? esc(tf('Baca di {src} ↗', { src: new URL(p.source_url).hostname.replace(/^www\./, '') })) : tr('Baca selengkapnya →');
 // database rows keep Indonesian in their columns and optional EN/NGAJU in i18n
 const pick = (r, k) => (LANG !== 'id' && r.i18n?.[LANG]?.[k]) || r[k] || '';
+// titles typed in ALL CAPS read as shouting: show them in normal case (short acronyms like SD, RT, TNI stay)
+const ACR = new Set(['tni', 'polri', 'sma', 'smk', 'sdn', 'smpn', 'kua', 'bpd', 'pkk', 'ktp', 'skck', 'dpo', 'bbm', 'umkm', 'mts', 'bpbd', 'odgj', 'sim', 'stnk', 'pln', 'ri', 'nkri', 'pilkada']);
+const SMALL = new Set(['dan', 'di', 'ke', 'dari', 'yang', 'untuk', 'dengan', 'pada', 'oleh', 'atau', 'serta', 'dalam', 'bagi', 'kepada', 'tentang', 'sebagai', 'agar']);
+const calm = t => !t || /[a-z]/.test(t) || !/[A-Z]{4}/.test(t) ? t : t.toLowerCase().replace(/[\p{L}\d.]+/gu, (w, i) => {
+  const up = w.toUpperCase();
+  if (i > 0 && SMALL.has(w)) return w;
+  if (ACR.has(w) || (w.length <= 4 && !SMALL.has(w) && /^[a-z]+$/.test(w) && !/[aiueo]/.test(w.slice(1)))) return up; // SD, RT, SMP, TNI
+  return w.charAt(0).toUpperCase() + w.slice(1);
+});
 const postCard = p => {
   const tag = p.source_url ? 'a' : 'article', im = p.kind === 'imbauan';
-  return `<${tag} class="post${im ? ' imb' : ''}" data-cat="${p.kind}"${postLink(p)}>${img(p.image_url)}<span class="b"><span class="meta"><b>${im ? 'Imbauan' : 'Berita'}</b>${esc(pick(p, 'date_label'))}${pick(p, 'place') ? ' · ' + esc(pick(p, 'place')) : ''}</span><h3>${esc(pick(p, 'title'))}</h3><p>${esc(pick(p, 'summary'))}</p>${postSrc(p) ? `<span class="src">${postSrc(p)}</span>` : ''}</span></${tag}>`;
+  return `<${tag} class="post${im ? ' imb' : ''}" data-cat="${p.kind}"${postLink(p)}>${img(p.image_url)}<span class="b"><span class="meta"><b>${im ? 'Imbauan' : 'Berita'}</b>${esc(pick(p, 'date_label'))}${pick(p, 'place') ? ' · ' + esc(pick(p, 'place')) : ''}</span><h3>${esc(calm(pick(p, 'title')))}</h3><p>${esc(pick(p, 'summary'))}</p>${postSrc(p) ? `<span class="src">${postSrc(p)}</span>` : ''}</span></${tag}>`;
 };
 const feeds = $$('[data-feed]');
 const showPosts = ps => {
@@ -231,7 +240,7 @@ const showPosts = ps => {
   const feat = $('[data-feed=feature]'), grid = $('[data-feed=posts]');
   if (feat && berita[0]) {
     const p = berita[0];
-    feat.outerHTML = `<a class="feature" data-feed="feature"${postLink(p) || ' href="#"'} style="margin-top:10px">${img(p.image_url)}<span class="b"><span class="meta" style="font-size:13px;color:#6B5D4F">${esc(pick(p, 'date_label'))}${pick(p, 'place') ? ' · ' + esc(pick(p, 'place')) : ''}</span><h2 class="display">${esc(pick(p, 'title'))}</h2><p style="color:var(--muted)">${esc(pick(p, 'summary'))}</p>${postSrc(p) ? `<span class="src" style="font-weight:700;color:var(--brown)">${postSrc(p)}</span>` : ''}</span></a>`;
+    feat.outerHTML = `<a class="feature" data-feed="feature"${postLink(p) || ' href="#"'} style="margin-top:10px">${img(p.image_url)}<span class="b"><span class="meta" style="font-size:13px;color:#6B5D4F">${esc(pick(p, 'date_label'))}${pick(p, 'place') ? ' · ' + esc(pick(p, 'place')) : ''}</span><h2 class="display">${esc(calm(pick(p, 'title')))}</h2><p style="color:var(--muted)">${esc(pick(p, 'summary'))}</p>${postSrc(p) ? `<span class="src" style="font-weight:700;color:var(--brown)">${postSrc(p)}</span>` : ''}</span></a>`;
   }
   if (grid) {
     grid.innerHTML = ps.filter(p => p !== berita[0]).map(postCard).join('');
@@ -272,7 +281,7 @@ if (wd) Promise.all([
 ]).then(([rows, runs]) => {
   const grid = $('.wgrid', wd), more = $('.wmore', wd), note = $('.wnote', wd), q = $('.wsearch', wd), tabs = $$('.wtabs button', wd);
   const SRC = { polsek: 'Polsek Kapuas Tengah', kejati: 'Kejati Kalimantan Tengah', pusiknas: 'Pusiknas Polri' };
-  let src = 'polsek', shown = 24;
+  let src = shown = 24;
   const fmt = d => new Date(d).toLocaleDateString(LANG === 'en' ? 'en-GB' : 'id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
   const card = r => `<article class="wcard ${r.kind}">${r.photo_url ? `<img src="${esc(r.photo_url)}" alt="Foto ${esc(r.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}<div><span class="wtag">${tf(r.kind === 'dpo' ? 'DPO' : 'Orang hilang')}</span><b>${esc(r.name)}</b>${pick(r, 'crime') ? `<span>${esc(pick(r, 'crime'))}</span>` : ''}${pick(r, 'detail') ? `<small>${esc(pick(r, 'detail'))}</small>` : ''}${r.source_url ? `<a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(tf('Lihat di {src} ↗', { src: tr(SRC[r.source]) }))}</a>` : `<small>${esc(tf('Sumber: {src}', { src: tr(SRC[r.source]) }))}</small>`}</div></article>`;
   const draw = () => {

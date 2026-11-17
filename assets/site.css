@@ -422,3 +422,12 @@ footer .logos img.pbm-f{height:58px}
 @media (min-width:1321px){.brand .pbm,.brand .pbm-sep{display:none}}
 @media (max-width:640px){.brand .pbm{display:none}}
 @media (max-width:720px){.pbm-grid{grid-template-columns:1fr;gap:24px}.pbm-shield{max-width:200px}.slide .pbm-hero{width:min(220px,58vw)}}
+
+/* news: long texts stay tidy; the photo keeps its shape instead of stretching beside a long article */
+.feature{align-items:stretch}
+.feature .img{aspect-ratio:4/3;min-height:0;align-self:flex-start;max-height:520px}
+.feature h2{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.feature p{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.post p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex-grow:0}
+.post .b{justify-content:flex-start}
+.post .src{margin-top:auto}
