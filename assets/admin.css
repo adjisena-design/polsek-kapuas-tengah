@@ -268,3 +268,15 @@ select.sel{min-height:46px;border:1px solid var(--line);border-radius:12px;paddi
   .drawer footer{padding-bottom:calc(12px + env(safe-area-inset-bottom))}
 }
 @media (min-width:761px){.dr-save{display:none}}
+
+/* news in one step: big buttons for older users on Android */
+.btn.big{min-height:48px;padding:0 22px;font-size:16px}
+@media (max-width:980px){
+  .bnav a.write{color:#2B2118}
+  .bnav a.write svg{background:var(--gold);color:#2B2118;border-radius:999px;padding:3px;width:30px;height:30px;margin-top:-4px}
+  .bnav a.write span{font-weight:800}
+}
+@media (max-width:760px){
+  .drawer .btn.primary{min-height:46px;font-size:16px;padding:0 20px}
+}
+#ef.simple .tri{display:none}

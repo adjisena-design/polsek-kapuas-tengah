@@ -38,7 +38,7 @@ const PAGES = [
 function signOut(msg) {
   if (token) rpc('admin_logout', { p_token: token }).catch(() => {});
   token = null; me = null; sessionStorage.removeItem('pkt-token');
-  if (dr.open) dr.close();
+  if (dr.open) { dirty = false; dr.close(); }
   $('#app').hidden = true; $('#login').hidden = false; $('#code').value = '';
   const n = $('#login-msg'); n.hidden = !msg; n.className = 'notice'; n.textContent = msg || '';
   history.replaceState(null, '', location.pathname);
@@ -85,9 +85,9 @@ const sideOpen = o => { $('#side').classList.toggle('open', o); $('#menu-btn').s
 $('#menu-btn').onclick = () => sideOpen(!$('#side').classList.contains('open'));
 $('#side-bg').onclick = () => sideOpen(false);
 // phones: the most used pages sit in a bar at the bottom of the screen, the rest stay in the menu
-const BOTTOM = [['dasbor', 'Dasbor', IC.home], ['berita', 'Berita', IC.news], ['booking', 'Booking', IC.cal, 'bookings_new'], ['pengaduan', 'Aduan', IC.inbox, 'reports_new'], ['publikasi', 'Publikasi', '<path d="M12 16V4M7 9l5-5 5 5M4 20h16"/>', 'unpublished']];
+const BOTTOM = [['dasbor', 'Dasbor', IC.home], ['berita?baru', 'Tulis berita', '<path d="M12 5v14M5 12h14"/>'], ['berita', 'Berita', IC.news], ['booking', 'Booking', IC.cal, 'bookings_new'], ['pengaduan', 'Aduan', IC.inbox, 'reports_new']];
 function bottomNav(page) {
-  $('#bnav').innerHTML = BOTTOM.map(([id, l, ic, dot]) => `<a href="#/${id}"${id === page ? ' aria-current="page"' : ''}>${I(ic, 22)}<span>${l}</span>${dot && D[dot] ? `<i>${D[dot]}</i>` : ''}</a>`).join('') + `<button type="button" id="bnav-more">${I('<path d="M4 6h16M4 12h16M4 18h16"/>', 22)}<span>Menu</span></button>`;
+  $('#bnav').innerHTML = BOTTOM.map(([id, l, ic, dot]) => `<a href="#/${id}"${id === page ? ' aria-current="page"' : ''}${id === 'berita?baru' ? ' class="write"' : ''}>${I(ic, 22)}<span>${l}</span>${dot && D[dot] ? `<i>${D[dot]}</i>` : ''}</a>`).join('') + `<button type="button" id="bnav-more">${I('<path d="M4 6h16M4 12h16M4 18h16"/>', 22)}<span>Menu</span></button>`;
   $('#bnav-more').onclick = () => sideOpen(true);
 }
 $('#menu').addEventListener('click', e => { if (e.target.closest('a')) sideOpen(false); });
@@ -131,7 +131,11 @@ function drawer(kicker, title, body, foot) {
   top.hidden = !sub; if (sub) { top.setAttribute('form', sub.getAttribute('form')); top.textContent = sub.textContent; }
   if (!dr.open) dr.showModal();
 }
-dr.addEventListener('click', e => { if (e.target === dr || e.target.closest('[data-close]')) dr.close(); });
+let dirty = false; // set by edit forms; closing asks first so a written report is never lost by accident
+const closeDr = () => { if (dirty && !confirm('Isian belum disimpan dan akan hilang. Tutup?')) return; dirty = false; dr.close(); };
+dr.addEventListener('click', e => { if (e.target === dr || e.target.closest('[data-close]')) closeDr(); });
+dr.addEventListener('cancel', e => { e.preventDefault(); closeDr(); });
+const SAVE_LABEL = { posts: 'Upload berita' };
 
 // ---------- searchable list ----------
 function listing({ rows, item, match, filter, empty = 'Belum ada data.', open }) {
@@ -160,13 +164,13 @@ const LANGS = [['id', 'ID'], ['en', 'EN'], ['nij', 'NGAJU']];
 const HREFS = { 'layanan.html': 'Halaman Layanan', '#booking': 'Buka formulir booking', '#kontak': 'Bagian Kontak', '#wilayah': 'Peta wilayah dan desa', 'pencarian-orang.html': 'Halaman Pencarian orang', 'berita.html': 'Halaman Berita', 'profil.html': 'Halaman Profil' };
 const ICONS = { search: 'Kaca pembesar', flag: 'Bendera / acara', chat: 'Balon pesan', shield: 'Perisai', doc: 'Dokumen', calendar: 'Kalender', users: 'Orang' };
 const FORMS = {
-  posts: { kicker: ['TAMBAH BERITA', 'UBAH BERITA'], title: 'title', mode: 'col', f: [
+  posts: { kicker: ['BERITA BARU', 'UBAH BERITA'], title: 'title', mode: 'col', simple: 1, f: [
+    { k: 'title', l: 'Judul', t: 'textarea-s', req: 1, tr: 1, hint: 'Contoh: Bhabinkamtibmas sambang Desa Pujon' },
+    { k: 'image_url', l: 'Foto', t: 'image', aspect: [1200, 900] },
+    { k: 'summary', l: 'Isi singkat', t: 'textarea', tr: 1, hint: 'Satu atau dua kalimat. Boleh kosong.' },
+    { k: 'place', l: 'Lokasi', t: 'text', tr: 1, hint: 'Contoh: Desa Pujon. Boleh kosong.' },
+    { k: 'published_on', l: 'Tanggal kegiatan', t: 'date', req: 1 },
     { k: 'kind', l: 'Jenis', t: 'select', o: { berita: 'Berita kegiatan', imbauan: 'Imbauan kamtibmas' } },
-    { k: 'title', l: 'Judul', t: 'textarea-s', req: 1, tr: 1, hint: 'Kalimat biasa: huruf besar hanya di awal dan pada nama.' },
-    { k: 'summary', l: 'Ringkasan', t: 'textarea', tr: 1, hint: 'Satu atau dua kalimat yang tampil di kartu berita.' },
-    [{ k: 'date_label', l: 'Tanggal tampil', t: 'text', tr: 1, hint: 'Contoh: 5 November 2026' }, { k: 'published_on', l: 'Tanggal terbit', t: 'date', req: 1, hint: 'Menentukan urutan; terbaru di atas.' }],
-    { k: 'place', l: 'Lokasi', t: 'text', tr: 1, hint: 'Contoh: Desa Pujon' },
-    { k: 'image_url', l: 'Foto utama', t: 'image', aspect: [1200, 900] },
     { k: 'source_url', l: 'Tautan berita lengkap', t: 'text', hint: 'Opsional, misalnya artikel di analisnews.co.id.' },
     { k: 'published', l: 'Tampilkan di situs', t: 'toggle', hint: 'Mati = disimpan sebagai draf, tidak tampil di situs.' },
   ] },
@@ -309,11 +313,11 @@ function edit(entity, r, done) {
   r = r || { published: true, active: true, bookable: true, published_on: today(), kind: { wanted: 'dpo', hero: 'photo' }[entity] || 'berita', grp: 'unit', icon: 'doc', href: 'layanan.html', sections: [], sort: (LISTS[entity]?.length || 0) + 1 };
   const val = s => s.tr ? (obj ? { ...blankT(), ...(r[s.k] || {}) } : { id: r[s.k] ?? '', en: r.i18n?.en?.[s.k] ?? '', nij: r.i18n?.nij?.[s.k] ?? '' }) : (r[s.k] ?? '');
   const titleOf = () => { const v = val(flat(F.f).find(s => s.k === F.title)); return (v.id ?? v) || 'Tanpa judul'; };
-  const hasTr = flat(F.f).some(s => s.tr);
+  const hasTr = !F.simple && flat(F.f).some(s => s.tr); // simple forms: Indonesian only, no language switch
   drawer(F.kicker[isNew ? 0 : 1], isNew ? 'Tanpa judul' : titleOf(),
-    `<form id="ef" novalidate style="display:flex;flex-direction:column;gap:16px">${hasTr ? langBar() : ''}${F.f.map(x => Array.isArray(x) ? `<div class="two">${x.map(y => field(y, val(y))).join('')}</div>` : field(x, val(x))).join('')}<p class="err-line" id="ef-err"></p></form>`,
-    `<button class="btn primary" type="submit" form="ef">Simpan</button><button class="btn" type="button" data-close>Batal</button><span class="spacer"></span>${isNew ? '' : '<button class="btn danger" type="button" id="ef-del">Hapus</button>'}`);
-  const f = $('#ef'), crops = {};
+    `<form id="ef" novalidate${F.simple ? ' class="simple"' : ''} style="display:flex;flex-direction:column;gap:16px">${hasTr ? langBar() : ''}${F.f.map(x => Array.isArray(x) ? `<div class="two">${x.map(y => field(y, val(y))).join('')}</div>` : field(x, val(x))).join('')}<p class="err-line" id="ef-err"></p></form>`,
+    `<button class="btn primary" type="submit" form="ef">${SAVE_LABEL[entity] || 'Simpan'}</button><button class="btn" type="button" data-close>Batal</button><span class="spacer"></span>${isNew ? '' : '<button class="btn danger" type="button" id="ef-del">Hapus</button>'}`);
+  const f = $('#ef'), crops = {}; if (F.simple) setFL(f, 'id'); dirty = false; f.addEventListener('input', () => dirty = true); f.addEventListener('change', () => dirty = true);
   $$('[data-fl]', f).forEach(b => b.onclick = () => setFL(f, b.dataset.fl));
   const getSecs = $('#secs') ? sectionsEditor($('#secs'), r.sections || []) : null;
   const pick = async (s, src) => {
@@ -354,12 +358,13 @@ function edit(entity, r, done) {
           row[k] = u.publicUrl; // shortcut: a replaced photo stays in storage until the row is deleted
         }
       }
+      if (entity === 'posts' && !r.id) row.date_label = new Date(row.published_on + 'T00:00').toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
       if (!obj) row.i18n = i18n;
       if (entity === 'services' && !row.id) row.slug = (row.name.id.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'layanan').slice(0, 30) + '-' + Date.now().toString(36).slice(-3);
       b.disabled = true; b.textContent = 'Menyimpan…';
       await call('admin_save', { p_entity: entity, p_row: row });
-      dr.close(); toast(obj ? 'Tersimpan. Tekan Publikasikan agar tampil di situs.' : isNew ? 'Ditambahkan.' : 'Perubahan disimpan.'); done();
-    } catch (x) { err.textContent = x.message; toast(x.message); err.scrollIntoView({ block: 'center', behavior: 'smooth' }); } finally { b.disabled = false; b.textContent = 'Simpan'; }
+      dirty = false; dr.close(); toast(entity === 'posts' ? 'Berhasil. Berita sudah tampil di situs.' : obj ? 'Tersimpan. Tekan Publikasikan agar tampil di situs.' : isNew ? 'Ditambahkan.' : 'Perubahan disimpan.'); done();
+    } catch (x) { err.textContent = x.message; toast(x.message); err.scrollIntoView({ block: 'center', behavior: 'smooth' }); } finally { b.disabled = false; b.textContent = SAVE_LABEL[entity] || 'Simpan'; }
   };
 }
 
@@ -455,7 +460,7 @@ function wirePublish(box) {
     catch (x) { st.textContent = x.message; } finally { btn.disabled = false; }
   };
 }
-const PUB_PAGES = ['berita', 'pencarian', 'personel', 'pengaturan', 'hero', 'layanan', 'teks', 'desa'];
+const PUB_PAGES = ['pengaturan', 'hero', 'layanan', 'teks', 'desa'];
 
 // ---------- pages ----------
 const VIEWS = {
@@ -583,13 +588,15 @@ ${publishBox()}
   pengaduan: () => inbox('reports'),
   async berita() {
     const rows = await call('admin_list', { p_entity: 'posts' }); let tab = 'all';
-    view.innerHTML = `<div class="head"><h1>Berita dan imbauan</h1><button class="btn primary" type="button" id="add">+ Tulis berita atau imbauan</button></div>
-<p class="sub">Yang tampil di halaman Beranda dan Berita. Berita terbaru otomatis menjadi berita utama.</p>
+    view.innerHTML = `<div class="head"><h1>Berita dan imbauan</h1><button class="btn primary big" type="button" id="add">+ Tulis berita</button></div>
+<p class="sub">Tekan Tulis berita, isi judul dan foto, lalu tekan Upload berita. Berita langsung tampil di situs, tidak perlu dipublikasikan.</p>
 <div id="tabs"></div><div class="tools"><input class="search" type="search" placeholder="Cari berita dan imbauan…" aria-label="Cari"></div>
 <p class="count"></p><div class="list"></div><button class="btn more" type="button" hidden>Tampilkan lebih banyak</button>`;
     const drawTabs = () => $('#tabs').innerHTML = tabsHtml([['all', 'Semua', rows.length], ['berita', 'Berita', rows.filter(r => r.kind === 'berita').length], ['imbauan', 'Imbauan', rows.filter(r => r.kind === 'imbauan').length]], tab);
     drawTabs(); $('#tabs').onclick = e => { const b = e.target.closest('[data-f]'); if (b) { tab = b.dataset.f; drawTabs(); draw(); } };
-    $('#add').onclick = () => edit('posts', null, route);
+    const add = () => edit('posts', null, () => { location.hash = '#/berita'; route(); });
+    $('#add').onclick = add;
+    if (location.hash.endsWith('?baru')) { history.replaceState(null, '', '#/berita'); add(); }
     const draw = listing({
       rows: () => rows, filter: r => tab === 'all' || r.kind === tab, match: r => `${r.title} ${r.summary ?? ''} ${r.place ?? ''}`,
       item: (r, i) => `<button type="button" class="item" data-i="${i}">${thumb(r.image_url)}<span class="tx"><b>${esc(r.title)}</b><span>${esc(r.date_label || r.published_on)}${r.place ? ' · ' + esc(r.place) : ''}</span></span>${r.kind === 'imbauan' ? '<span class="pill yel">Imbauan</span>' : ''}${r.published ? '<span class="pill">Tampil</span>' : '<span class="pill off">Draf</span>'}</button>`,
